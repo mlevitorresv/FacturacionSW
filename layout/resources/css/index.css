@@ -73,5 +73,18 @@ body {
   border-radius: 0.9em;
   padding: 0.5em 1em;
 }
+.main__table {
+  margin: 3em auto;
+  width: 60%;
+  text-align: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.main__table__head__row__th {
+  border: 1px solid black;
+}
+.main__table__body__row {
+  border-bottom: 1px solid black;
+}
 
 /*# sourceMappingURL=index.css.map */
