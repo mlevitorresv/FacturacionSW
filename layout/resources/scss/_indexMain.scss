@@ -1,0 +1,39 @@
+.main{
+    &__bg{
+        height: 80vh;
+        margin: 0 auto;
+        display: block;
+        opacity: .5;
+    }
+
+    &__buttons{
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+
+        &__create{
+            background-color: #cecece;
+            border: none;
+            border-radius: .9em;
+            padding: .5em 1em;
+        }
+
+        &__find{
+            display: flex;
+            align-items: center;
+            &__select{
+                margin: 0 .5em;
+                background-color: #cecece;
+                border: none;
+                border-radius: .9em;
+                padding: .5em 1em;
+            }
+
+            &__input{
+                border-radius: .9em;
+                padding: .5em 1em;
+            }
+        }
+    }
+}

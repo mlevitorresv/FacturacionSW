@@ -1,0 +1,30 @@
+.header{
+    position: relative;
+    width: 50%;
+    margin: 2em 25%;
+    background-color: #cecece;
+    padding: 1em;
+    border-radius: 2em;
+
+    &__list{
+        display: flex;
+        list-style-type: none;
+        justify-content: space-around;
+
+       &__item{
+        cursor: pointer;
+
+        &__secondary{
+            display: none;
+            margin-top: .5em;
+            flex-direction: column;
+            list-style-type: none;
+            justify-content: center;
+
+            &__item{
+                border-top: 1px solid black;
+            }
+        }
+       }
+    }
+}
