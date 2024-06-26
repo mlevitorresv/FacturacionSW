@@ -36,4 +36,24 @@
             }
         }
     }
+
+    
+
+    &__table{
+        margin: 3em auto;
+        width: 60%;
+        text-align: center;
+        border: 1px solid black;
+        border-collapse: collapse;
+        
+        &__head__row{
+            &__th{
+                border: 1px solid black;
+            }
+        }
+
+        &__body__row{
+            border-bottom: 1px solid black;
+        }
+    }
 }
