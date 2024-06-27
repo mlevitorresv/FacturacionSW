@@ -1,3 +1,126 @@
 .plantilla{
+    padding: 2em 5%;
     
+    &__info{
+        font-size: .8em;
+        margin-bottom: 3em;
+        width: fit-content;
+        text-align: center;
+
+        &__text--bold{
+            font-weight: bold;
+        }
+    }
+
+    &__form{
+        &__basico{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            &__left{
+                width: 48;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+
+                &__two__field{
+                    background-color: #cecece;
+                    text-align: center;
+                    border: 1px solid black;
+                }
+    
+                &__two__input{
+                    text-align: center;
+                    border: 1px solid black;
+                    font-weight: bold;
+                    padding: .2em;
+                }
+            }
+
+            &__right{
+                width: 48%;
+
+                &__two__field{
+                    background-color: #cecece;
+                    border: 1px solid black;
+                    width: 100%;
+                    padding: .5em;
+                }
+    
+                &__two__area{
+                    padding: .5em;
+                    border: 1px solid black;
+                    font-weight: bold;
+                    width: 100%;
+                }
+            }
+
+           &__down{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 2em;
+                &__field{
+                    width: 20%;
+                }
+                &__input{
+                    width: 78%;
+                }
+           }
+        }
+
+
+        &__articulos{
+            &__fields{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                &__field{
+                    padding: .2em;
+                    width: 15%;
+                    background-color: #cecece;
+                    text-align: center;
+                
+                    &--description{
+                        width: 40%;
+                    }
+                }
+
+            }
+
+            &__inputs{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                &__input{
+                    padding: .2em;
+                    width: 15%;
+                    text-align: right;
+                
+                    &--description{
+                        text-align: left;
+                        width: 40%;
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    &__footer{
+        font-size: .6em;
+        position: absolute;
+        bottom: 0;
+        margin-top: 3em;
+        &__text{
+            &__bigger{
+                font-size: 1em;
+            }
+            &__bolder{
+                font-weight: bold;
+            }
+        }
+    }
 }

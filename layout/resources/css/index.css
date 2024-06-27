@@ -6,7 +6,8 @@
 }
 
 body {
-  min-width: 320px;
+  width: 1250px;
+  margin: 0 auto;
   color: white;
   font-family: "Poppins";
   font-size: 1em;
@@ -85,6 +86,107 @@ body {
 }
 .main__table__body__row {
   border-bottom: 1px solid black;
+}
+
+.plantilla {
+  padding: 2em 5%;
+}
+.plantilla__info {
+  font-size: 0.8em;
+  margin-bottom: 3em;
+  width: fit-content;
+  text-align: center;
+}
+.plantilla__info__text--bold {
+  font-weight: bold;
+}
+.plantilla__form__basico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.plantilla__form__basico__left {
+  width: 48;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.plantilla__form__basico__left__two__field {
+  background-color: #cecece;
+  text-align: center;
+  border: 1px solid black;
+}
+.plantilla__form__basico__left__two__input {
+  text-align: center;
+  border: 1px solid black;
+  font-weight: bold;
+  padding: 0.2em;
+}
+.plantilla__form__basico__right {
+  width: 48%;
+}
+.plantilla__form__basico__right__two__field {
+  background-color: #cecece;
+  border: 1px solid black;
+  width: 100%;
+  padding: 0.5em;
+}
+.plantilla__form__basico__right__two__area {
+  padding: 0.5em;
+  border: 1px solid black;
+  font-weight: bold;
+  width: 100%;
+}
+.plantilla__form__basico__down {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+.plantilla__form__basico__down__field {
+  width: 20%;
+}
+.plantilla__form__basico__down__input {
+  width: 78%;
+}
+.plantilla__form__articulos__fields {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.plantilla__form__articulos__fields__field {
+  padding: 0.2em;
+  width: 15%;
+  background-color: #cecece;
+  text-align: center;
+}
+.plantilla__form__articulos__fields__field--description {
+  width: 40%;
+}
+.plantilla__form__articulos__inputs {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.plantilla__form__articulos__inputs__input {
+  padding: 0.2em;
+  width: 15%;
+  text-align: right;
+}
+.plantilla__form__articulos__inputs__input--description {
+  text-align: left;
+  width: 40%;
+}
+.plantilla__footer {
+  font-size: 0.6em;
+  position: absolute;
+  bottom: 0;
+  margin-top: 3em;
+}
+.plantilla__footer__text__bigger {
+  font-size: 1em;
+}
+.plantilla__footer__text__bolder {
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=index.css.map */

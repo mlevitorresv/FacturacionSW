@@ -15,47 +15,72 @@
             <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
             <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
             <p class="plantilla__info__text">Fax 923 25 54 11</p>
-            <p class="plantilla__info__text--bolder">37184 VILLARES DE LA REINA SALAMANCA</p>
+            <p class="plantilla__info__text--bold">37184 VILLARES DE LA REINA SALAMANCA</p>
             <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
             <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
         </div>
         <form action="" class="plantilla__form">
             <div class="plantilla__form__basico">
-                <p class="plantilla__form__basico__field">VENDEDOR</p>
-                <input type="text" class="plantilla__form__basico__input" />
+                <div class="plantilla__form__basico__left">
+                    <div class="plantilla__form__basico__left__two">
+                        <p class="plantilla__form__basico__left__two__field">VENDEDOR</p>
+                        <input type="text" class="plantilla__form__basico__left__two__input" />
+                    </div>
 
-                <p class="plantilla__form__basico__field">FECHA</p>
-                <input type="text" class="plantilla__form__basico__input" />
+                    <div class="plantilla__form__basico__left__two">
+                        <p class="plantilla__form__basico__left__two__field">FECHA</p>
+                        <input type="text" class="plantilla__form__basico__left__two__input" />
+                    </div>
 
-                <p class="plantilla__form__basico__field">HOJA</p>
-                <input type="text" class="plantilla__form__basico__input" />
+                    <div class="plantilla__form__basico__left__two">
+                        <p class="plantilla__form__basico__left__two__field">HOJA</p>
+                        <input type="text" class="plantilla__form__basico__left__two__input" />
+                    </div>
 
-                <p class="plantilla__form__basico__field">NUMERO FACTURA</p>
-                <input type="text" class="plantilla__form__basico__input" />
+                    <div class="plantilla__form__basico__left__two">
+                        <p class="plantilla__form__basico__left__two__field">NUMERO FACTURA
+                        </p>
+                        <input type="text" class="plantilla__form__basico__left__two__input" />
+                    </div>
 
-                <p class="plantilla__form__basico__field">C.I.F/N.I.F</p>
-                <input type="text" class="plantilla__form__basico__input" />
+                    <div class="plantilla__form__basico__left__two">
+                        <p class="plantilla__form__basico__left__two__field">C.I.F/N.I.F</p>
+                        <input type="text" class="plantilla__form__basico__left__two__input" />
+                    </div>
 
-                <p class="plantilla__form__basico__field">FECHA VENCI.</p>
-                <input type="text" class="plantilla__form__basico__input" />
+                    <div class="plantilla__form__basico__left__two">
+                        <p class="plantilla__form__basico__left__two__field ">FECHA VENCI.
+                        </p>
+                        <input type="text" class="plantilla__form__basico__left__two__input" />
+                    </div>
+                </div>
 
 
-                <p class="plantilla__form__basico__field">CLIENTE</p>
-                <textarea class="plantilla__form__basico__area"></textarea>
+                <div class="plantilla__form__basico__right">
+                    <p class="plantilla__form__basico__right__two__field">CLIENTE</p>
+                    <textarea class="plantilla__form__basico__right__two__area" rows="8"></textarea>
+                </div>
             </div>
-
+            <div class="plantilla__form__basico__down">
+                <p class="plantilla__form__basico__left__two__field plantilla__form__basico__down__field">OBSERVACIONES
+                </p>
+                <input type="text" class="plantilla__form__basico__down__input" />
+            </div>
             <div class="plantilla__form__articulos">
-                <p class="plantilla__form__articulos__field">DESCRIPCIÓN</p>
-                <p class="plantilla__form__articulos__field">UNIDADES</p>
-                <p class="plantilla__form__articulos__field">PRECIO U</p>
-                <p class="plantilla__form__articulos__field">DTO</p>
-                <p class="plantilla__form__articulos__field">IMPORTE</p>
-
-                <input type="text" class="plantilla__form__articulos__input" />
-                <input type="text" class="plantilla__form__articulos__input" />
-                <input type="text" class="plantilla__form__articulos__input" />
-                <input type="text" class="plantilla__form__articulos__input" />
-                <input type="text" class="plantilla__form__articulos__input" />
+                <div class="plantilla__form__articulos__fields">
+                    <p class="plantilla__form__articulos__fields__field plantilla__form__articulos__fields__field--description">DESCRIPCIÓN</p>
+                    <p class="plantilla__form__articulos__fields__field">UNIDADES</p>
+                    <p class="plantilla__form__articulos__fields__field">PRECIO U</p>
+                    <p class="plantilla__form__articulos__fields__field">DTO</p>
+                    <p class="plantilla__form__articulos__fields__field">IMPORTE</p>
+                </div>
+                <div class="plantilla__form__articulos__inputs">
+                    <input type="text" class="plantilla__form__articulos__inputs__input plantilla__form__articulos__inputs__input--description" name="desc" />
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="unidades" />
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="precioUnidad" />
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="dto" />
+                    <input type="float" class="plantilla__form__articulos__inputs__input" name="importe" />
+                </div>
             </div>
 
             <div class="plantilla__form__resultados">
@@ -90,9 +115,10 @@
         <footer class="plantilla__footer">
             <p class="plantilla__footer__text">
                 <span class="plantilla__footer__text__bigger">CORONA ASENSIO, S.L. - C.I.F. B-56831837</span> · La
-                recogida y uo de datos se hará de acuerdo con la ley orgánica 15/1999 de 13 de Diciembre <span
-                    class="plantilla__footer__text__bolder">de pertcción de datos de carácter personal y al amparo de lo
-                    dispuesto en el artículo 12.1 de la ley orgánica</span> 01/1992 de 21 de Febrero sobre protección de la seguridad ciudadana.
+                recogida y uso de datos se hará de acuerdo con la ley orgánica 15/1999 de 13 de Diciembre <span
+                    class="plantilla__footer__text__bolder">de protección de datos de carácter personal y al amparo de lo
+                    dispuesto en el artículo 12.1 de la ley orgánica</span> 01/1992 de 21 de Febrero sobre protección de
+                la seguridad ciudadana.
             </p>
         </footer>
     </main>
