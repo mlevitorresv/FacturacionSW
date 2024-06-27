@@ -129,6 +129,7 @@ body {
   background-color: #cecece;
   border: 1px solid black;
   width: 100%;
+  padding: 0.5em;
 }
 .plantilla__form__basico__right__two__area {
   padding: 0.5em;
