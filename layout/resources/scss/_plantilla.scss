@@ -68,5 +68,59 @@
                 }
            }
         }
+
+
+        &__articulos{
+            &__fields{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                &__field{
+                    padding: .2em;
+                    width: 15%;
+                    background-color: #cecece;
+                    text-align: center;
+                
+                    &--description{
+                        width: 40%;
+                    }
+                }
+
+            }
+
+            &__inputs{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+
+                &__input{
+                    padding: .2em;
+                    width: 15%;
+                    text-align: right;
+                
+                    &--description{
+                        text-align: left;
+                        width: 40%;
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    &__footer{
+        font-size: .6em;
+        position: absolute;
+        bottom: 0;
+        margin-top: 3em;
+        &__text{
+            &__bigger{
+                font-size: 1em;
+            }
+            &__bolder{
+                font-weight: bold;
+            }
+        }
     }
 }
