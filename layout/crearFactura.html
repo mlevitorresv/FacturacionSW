@@ -5,19 +5,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="resources/css/index.css">
-    <title>Facturación | facturas</title>
+    <title>Facturación | Nueva Factura</title>
 </head>
 
 <body>
-    <header class="header">
-        <ul class="header__list">
-            <li class="header__list__item">Inicio</li>
-            <li class="header__list__item">Facturas</li>
-            <li class="header__list__item">Artículos</li>
-        </ul>
-    </header>
-    <main class="main">
-        
+    <main class="plantilla">
+        <div class="plantilla__info">
+            <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
+            <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
+            <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
+            <p class="plantilla__info__text">Fax 923 25 54 11</p>
+            <p class="plantilla__info__text--bolder">37184 VILLARES DE LA REINA SALAMANCA</p>
+            <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
+            <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
+        </div>
+        <form action="" class="plantilla__form">
+            <div class="plantilla__form__basico">
+                <p class="plantilla__form__basico__field">VENDEDOR</p>
+                <input type="text" class="plantilla__form__basico__input" />
+
+                <p class="plantilla__form__basico__field">FECHA</p>
+                <input type="text" class="plantilla__form__basico__input" />
+
+                <p class="plantilla__form__basico__field">HOJA</p>
+                <input type="text" class="plantilla__form__basico__input" />
+
+                <p class="plantilla__form__basico__field">NUMERO FACTURA</p>
+                <input type="text" class="plantilla__form__basico__input" />
+
+                <p class="plantilla__form__basico__field">C.I.F/N.I.F</p>
+                <input type="text" class="plantilla__form__basico__input" />
+
+                <p class="plantilla__form__basico__field">FECHA VENCI.</p>
+                <input type="text" class="plantilla__form__basico__input" />
+
+
+                <p class="plantilla__form__basico__field">CLIENTE</p>
+                <textarea class="plantilla__form__basico__area"></textarea>
+            </div>
+
+            <div class="plantilla__form__articulos">
+                <p class="plantilla__form__articulos__field">DESCRIPCIÓN</p>
+                <p class="plantilla__form__articulos__field">UNIDADES</p>
+                <p class="plantilla__form__articulos__field">PRECIO U</p>
+                <p class="plantilla__form__articulos__field">DTO</p>
+                <p class="plantilla__form__articulos__field">IMPORTE</p>
+
+                <input type="text" class="plantilla__form__articulos__input" />
+                <input type="text" class="plantilla__form__articulos__input" />
+                <input type="text" class="plantilla__form__articulos__input" />
+                <input type="text" class="plantilla__form__articulos__input" />
+                <input type="text" class="plantilla__form__articulos__input" />
+            </div>
+
+            <div class="plantilla__form__resultados">
+                <p class="plantilla__form__resultados__field">TOTAL PREVIO</p>
+                <p class="plantilla__form__resultados__field">DESCUENTO</p>
+                <p class="plantilla__form__resultados__field">BASE IMPONIBLE</p>
+                <p class="plantilla__form__resultados__field">%IVA</p>
+                <p class="plantilla__form__resultados__field">IMPORTE IVA</p>
+                <p class="plantilla__form__resultados__field">%R.E.</p>
+                <p class="plantilla__form__resultados__field">IMPORTE R.E.</p>
+                <p class="plantilla__form__resultados__field">IMPORTE R.E.</p>
+                <p class="plantilla__form__resultados__field">Ret.</p>
+                <p class="plantilla__form__resultados__field">I.R.P.F</p>
+                <p class="plantilla__form__resultados__field">IMP. PARCIAL</p>
+
+                <p class="plantilla__form__resultados__data">391.26</p>
+                <p class="plantilla__form__resultados__data"></p>
+                <p class="plantilla__form__resultados__data">391.26</p>
+                <p class="plantilla__form__resultados__data">10</p>
+                <p class="plantilla__form__resultados__data">39.13</p>
+                <p class="plantilla__form__resultados__data"></p>
+                <p class="plantilla__form__resultados__data"></p>
+                <p class="plantilla__form__resultados__data"></p>
+                <p class="plantilla__form__resultados__data"></p>
+                <p class="plantilla__form__resultados__data">430.39</p>
+
+                <p class="plantilla__form__resultados__field">TOTAL FACTURA</p>
+                <p type="text" class="plantilla__form__resultados__data">430.39</p>
+            </div>
+        </form>
+
+        <footer class="plantilla__footer">
+            <p class="plantilla__footer__text">
+                <span class="plantilla__footer__text__bigger">CORONA ASENSIO, S.L. - C.I.F. B-56831837</span> · La
+                recogida y uo de datos se hará de acuerdo con la ley orgánica 15/1999 de 13 de Diciembre <span
+                    class="plantilla__footer__text__bolder">de pertcción de datos de carácter personal y al amparo de lo
+                    dispuesto en el artículo 12.1 de la ley orgánica</span> 01/1992 de 21 de Febrero sobre protección de la seguridad ciudadana.
+            </p>
+        </footer>
     </main>
 </body>
 
