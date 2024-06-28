@@ -156,6 +156,13 @@ body {
   font-weight: bold;
   background-color: #cecece;
 }
+.plantilla__buttons {
+  margin-top: 2em;
+}
+.plantilla__buttons__button {
+  margin-right: 1.5em;
+  padding: 0.5em;
+}
 .plantilla__footer {
   font-size: 0.6em;
   position: absolute;
@@ -167,6 +174,12 @@ body {
 }
 .plantilla__footer__text__bolder {
   font-weight: bold;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=index.css.map */
