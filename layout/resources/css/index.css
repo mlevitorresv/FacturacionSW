@@ -101,57 +101,21 @@ body {
   font-weight: bold;
 }
 .plantilla__form__basico {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  width: 50%;
 }
-.plantilla__form__basico__left {
-  width: 48;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-.plantilla__form__basico__left__two__field {
+.plantilla__form__basico__field {
   background-color: #cecece;
-  text-align: center;
+  padding: 0 0.2em;
   border: 1px solid black;
 }
-.plantilla__form__basico__left__two__input {
-  text-align: center;
+.plantilla__form__basico__area {
+  width: 100%;
   border: 1px solid black;
   font-weight: bold;
   padding: 0.2em;
 }
-.plantilla__form__basico__right {
-  width: 48%;
-}
-.plantilla__form__basico__right__two__field {
-  background-color: #cecece;
-  border: 1px solid black;
-  width: 100%;
-  padding: 0.5em;
-}
-.plantilla__form__basico__right__two__area {
-  padding: 0.5em;
-  border: 1px solid black;
-  font-weight: bold;
-  width: 100%;
-}
-.plantilla__form__basico__down {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2em;
-}
-.plantilla__form__basico__down__field {
-  width: 20%;
-}
-.plantilla__form__basico__down__input {
-  width: 78%;
-}
 .plantilla__form__articulos__fields {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
 }
 .plantilla__form__articulos__fields__field {
   padding: 0.2em;
@@ -163,18 +127,34 @@ body {
   width: 40%;
 }
 .plantilla__form__articulos__inputs {
-  width: 100%;
   display: flex;
-  justify-content: space-between;
 }
 .plantilla__form__articulos__inputs__input {
   padding: 0.2em;
   width: 15%;
   text-align: right;
 }
-.plantilla__form__articulos__inputs__input--description {
-  text-align: left;
-  width: 40%;
+.plantilla__form__tabla {
+  margin: 3em 0;
+  width: 50%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.plantilla__form__tabla__thead {
+  font-weight: bold;
+  background-color: #cecece;
+}
+.plantilla__form__tabla__thead__trow__tdata {
+  border: 1px solid white;
+  padding: 0.2em;
+}
+.plantilla__form__tabla__tbody__trow__tdata {
+  border: 1px solid white;
+  padding: 0.2em;
+}
+.plantilla__form__tabla__tbody__trow__tdata:first-child {
+  font-weight: bold;
+  background-color: #cecece;
 }
 .plantilla__footer {
   font-size: 0.6em;

@@ -14,67 +14,25 @@
 
     &__form{
         &__basico{
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            &__left{
-                width: 48;
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 10px;
-
-                &__two__field{
-                    background-color: #cecece;
-                    text-align: center;
-                    border: 1px solid black;
-                }
-    
-                &__two__input{
-                    text-align: center;
-                    border: 1px solid black;
-                    font-weight: bold;
-                    padding: .2em;
-                }
+            width: 50%;
+            &__field{
+                background-color: #cecece;
+                padding: 0 .2em;
+                border: 1px solid black;
             }
-
-            &__right{
-                width: 48%;
-
-                &__two__field{
-                    background-color: #cecece;
-                    border: 1px solid black;
-                    width: 100%;
-                    padding: .5em;
-                }
     
-                &__two__area{
-                    padding: .5em;
-                    border: 1px solid black;
-                    font-weight: bold;
-                    width: 100%;
-                }
+            &__area{
+                width: 100%;
+                border: 1px solid black;
+                font-weight: bold;
+                padding: .2em;
             }
-
-           &__down{
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 2em;
-                &__field{
-                    width: 20%;
-                }
-                &__input{
-                    width: 78%;
-                }
-           }
         }
 
 
         &__articulos{
             &__fields{
-                width: 100%;
                 display: flex;
-                justify-content: space-between;
                 &__field{
                     padding: .2em;
                     width: 15%;
@@ -89,21 +47,47 @@
             }
 
             &__inputs{
-                width: 100%;
                 display: flex;
-                justify-content: space-between;
 
                 &__input{
                     padding: .2em;
                     width: 15%;
                     text-align: right;
-                
-                    &--description{
-                        text-align: left;
-                        width: 40%;
-                    }
                 }
 
+            }
+        }
+
+        &__tabla{
+            margin: 3em 0;
+            width: 50%;
+            border: 1px solid black;
+            border-collapse: collapse;
+
+            &__thead{
+                font-weight: bold;
+                background-color: #cecece;
+                &__trow{
+                    &__tdata{
+                        border: 1px solid white;
+                        padding: .2em;
+                    }
+                }
+            }
+
+            &__tbody{
+                &__trow{
+                    &__tdata{
+                        border: 1px solid white;
+                        padding: .2em;
+                    }
+
+                    
+                    &__tdata:first-child{
+                        font-weight: bold;
+                        background-color: #cecece;
+                    }
+                }
             }
         }
     }
