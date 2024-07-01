@@ -93,10 +93,16 @@
     }
 
     &__buttons{
+        position: relative;
         margin-top: 2em;
         &__button{
             margin-right: 1.5em;
             padding: .5em;
+
+            &--eliminar{
+                position: absolute;
+                right: 0;
+            }
         }
     }
 
