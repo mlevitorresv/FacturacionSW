@@ -186,5 +186,16 @@ body {
     display: none;
   }
 }
+.articulos__articulo {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2em;
+}
+.articulos__articulo__nombre {
+  width: 15%;
+}
+.articulos__articulo__submit {
+  padding: 0.2em 0.5em;
+}
 
 /*# sourceMappingURL=index.css.map */
