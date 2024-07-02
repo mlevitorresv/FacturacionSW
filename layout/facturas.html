@@ -20,13 +20,12 @@
         <div class="main__buttons">
             <button class="main__buttons__create">Crear Factura</button>
             <div class="main__buttons__find">
-                <p class="main__buttons__find__text">Buscar por: </p>
+                <p class="main__buttons__find__text">Obtener: </p>
                 <select class="main__buttons__find__select">
-                    <option value="cliente">Cliente</option>
-                    <option value="mes">Mes</option>
-                    <option value="año">Año</option>
+                    <option value="todas">Todas</option>
+                    <option value="mes">Último mes</option>
+                    <option value="meses">Últimos 3 meses</option>
                 </select>
-                <input type="text" class="main__buttons__find__input">
             </div>
         </div>
         <table class="main__table">
@@ -149,6 +148,10 @@
                 </tr>
             </tbody>
         </table>
+        <div class="main__total">
+            <p class="main__total__text">Total Facturado: </p>
+            <input type="text" class="main__total__input" value="1235.65">
+        </div>
     </main>
 </body>
 
