@@ -56,4 +56,14 @@
             border-bottom: 1px solid black;
         }
     }
+
+    &__total{
+        text-align: center;
+        &__input{
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            
+        }
+    }
 }

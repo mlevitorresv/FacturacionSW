@@ -87,6 +87,14 @@ body {
 .main__table__body__row {
   border-bottom: 1px solid black;
 }
+.main__total {
+  text-align: center;
+}
+.main__total__input {
+  text-align: center;
+  font-weight: bold;
+  border: none;
+}
 
 .plantilla {
   padding: 2em 5%;
