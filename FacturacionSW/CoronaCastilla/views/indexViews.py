@@ -1,3 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 
-render('index.html')
+def view_index(request):
+    return render(request, 'index.html')

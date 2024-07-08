@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block title %} Inicio {% endblock %}
+{% load static %}
 
 {% block content %}
-    <main class="main">
-        <img class="main__bg" src="./resources/assets/fact-bg.png" alt="background of index page">
-    </main>
-    {% endblock %}
+<main class="main">
+    <img class="main__bg" src="{% static 'resources/assets/fact-bg.png' %}" alt="background of index page">
+</main>
+{% endblock %}
