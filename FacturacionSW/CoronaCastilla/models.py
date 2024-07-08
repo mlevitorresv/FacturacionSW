@@ -9,7 +9,7 @@ class Articulo(models.Model):
     precio4 = models.FloatField()
     
 class Factura(models.Model):
-    cliente = models.CharField()
+    cliente = models.CharField(max_length=500)
     numero_factura = models.CharField(max_length=255)
     habitacion = models.ForeignKey(Articulo, on_delete=models.CASCADE)
     habitacion_numero = models.IntegerField()
