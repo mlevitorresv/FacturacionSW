@@ -1,0 +1,69 @@
+.main{
+    &__bg{
+        height: 80vh;
+        margin: 0 auto;
+        display: block;
+        opacity: .5;
+    }
+
+    &__buttons{
+        width: 50%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+
+        &__create{
+            background-color: #cecece;
+            border: none;
+            border-radius: .9em;
+            padding: .5em 1em;
+        }
+
+        &__find{
+            display: flex;
+            align-items: center;
+            &__select{
+                margin: 0 .5em;
+                background-color: #cecece;
+                border: none;
+                border-radius: .9em;
+                padding: .5em 1em;
+            }
+
+            &__input{
+                border-radius: .9em;
+                padding: .5em 1em;
+            }
+        }
+    }
+
+    
+
+    &__table{
+        margin: 3em auto;
+        width: 60%;
+        text-align: center;
+        border: 1px solid black;
+        border-collapse: collapse;
+        
+        &__head__row{
+            &__th{
+                border: 1px solid black;
+            }
+        }
+
+        &__body__row{
+            border-bottom: 1px solid black;
+        }
+    }
+
+    &__total{
+        text-align: center;
+        &__input{
+            text-align: center;
+            font-weight: bold;
+            border: none;
+            
+        }
+    }
+}

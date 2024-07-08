@@ -1,0 +1,14 @@
+.articulos{
+    &__articulo{
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 2em;
+        &__nombre{
+            width: 15%;
+        }
+
+        &__submit{
+            padding: .2em .5em;
+        }
+    }
+}
