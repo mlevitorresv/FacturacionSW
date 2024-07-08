@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'resources/css/index.css' %}">
+    <title>Facturación | {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+    <header class="header no-print">
+        <ul class="header__list">
+            <li class="header__list__item">Inicio</li>
+            <li class="header__list__item">Facturas</li>
+            <li class="header__list__item">Artículos</li>
+        </ul>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+</body>
+
+</html>

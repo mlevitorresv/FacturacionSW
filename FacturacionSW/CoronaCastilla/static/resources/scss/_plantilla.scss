@@ -1,0 +1,131 @@
+.plantilla{
+    padding: 2em 5%;
+    
+    &__info{
+        font-size: .8em;
+        margin-bottom: 3em;
+        width: fit-content;
+        text-align: center;
+
+        &__text--bold{
+            font-weight: bold;
+        }
+    }
+
+    &__form{
+        &__basico{
+            width: 50%;
+            &__field{
+                background-color: #cecece;
+                padding: 0 .2em;
+                border: 1px solid black;
+            }
+    
+            &__area{
+                width: 100%;
+                border: 1px solid black;
+                font-weight: bold;
+                padding: .2em;
+            }
+        }
+
+
+        &__articulos{
+            &__fields{
+                display: flex;
+                &__field{
+                    padding: .2em;
+                    width: 15%;
+                    background-color: #cecece;
+                    text-align: center;
+                
+                    &--description{
+                        width: 40%;
+                    }
+                }
+
+            }
+
+            &__inputs{
+                display: flex;
+
+                &__input{
+                    padding: .2em;
+                    width: 15%;
+                    text-align: right;
+                }
+
+            }
+        }
+
+        &__tabla{
+            margin: 3em 0;
+            width: 50%;
+            border: 1px solid black;
+            border-collapse: collapse;
+
+            &__thead{
+                font-weight: bold;
+                background-color: #cecece;
+                &__trow{
+                    &__tdata{
+                        border: 1px solid white;
+                        padding: .2em;
+                    }
+                }
+            }
+
+            &__tbody{
+                &__trow{
+                    &__tdata{
+                        border: 1px solid white;
+                        padding: .2em;
+                    }
+
+                    
+                    &__tdata:first-child{
+                        font-weight: bold;
+                        background-color: #cecece;
+                    }
+                }
+            }
+        }
+    }
+
+    &__buttons{
+        position: relative;
+        margin-top: 2em;
+        &__button{
+            margin-right: 1.5em;
+            padding: .5em;
+
+            &--eliminar{
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+
+
+    &__footer{
+        font-size: .6em;
+        position: absolute;
+        bottom: 0;
+        margin-top: 3em;
+        &__text{
+            &__bigger{
+                font-size: 1em;
+            }
+            &__bolder{
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+@media print {
+    .no-print {
+        display: none;
+    }
+}

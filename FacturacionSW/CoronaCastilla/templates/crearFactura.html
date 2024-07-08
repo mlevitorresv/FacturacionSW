@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% block title %} Nueva Factura {% endblock %}
+
+{% block content %}
+    <main class="plantilla">
+        <div class="plantilla__info">
+            <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
+            <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
+            <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
+            <p class="plantilla__info__text">Fax 923 25 54 11</p>
+            <p class="plantilla__info__text--bold">37184 VILLARES DE LA REINA SALAMANCA</p>
+            <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
+            <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
+        </div>
+        <form action="" class="plantilla__form">
+            <div class="plantilla__form__basico">
+                <p class="plantilla__form__basico__field">CLIENTE</p>
+                <textarea class="plantilla__form__basico__area" rows="8"></textarea>
+            </div>
+            <div class="plantilla__form__articulos">
+                <div class="plantilla__form__articulos__fields">
+                    <p class="plantilla__form__articulos__fields__field">NUMERO FACTURA</p>
+                    <p class="plantilla__form__articulos__fields__field">HABITACIÓN (TIPO)</p>
+                    <p class="plantilla__form__articulos__fields__field">HABITACIÓN (Nº)</p>
+                    <p class="plantilla__form__articulos__fields__field">FECHA ENTRADA</p>
+                    <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
+                </div>
+                <div class="plantilla__form__articulos__inputs">
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="numero" />
+                    <select name="tipoHabitacion" class="plantilla__form__articulos__inputs__input">
+                        <option value="individual">Habitación individual</option>
+                        <option value="doble">Habitación doble</option>
+                        <option value="triple">Habitación triple</option>
+                        <option value="cuadruple">Habitación cuadruple</option>
+                    </select>
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="numeroHabitacion" />
+                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaEntrada" />
+                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaSalida" />
+                </div>
+            </div>
+
+            <table class="plantilla__form__tabla">
+                <thead class="plantilla__form__tabla__thead">
+                    <tr class="plantilla__form__tabla__thead__trow">
+                        <td class="plantilla__form__tabla__thead__trow__tdata"></td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">DIAS</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
+                    </tr>
+                </thead>
+
+                <tbody class="plantilla__form__tabla__tbody">
+                    <tr class="plantilla__form__tabla__tbody__trow">
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
+                                name="numeroDias"/>
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
+                                <option value="33">33</option>
+                                <option value="38">38</option>
+                                <option value="44">44</option>
+                                <option value="56">56</option>
+                            </select>
+                        </td class="plantilla__form__tabla__tbody__trow__tdata">
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">euros*dias</td>
+                    </tr>
+
+                    <tr class="plantilla__form__tabla__tbody__trow">
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
+                                name="numeroDias"/>
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
+                                <option value="" selected></option>
+                                <option value="33">33</option>
+                                <option value="38">38</option>
+                                <option value="44">44</option>
+                                <option value="56">56</option>
+                            </select>
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">euros*dias</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+            <div class="plantilla__form__articulos">
+                <div class="plantilla__form__articulos__fields">
+                    <p class="plantilla__form__articulos__fields__field">BASE IMPONIBLE</p>
+                    <p class="plantilla__form__articulos__fields__field">% IVA</p>
+                    <p class="plantilla__form__articulos__fields__field">IMPORTE IVA</p>
+                    <p class="plantilla__form__articulos__fields__field">TOTAL FACTURA</p>
+                </div>
+                <div class="plantilla__form__articulos__inputs">
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="baseImponible" disabled value="PRECIO - IVA"/>
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="porcentajeIva" value="10"/>
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="importeIva" disabled value="precio*10/100"/>
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="totalFactura" disabled value="baseImponible + importeIva"/>
+                </div>
+            </div>
+        </form>
+
+        <div class="plantilla__buttons no-print">
+            <button class="plantilla__buttons__button">Guardar Factura</button>
+            <button class="plantilla__buttons__button">Imprimir Factura</button>
+        </div>
+
+        <footer class="plantilla__footer">
+            <p class="plantilla__footer__text">
+                <span class="plantilla__footer__text__bigger">CORONA ASENSIO, S.L. - C.I.F. B-56831837</span> · La
+                recogida y uso de datos se hará de acuerdo con la ley orgánica 15/1999 de 13 de Diciembre <span
+                    class="plantilla__footer__text__bolder">de protección de datos de carácter personal y al amparo de
+                    lo
+                    dispuesto en el artículo 12.1 de la ley orgánica</span> 01/1992 de 21 de Febrero sobre protección de
+                la seguridad ciudadana.
+            </p>
+        </footer>
+    </main>
+{% endblock %}

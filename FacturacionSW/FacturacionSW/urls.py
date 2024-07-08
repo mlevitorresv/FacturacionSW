@@ -16,7 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from CoronaCastilla.views import indexViews, facturasViews, articulosViews
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("", indexViews.view_index, name='index'),
+    path("facturas", facturasViews.view_facturas, name='facturas'),
+    path("facturas/<int:factura_id>", facturasViews.view_factura_id, name='facturaDetails'),
+    path("articulos", articulosViews.view_articulos, name='articulos'),
+    
 ]
