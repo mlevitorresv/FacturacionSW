@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block title %} Gestionar Factura {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/index.css">
-    <title>Facturación | Gestionar Factura</title>
-</head>
-
-<body>
-    <header class="header no-print">
-        <ul class="header__list">
-            <li class="header__list__item">Inicio</li>
-            <li class="header__list__item">Facturas</li>
-            <li class="header__list__item">Artículos</li>
-        </ul>
-    </header>
+{% block content %}
     <main class="plantilla">
         <div class="plantilla__info">
             <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
@@ -135,6 +121,4 @@
             </p>
         </footer>
     </main>
-</body>
-
-</html>
+    {% endblock %}

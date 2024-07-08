@@ -1,21 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% block title %} Articulos {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/index.css">
-    <title>Facturación | Nueva Factura</title>
-</head>
-
-<body>
-    <header class="header no-print">
-        <ul class="header__list">
-            <li class="header__list__item">Inicio</li>
-            <li class="header__list__item">Facturas</li>
-            <li class="header__list__item">Artículos</li>
-        </ul>
-    </header>
+{% block content %}
     <main class="articulos">
         <form action="" class="articulos__articulo">
             <p class="articulos__articulo__nombre">Habitación individual</p>
@@ -58,6 +44,4 @@
             <button type="submit" class="articulos__articulo__submit">Actualizar</button>
         </form>
     </main>
-</body>
-
-</html>
+    {% endblock %}
