@@ -24,114 +24,14 @@
                 </tr>
             </thead>
             <tbody class="main__table__body">
+            {% for factura in facturas %}
                 <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
+                    <td class="main__table__body__row__th">{{ factura.numero_factura }}</td>
+                    <td class="main__table__body__row__th">{{ factura.fecha_salida }}</td>
+                    <td class="main__table__body__row__th">{{ factura.cliente }}</td>
+                    <td class="main__table__body__row__th">{{ factura.habitacion }}</td>
                 </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">001</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Antonio S.L.</td>
-                    <td class="main__table__body__row__th">Habitación doble</td>
-                </tr>
-                <tr class="main__table__body__row">
-                    <td class="main__table__body__row__th">002</td>
-                    <td class="main__table__body__row__th">26/06/2024</td>
-                    <td class="main__table__body__row__th">Piensos S.L.</td>
-                    <td class="main__table__body__row__th">Habitación simple</td>
-                </tr>
+            {% endfor %}
             </tbody>
         </table>
         <div class="main__total">
