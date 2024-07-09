@@ -15,7 +15,7 @@
         <form action="" class="plantilla__form">
             <div class="plantilla__form__basico">
                 <p class="plantilla__form__basico__field">CLIENTE</p>
-                <textarea class="plantilla__form__basico__area" rows="8"></textarea>
+                <textarea class="plantilla__form__basico__area" rows="8">{{ factura.cliente }}</textarea>
             </div>
             <div class="plantilla__form__articulos">
                 <div class="plantilla__form__articulos__fields">
@@ -26,16 +26,16 @@
                     <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
                 </div>
                 <div class="plantilla__form__articulos__inputs">
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="numero" />
-                    <select name="tipoHabitacion" class="plantilla__form__articulos__inputs__input">
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="numero" value="{{ factura.numero_factura }}"/>
+                    <select name="tipoHabitacion" class="plantilla__form__articulos__inputs__input" value="{{ factura.habitacion }}">
                         <option value="individual">Habitación individual</option>
                         <option value="doble">Habitación doble</option>
                         <option value="triple">Habitación triple</option>
                         <option value="cuadruple">Habitación cuadruple</option>
                     </select>
-                    <input type="number" class="plantilla__form__articulos__inputs__input" name="numeroHabitacion" />
-                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaEntrada" />
-                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaSalida" />
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="numeroHabitacion"  value="{{ factura.habitacion_numero }}"/>
+                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaEntrada"  value="{{ factura.fecha_entrada }}"/>
+                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaSalida"  value="{{ factura.fecha_salida }}"/>
                 </div>
             </div>
 
@@ -54,27 +54,27 @@
                         <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
-                                name="numeroDias"/>
+                                name="numeroDias" value="{{ factura.alojamiento_dias }}"/>
                         </td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
-                            <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
+                            <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input" value="{{ factura.alojamiento_precio }}">
                                 <option value="33">33</option>
                                 <option value="38">38</option>
                                 <option value="44">44</option>
                                 <option value="56">56</option>
                             </select>
                         </td class="plantilla__form__tabla__tbody__trow__tdata">
-                        <td class="plantilla__form__tabla__tbody__trow__tdata">euros*dias</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">{{factura.alojamiento_dias * factura.alojamiento_precio}}</td>
                     </tr>
 
                     <tr class="plantilla__form__tabla__tbody__trow">
                         <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
-                                name="numeroDias"/>
+                                name="numeroDias" value="{{ factura.desayuno_dias }}"/>
                         </td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
-                            <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
+                            <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input" value="{{ factura.desayuno_precio }}">
                                 <option value="" selected></option>
                                 <option value="33">33</option>
                                 <option value="38">38</option>
@@ -82,7 +82,7 @@
                                 <option value="56">56</option>
                             </select>
                         </td>
-                        <td class="plantilla__form__tabla__tbody__trow__tdata">euros*dias</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">{{factura.desayuno_dias * factura.desayuno_precio}}</td>
                     </tr>
                 </tbody>
 

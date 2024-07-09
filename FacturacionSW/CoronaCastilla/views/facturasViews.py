@@ -40,5 +40,5 @@ def view_facturas_tres(request):
 
 def view_factura_id(request, factura_id):
     factura = Factura.objects.get(id=factura_id)
-    return render(request, 'facturaDetails.html', {'factura' : factura})
+    return render(request, 'gestionarFactura.html', {'factura' : factura})
 
