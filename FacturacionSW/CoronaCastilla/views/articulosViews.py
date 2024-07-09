@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from CoronaCastilla.models import Factura
+from CoronaCastilla.models import Articulo
 
-def view_articulos():
-    return render('articulos.html')
+def view_articulos(request):
+    articulos = Articulo.objects.all()
+    return render(request, 'articulos.html', {'articulo' : Articulo})
