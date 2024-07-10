@@ -2,9 +2,10 @@ const precioAlojamiento = () => {
     dias = document.getElementById('alojamientoDias')
     precio = document.getElementById('alojamientoPrecio')
     result = document.getElementById('alojamientoResult')
+    console.log(dias.value, precio.value, result)
 
     total = dias.value * precio.value
-    result.value = total
+    result.innerHTML = total
 }
 
 const precioDesayuno = () => {
@@ -13,5 +14,5 @@ const precioDesayuno = () => {
     result = document.getElementById('desayunoResult')
 
     total = dias.value * precio.value
-    result.TextContent = total
+    result.innerHTML = total
 }
