@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
 from CoronaCastilla.models import Factura
+from CoronaCastilla.forms import facturaForm
 from datetime import datetime
 
 def view_facturas(request):
@@ -40,5 +41,34 @@ def view_facturas_tres(request):
 
 def view_factura_id(request, factura_id):
     factura = Factura.objects.get(id=factura_id)
-    return render(request, 'gestionarFactura.html', {'factura' : factura})
+    
+    alojamiento_importe = factura.alojamiento_dias * factura.alojamiento_precio
+    desayuno_importe = factura.desayuno_dias * factura.desayuno_precio
+    base_imponible = alojamiento_importe + desayuno_importe
+    porcentaje_iva = factura.porcentaje_iva
+    importe_iva = base_imponible * (porcentaje_iva / 100)
+    total_factura = base_imponible + importe_iva
+    
+    context = {
+        'factura': factura,
+        'alojamiento_importe': alojamiento_importe,
+        'desayuno_importe': desayuno_importe,
+        'base_imponible': base_imponible,
+        'porcentaje_iva': porcentaje_iva,
+        'importe_iva': importe_iva,
+        'total_factura': total_factura,
+    }
+    
+    return render(request, 'gestionarFactura.html', context)
 
+def post_factura(request):
+    if request.method == 'POST':
+        form = facturaForm(request.POST)
+        if form.is_valid:
+            factura = form.save(commit=False)
+            factura.save()
+            return redirect('facturas')
+    else:
+        form = facturaForm()
+    
+    return render(request, 'crearFactura.html', {'form' : form})

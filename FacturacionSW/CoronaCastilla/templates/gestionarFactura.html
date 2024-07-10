@@ -64,7 +64,7 @@
                                 <option value="56">56</option>
                             </select>
                         </td class="plantilla__form__tabla__tbody__trow__tdata">
-                        <td class="plantilla__form__tabla__tbody__trow__tdata">{{factura.alojamiento_dias * factura.alojamiento_precio}}</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">{{ alojamiento_importe }}</td>
                     </tr>
 
                     <tr class="plantilla__form__tabla__tbody__trow">
@@ -82,7 +82,7 @@
                                 <option value="56">56</option>
                             </select>
                         </td>
-                        <td class="plantilla__form__tabla__tbody__trow__tdata">{{factura.desayuno_dias * factura.desayuno_precio}}</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">{{ desayuno_importe }}</td>
                     </tr>
                 </tbody>
 
@@ -96,10 +96,10 @@
                     <p class="plantilla__form__articulos__fields__field">TOTAL FACTURA</p>
                 </div>
                 <div class="plantilla__form__articulos__inputs">
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="baseImponible" disabled value="PRECIO - IVA"/>
-                    <input type="number" class="plantilla__form__articulos__inputs__input" name="porcentajeIva" value="10"/>
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="importeIva" disabled value="precio*10/100"/>
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="totalFactura" disabled value="baseImponible + importeIva"/>
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="baseImponible" disabled value="{{ base_imponible }}"/>
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="porcentajeIva" value=" {{ porcentaje_iva }}"/>
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="importeIva" disabled value="{{ importe_iva }}"/>
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="totalFactura" disabled value="{{ total_factura }}"/>
                 </div>
             </div>
         </form>
