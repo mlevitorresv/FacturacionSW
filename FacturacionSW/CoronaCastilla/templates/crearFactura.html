@@ -13,9 +13,10 @@
             <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
         </div>
         <form action="" class="plantilla__form">
+            {% csrf_token %}
             <div class="plantilla__form__basico">
                 <p class="plantilla__form__basico__field">CLIENTE</p>
-                <textarea class="plantilla__form__basico__area" rows="8"></textarea>
+                {{ form.cliente }}
             </div>
             <div class="plantilla__form__articulos">
                 <div class="plantilla__form__articulos__fields">
@@ -26,16 +27,16 @@
                     <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
                 </div>
                 <div class="plantilla__form__articulos__inputs">
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="numero" />
+                    {{ form.numero_factura }}
                     <select name="tipoHabitacion" class="plantilla__form__articulos__inputs__input">
                         <option value="individual">Habitación individual</option>
                         <option value="doble">Habitación doble</option>
                         <option value="triple">Habitación triple</option>
                         <option value="cuadruple">Habitación cuadruple</option>
                     </select>
-                    <input type="number" class="plantilla__form__articulos__inputs__input" name="numeroHabitacion" />
-                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaEntrada" />
-                    <input type="date" class="plantilla__form__articulos__inputs__input" name="fechaSalida" />
+                    {{ form.habitacion_numero }}
+                    {{ form.fecha_entrada }}
+                    {{ form.fecha_salida }}
                 </div>
             </div>
 
@@ -53,8 +54,7 @@
                     <tr class="plantilla__form__tabla__tbody__trow">
                         <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
-                            <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
-                                name="numeroDias"/>
+                            {{ form.alojamiento_dias }}
                         </td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
@@ -70,8 +70,7 @@
                     <tr class="plantilla__form__tabla__tbody__trow">
                         <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
-                            <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
-                                name="numeroDias"/>
+                            {{ form.desayuno_dias }}
                         </td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
@@ -96,10 +95,10 @@
                     <p class="plantilla__form__articulos__fields__field">TOTAL FACTURA</p>
                 </div>
                 <div class="plantilla__form__articulos__inputs">
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="baseImponible" disabled value="PRECIO - IVA"/>
-                    <input type="number" class="plantilla__form__articulos__inputs__input" name="porcentajeIva" value="10"/>
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="importeIva" disabled value="precio*10/100"/>
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="totalFactura" disabled value="baseImponible + importeIva"/>
+                    {{ form.base_imponible}}
+                    {{ form.porcentaje_iva}}
+                    {{ form.importe_iva}}
+                    {{ form.total_factura}}
                 </div>
             </div>
         </form>
