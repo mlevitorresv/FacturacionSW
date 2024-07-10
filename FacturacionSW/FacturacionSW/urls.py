@@ -23,6 +23,9 @@ urlpatterns = [
     path("", indexViews.view_index, name='index'),
     path("facturas", facturasViews.view_facturas, name='facturas'),
     path("facturas/<int:factura_id>", facturasViews.view_factura_id, name='facturaDetails'),
+    path("facturas/nueva", facturasViews.view_facturas, name='nuevaFactura'),
+    path("facturas/edit/<int:factura_id>", facturasViews.view_facturas, name='editaFactura'),
+    path("facturas/delete/<int:factura_id>", facturasViews.view_facturas, name='eliminaFactura'),
     path("articulos", articulosViews.view_articulos, name='articulos'),
     
 ]
