@@ -36,7 +36,6 @@ const showResults = () => {
     if (isNaN(desayuno)) desayuno = 0;
 
     const precio = alojamiento + desayuno
-    console.log(alojamiento)
     const importeIva = Math.round(precio * (ivaInput.value / 100) * 100) / 100
     const baseImponible = precio - importeIva
     const totalFactura = baseImponible + importeIva
