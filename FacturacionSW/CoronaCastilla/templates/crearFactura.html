@@ -29,10 +29,10 @@
             <div class="plantilla__form__articulos__inputs">
                 {{ form.numero_factura }}
                 <select name="tipoHabitacion" class="plantilla__form__articulos__inputs__input">
-                    <option value="individual">Habitación individual</option>
-                    <option value="doble">Habitación doble</option>
-                    <option value="triple">Habitación triple</option>
-                    <option value="cuadruple">Habitación cuadruple</option>
+                    <option value="habitación individual">Habitación individual</option>
+                    <option value="habitación doble">Habitación doble</option>
+                    <option value="habitación triple">Habitación triple</option>
+                    <option value="habitación cuadruple">Habitación cuadruple</option>
                 </select>
                 {{ form.habitacion_numero }}
                 {{ form.fecha_entrada }}
@@ -57,12 +57,7 @@
                         {{ form.alojamiento_dias }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input" id="alojamientoPrecio" onchange="precioAlojamiento()">
-                            <option value="33">33</option>
-                            <option value="39">39</option>
-                            <option value="44">44</option>
-                            <option value="56">56</option>
-                        </select>
+                        {{ form.alojamiento_precio }}
                     </td class="plantilla__form__tabla__tbody__trow__tdata">
                     <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult"></td>
                 </tr>
@@ -73,12 +68,7 @@
                         {{ form.desayuno_dias }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input" id="desayunoPrecio" onchange="precioDesayuno()">
-                            <option value="33">33</option>
-                            <option value="38">38</option>
-                            <option value="44">44</option>
-                            <option value="56">56</option>
-                        </select>
+                        {{ form.desayuno_precio }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata" id="desayunoResult"></td>
                 </tr>

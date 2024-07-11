@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from CoronaCastilla.models import Factura
+from CoronaCastilla.models import Factura, Articulo
 from CoronaCastilla.forms import facturaForm
 from datetime import datetime
 
@@ -61,14 +61,14 @@ def view_factura_id(request, factura_id):
     
     return render(request, 'gestionarFactura.html', context)
 
+
 def post_factura(request):
+    articulos = Articulo.objects.all()
     if request.method == 'POST':
         form = facturaForm(request.POST)
-        if form.is_valid:
-            factura = form.save(commit=False)
-            factura.save()
+        if form.is_valid():
+            form.save()
             return redirect('facturas')
     else:
         form = facturaForm()
-    
-    return render(request, 'crearFactura.html', {'form' : form})
+    return render(request, 'crearFactura.html', {'form': form, 'articulos': articulos})
