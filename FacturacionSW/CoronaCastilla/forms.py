@@ -19,8 +19,8 @@ class facturaForm(forms.ModelForm):
             'alojamiento_precio': forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioHabitacion', 'id': 'alojamientoPrecio'}),
             'desayuno_precio': forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioDesayuno', 'id': 'desayunoPrecio'}),
             'importe': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'importe'}),
-            'base_imponible': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'baseImponible', 'disabled': True}),
-            'porcentaje_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'porcentajeIva', 'value': 10}),
-            'importe_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'importeIva', 'disabled': True}),
-            'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'disabled': True})
+            'base_imponible': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'baseImponible', 'disabled': True, 'id': 'baseImponible'}),
+            'porcentaje_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'porcentajeIva', 'value': 10,'id': 'porcentajeIva', 'onchange': 'showResults()'}),
+            'importe_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'importeIva', 'disabled': True, 'id': 'importeIva'}),
+            'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'disabled': True, 'id': 'totalFactura'})
         }
