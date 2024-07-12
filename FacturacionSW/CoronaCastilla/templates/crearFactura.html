@@ -12,7 +12,7 @@
         <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
         <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
     </div>
-    <form action="" class="plantilla__form">
+    <form action="" class="plantilla__form" id="facturaForm" method="POST">
         {% csrf_token %}
         <div class="plantilla__form__basico">
             <p class="plantilla__form__basico__field">CLIENTE</p>
@@ -88,7 +88,7 @@
     </form>
 
     <div class="plantilla__buttons no-print">
-        <button class="plantilla__buttons__button">Guardar Factura</button>
+        <button class="plantilla__buttons__button" type="submit" form="facturaForm">Guardar Factura</button>
         <button class="plantilla__buttons__button">Imprimir Factura</button>
     </div>
 

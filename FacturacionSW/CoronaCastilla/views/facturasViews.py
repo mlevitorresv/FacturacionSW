@@ -63,12 +63,15 @@ def view_factura_id(request, factura_id):
 
 
 def post_factura(request):
-    articulos = Articulo.objects.all()
+    articulos = Articulo.objects.all()  # Obtener todos los artículos disponibles
     if request.method == 'POST':
         form = facturaForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('facturas')
+            form.save()  # Guardar el formulario si es válido
+            return redirect('facturasViews.view_facturas')  # Redirigir a la lista de facturas después de guardar
+        else:
+            print('formulario invalido', form.errors)
     else:
-        form = facturaForm()
+        form = facturaForm()  # Formulario vacío para mostrar en GET
+    
     return render(request, 'crearFactura.html', {'form': form, 'articulos': articulos})
