@@ -46,3 +46,29 @@ const showResults = () => {
     baseImponibleInput.value = baseImponible
     totalFacturaInput.value = totalFactura
 }
+
+
+
+$(document).ready(function() {
+    $('#tipoHabitacion').change(function() {
+        var tipoHabitacion = $(this).val();
+        $.ajax({
+            url: '/get-precios/',
+            data: {
+                'tipoHabitacion': tipoHabitacion
+            },
+            dataType: 'json',
+            success: function(data) {
+                $('#alojamientoPrecio').empty();
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        $('#alojamientoPrecio').append($('<option>', {
+                            value: data[key],
+                            text: '€' + data[key]
+                        }));
+                    }
+                }
+            }
+        });
+    });
+});

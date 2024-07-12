@@ -27,5 +27,5 @@ urlpatterns = [
     path("facturas/edit/<int:factura_id>", facturasViews.view_facturas, name='editaFactura'),
     path("facturas/delete/<int:factura_id>", facturasViews.view_facturas, name='eliminaFactura'),
     path("articulos", articulosViews.view_articulos, name='articulos'),
-    
+    path('get-precios/', articulosViews.get_precios, name='get_precios')    
 ]
