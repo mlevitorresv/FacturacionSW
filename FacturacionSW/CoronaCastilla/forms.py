@@ -1,8 +1,6 @@
 from django import forms
 from CoronaCastilla.models import Factura, Articulo
 
-# forms.py
-
 class facturaForm(forms.ModelForm):
     class Meta:
         model = Factura
@@ -28,11 +26,20 @@ class facturaForm(forms.ModelForm):
 
     alojamiento_precio = forms.ChoiceField(
         choices=[],
-        widget=forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioHabitacion', 'id': 'alojamientoPrecio'})
+        widget=forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioHabitacion', 'id': 'alojamientoPrecio', 'onchange': 'precioAlojamiento()'})
     )
 
     desayuno_precio = forms.ChoiceField(
         choices=[],
-        widget=forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioDesayuno', 'id': 'desayunoPrecio'})
+        widget=forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioDesayuno', 'id': 'desayunoPrecio', 'onchange': 'precioDesayuno()'})
     )
 
+    tipoHabitacion = forms.ChoiceField(
+        choices=[
+            ('habitación individual', 'Habitación individual'),
+            ('habitación doble', 'Habitación doble'),
+            ('habitación triple', 'Habitación triple'),
+            ('habitación cuadruple', 'Habitación cuadruple')
+        ],
+        widget=forms.Select(attrs={'class': 'plantilla__form__articulos__inputs__input', 'id': 'tipoHabitacion'})
+    )

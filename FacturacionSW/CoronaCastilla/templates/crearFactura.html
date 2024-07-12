@@ -28,12 +28,7 @@
             </div>
             <div class="plantilla__form__articulos__inputs">
                 {{ form.numero_factura }}
-                <select id="tipoHabitacion" name="tipoHabitacion" class="plantilla__form__articulos__inputs__input">
-                    <option value="habitación individual">Habitación individual</option>
-                    <option value="habitación doble">Habitación doble</option>
-                    <option value="habitación triple">Habitación triple</option>
-                    <option value="habitación cuadruple">Habitación cuadruple</option>
-                </select>
+                {{ form.tipoHabitacion }}
                 {{ form.habitacion_numero }}
                 {{ form.fecha_entrada }}
                 {{ form.fecha_salida }}
