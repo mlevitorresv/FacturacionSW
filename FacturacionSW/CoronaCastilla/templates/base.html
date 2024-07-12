@@ -13,9 +13,9 @@
 <body>
     <header class="header no-print">
         <ul class="header__list">
-            <li class="header__list__item">Inicio</li>
-            <li class="header__list__item">Facturas</li>
-            <li class="header__list__item">Artículos</li>
+            <li class="header__list__item" onclick="window.location.href= `{% url 'index' %}`">Inicio</li>
+            <li class="header__list__item" onclick="window.location.href= `{% url 'facturas' %}`">Facturas</li>
+            <li class="header__list__item" onclick="window.location.href= `{% url 'articulos' %}`">Artículos</li>
         </ul>
     </header>
 
