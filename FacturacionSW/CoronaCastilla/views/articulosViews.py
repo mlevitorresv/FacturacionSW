@@ -9,7 +9,6 @@ def view_articulos(request):
 
 def get_precios(request):
     tipo_habitacion = request.GET.get('tipoHabitacion')
-    print(f"Tipo de habitación recibido: {tipo_habitacion}")  # Depuración
     articulo = Articulo.objects.filter(nombre=tipo_habitacion).first()
     data = {}
     if articulo:
@@ -19,5 +18,4 @@ def get_precios(request):
             'precio3': articulo.precio3,
             'precio4': articulo.precio4
         }
-    print(f"Datos enviados: {data}")  # Depuración
     return JsonResponse(data)
