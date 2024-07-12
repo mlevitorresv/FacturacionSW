@@ -40,8 +40,8 @@ const showResults = () => {
     const baseImponible = precio - importeIva
     const totalFactura = baseImponible + importeIva
 
-    
-    
+
+
     importeIvaInput.value = importeIva
     baseImponibleInput.value = baseImponible
     totalFacturaInput.value = totalFactura
@@ -49,8 +49,8 @@ const showResults = () => {
 
 
 
-$(document).ready(function() {
-    $('#tipoHabitacion').change(function() {
+$(document).ready(function () {
+    $('#tipoHabitacion').change(function () {
         var tipoHabitacion = $(this).val();
         $.ajax({
             url: '/get-precios/',
@@ -58,7 +58,7 @@ $(document).ready(function() {
                 'tipoHabitacion': tipoHabitacion
             },
             dataType: 'json',
-            success: function(data) {
+            success: function (data) {
                 $('#alojamientoPrecio').empty();
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
@@ -70,5 +70,28 @@ $(document).ready(function() {
                 }
             }
         });
+    });
+});
+
+
+$(document).ready(function () {
+    var tipoHabitacion = 'desayuno';
+    $.ajax({
+        url: '/get-precios/',
+        data: {
+            'tipoHabitacion': tipoHabitacion
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#desayunoPrecio').empty();
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    $('#desayunoPrecio').append($('<option>', {
+                        value: data[key],
+                        text: '€' + data[key]
+                    }));
+                }
+            }
+        }
     });
 });
