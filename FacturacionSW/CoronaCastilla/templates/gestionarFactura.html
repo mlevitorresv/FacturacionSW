@@ -12,7 +12,8 @@
             <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
             <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
         </div>
-        <form action="" class="plantilla__form">
+        <form action="{% url 'eliminaFactura' factura_id=factura.id %}" method="POST" class="plantilla__form" id="editForm">
+            {% csrf_token %}
             <div class="plantilla__form__basico">
                 <p class="plantilla__form__basico__field">CLIENTE</p>
                 <textarea class="plantilla__form__basico__area" rows="8">{{ factura.cliente }}</textarea>
@@ -98,7 +99,7 @@
         <div class="plantilla__buttons no-print">
             <button class="plantilla__buttons__button">Actualizar Factura</button>
             <button class="plantilla__buttons__button">Imprimir Factura</button>
-            <button class="plantilla__buttons__button plantilla__buttons__button--eliminar">Eliminar Factura</button>
+            <button class="plantilla__buttons__button plantilla__buttons__button--eliminar" type="submit" form="editForm">Eliminar Factura</button>
         </div>
 
         <footer class="plantilla__footer">

@@ -1,8 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from CoronaCastilla.models import Factura, Articulo
 from CoronaCastilla.forms import facturaForm
 from datetime import datetime
+
 
 def view_facturas(request):
     facturas = Factura.objects.all()
@@ -86,3 +87,14 @@ def post_factura(request):
         form = facturaForm()  # Formulario vacío para mostrar en GET
     
     return render(request, 'crearFactura.html', {'form': form, 'articulos': articulos})
+
+
+def delete_factura(request, factura_id):
+    factura = get_object_or_404(Factura, id=factura_id)
+    
+    if request.method == 'POST':
+        factura.delete()
+        return redirect('facturas')  # Redirige a la lista de facturas después de eliminar
+    
+    # Si no es una solicitud POST, renderiza la página de detalles de factura (o alguna otra vista)
+    return render(request, 'gestionarFactura.html', {'factura': factura})
