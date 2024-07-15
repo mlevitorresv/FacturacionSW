@@ -41,3 +41,14 @@ class facturaForm(forms.ModelForm):
         ],
         widget=forms.Select(attrs={'class': 'plantilla__form__articulos__inputs__input', 'id': 'tipoHabitacion'})
     )
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['alojamiento_precio'].choices = self.get_initial_choices()
+        self.fields['desayuno_precio'].choices = self.get_initial_choices()
+
+    def get_initial_choices(self):
+
+        return []

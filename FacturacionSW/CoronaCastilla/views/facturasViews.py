@@ -66,6 +66,19 @@ def post_factura(request):
     articulos = Articulo.objects.all()  # Obtener todos los artículos disponibles
     if request.method == 'POST':
         form = facturaForm(request.POST)
+        # Cargar dinámicamente las opciones antes de la validación
+        tipo_habitacion = request.POST.get('tipoHabitacion')
+        if tipo_habitacion:
+            articulo = Articulo.objects.filter(nombre=tipo_habitacion).first()
+            if articulo:
+                precios = [
+                    (float(articulo.precio1), '€' + str(float(articulo.precio1))),
+                    (float(articulo.precio2), '€' + str(float(articulo.precio2))),
+                    (float(articulo.precio3), '€' + str(float(articulo.precio3))),
+                    (float(articulo.precio4), '€' + str(float(articulo.precio4))),
+                ]
+                form.fields['alojamiento_precio'].choices = precios
+                form.fields['desayuno_precio'].choices = precios
         if form.is_valid():
             form.save()  # Guardar el formulario si es válido
             return redirect('facturasViews.view_facturas')  # Redirigir a la lista de facturas después de guardar

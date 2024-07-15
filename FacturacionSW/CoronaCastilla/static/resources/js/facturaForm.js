@@ -59,7 +59,6 @@ $(document).ready(function () {
             },
             dataType: 'json',
             success: function (data) {
-                $('#alojamientoPrecio').empty();
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
                         $('#alojamientoPrecio').append($('<option>', {
@@ -86,9 +85,10 @@ $(document).ready(function () {
             $('#desayunoPrecio').empty();
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
+                    var precio = parseFloat(data[key]).toFixed(1)
                     $('#desayunoPrecio').append($('<option>', {
-                        value: data[key],
-                        text: '€' + data[key]
+                        value: precio,
+                        text: '€' + precio
                     }));
                 }
             }
