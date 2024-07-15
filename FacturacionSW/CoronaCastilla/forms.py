@@ -52,3 +52,9 @@ class facturaForm(forms.ModelForm):
     def get_initial_choices(self):
 
         return []
+    
+    
+class articuloEditForm(forms.ModelForm):
+    class Meta:
+        model = Articulo
+        fields = ['precio1', 'precio2', 'precio3', 'precio4']

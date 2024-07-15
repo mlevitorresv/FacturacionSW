@@ -3,13 +3,13 @@
 
 {% block content %}
     <main class="articulos">
-        {% for articulo in articulos %}
-        <form action="" class="articulos__articulo">
+        {% for articulo, form in articulos %}
+        <form action="{% url 'actualizar_articulo' articulo.id %}" method="POST" class="articulos__articulo">
+            {% csrf_token %}
             <p class="articulos__articulo__nombre">{{ articulo.nombre }}</p>
-            <input type="number" name="individual1" class="articulos__articulo__precio" value="{{ articulo.precio1 }}" />
-            <input type="number" name="individual2" class="articulos__articulo__precio" value="{{ articulo.precio2 }}" />
-            <input type="number" name="individual3" class="articulos__articulo__precio" value="{{ articulo.precio3 }}" />
-            <input type="number" name="individual4" class="articulos__articulo__precio" value="{{ articulo.precio4 }}" />
+            {% for field in form.visible_fields %}
+                {{ field }}
+            {% endfor %}
             <button type="submit" class="articulos__articulo__submit">Actualizar</button>
         </form>
         {% endfor %}
