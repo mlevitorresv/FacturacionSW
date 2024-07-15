@@ -44,19 +44,17 @@ def view_factura_id(request, factura_id):
     
     alojamiento_importe = factura.alojamiento_dias * factura.alojamiento_precio
     desayuno_importe = factura.desayuno_dias * factura.desayuno_precio
-    base_imponible = alojamiento_importe + desayuno_importe
-    porcentaje_iva = factura.porcentaje_iva
-    importe_iva = base_imponible * (porcentaje_iva / 100)
-    total_factura = base_imponible + importe_iva
+    porcentaje_iva = int(factura.porcentaje_iva)
+    fecha_entrada = datetime.strptime(str(factura.fecha_entrada) , '%Y-%m-%d').strftime('%Y-%m-%d')
+    fecha_salida = datetime.strptime(str(factura.fecha_salida) , '%Y-%m-%d').strftime('%Y-%m-%d')
     
     context = {
         'factura': factura,
         'alojamiento_importe': alojamiento_importe,
         'desayuno_importe': desayuno_importe,
-        'base_imponible': base_imponible,
         'porcentaje_iva': porcentaje_iva,
-        'importe_iva': importe_iva,
-        'total_factura': total_factura,
+        'fecha_entrada': fecha_entrada,
+        'fecha_salida': fecha_salida,
     }
     
     return render(request, 'gestionarFactura.html', context)
