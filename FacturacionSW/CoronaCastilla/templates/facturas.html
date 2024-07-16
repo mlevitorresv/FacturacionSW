@@ -5,7 +5,7 @@
 {% block content %}
 <main class="main">
     <div class="main__buttons">
-        <button class="main__buttons__create">Crear Factura</button>
+        <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevaFactura' %}`">Crear Factura</button>
         <div class="main__buttons__find">
             <p class="main__buttons__find__text">Obtener: </p>
             <form id="filter-form" action="{% url 'facturas' %}" method="GET">
