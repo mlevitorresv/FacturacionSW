@@ -58,3 +58,14 @@ class articuloEditForm(forms.ModelForm):
     class Meta:
         model = Articulo
         fields = ['precio1', 'precio2', 'precio3', 'precio4']
+        
+        
+class getFacturas(forms.Form):
+    select_facturas = forms.ChoiceField(
+        choices=[
+            ('todas', 'todas'),
+            ('mes', 'Último mes'),
+            ('meses', 'Últimos 3 meses')
+        ],
+        widget=forms.Select(attrs={'class': 'main__buttons__find__select', 'name': 'select_facturas', 'id': 'select-facturas', 'onchange': 'actualizarFacturas()'})
+    )
