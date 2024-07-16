@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from django.db.models import Q
+from django.db.models import Q, Sum
 from CoronaCastilla.models import Factura, Articulo
 from CoronaCastilla.forms import facturaForm, getFacturas
 from datetime import datetime
@@ -37,7 +37,11 @@ def view_facturas(request):
     else:
         facturas = Factura.objects.all()
         
-    return render(request, 'facturas.html', {'facturas' : facturas, 'form':form})
+    total_facturado = facturas.aggregate(Sum('total_factura'))['total_factura__sum'] or 0
+
+        
+        
+    return render(request, 'facturas.html', {'facturas' : facturas, 'form':form, 'total_facturado': total_facturado})
 
 
 
