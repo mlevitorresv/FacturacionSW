@@ -89,7 +89,7 @@
 
     <div class="plantilla__buttons no-print">
         <button class="plantilla__buttons__button" type="submit" form="facturaForm">Guardar Factura</button>
-        <button class="plantilla__buttons__button">Imprimir Factura</button>
+        <button class="plantilla__buttons__button" onclick="print()">Imprimir Factura</button>
     </div>
 
     <footer class="plantilla__footer">
@@ -105,4 +105,5 @@
 </main>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="{% static 'resources/js/facturaForm.js' %}"></script>
+<script src="{% static 'resources/js/facturasAll.js' %}"></script>
 {% endblock %}
