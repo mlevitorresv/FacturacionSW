@@ -84,7 +84,6 @@ def post_factura(request):
                     (float(articulo_habitacion.precio3), '€' + str(float(articulo_habitacion.precio3))),
                     (float(articulo_habitacion.precio4), '€' + str(float(articulo_habitacion.precio4))),
                 ]
-                print('alojamientos', precios_habitacion)
                 form.fields['alojamiento_precio'].choices = precios_habitacion
 
         if tipo_desayuno:
@@ -96,7 +95,6 @@ def post_factura(request):
                     (float(articulo_desayuno.precio3), '€' + str(float(articulo_desayuno.precio3))),
                     (float(articulo_desayuno.precio4), '€' + str(float(articulo_desayuno.precio4))),
                 ]
-                print('desayunos', precios_desayuno)
                 form.fields['desayuno_precio'].choices = precios_desayuno
 
         if form.is_valid():
