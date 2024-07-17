@@ -100,12 +100,20 @@ def post_factura(request):
                 form.fields['desayuno_precio'].choices = precios_desayuno
 
         if form.is_valid():
-            form.save()  # Guardar el formulario si es válido
+            factura = form.save(commit=False)
+            
+            tipo_habitacion = form.cleaned_data.get('tipoHabitacion')
+            habitacion = Articulo.objects.filter(nombre=tipo_habitacion).first()
+            
+            if habitacion:
+                factura.habitacion = habitacion
+            
+            # Guardar la factura después de asignar habitacion_id
+            factura.save()
+            
             return redirect('index')  # Redirigir a la lista de facturas después de guardar
         else:
             print('formulario invalido', form.errors)
-            print('A, precios',form.fields['alojamiento_precio'].choices)
-            print('D, precios',form.fields['desayuno_precio'].choices)
 
     return render(request, 'crearFactura.html', {'form': form, 'articulos': articulos})
 
