@@ -101,7 +101,7 @@ def post_factura(request):
 
         if form.is_valid():
             form.save()  # Guardar el formulario si es válido
-            return redirect('facturasViews.view_facturas')  # Redirigir a la lista de facturas después de guardar
+            return redirect('index')  # Redirigir a la lista de facturas después de guardar
         else:
             print('formulario invalido', form.errors)
             print('A, precios',form.fields['alojamiento_precio'].choices)
