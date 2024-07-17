@@ -28,7 +28,6 @@ class Factura(models.Model):
     desayuno_dias = models.IntegerField()
     alojamiento_precio = models.FloatField()
     desayuno_precio = models.FloatField()
-    importe = models.FloatField()
     base_imponible = models.FloatField()
     porcentaje_iva = models.IntegerField()
     importe_iva = models.FloatField()
