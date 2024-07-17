@@ -20,7 +20,7 @@ class Articulo(models.Model):
 class Factura(models.Model):
     cliente = models.CharField(max_length=500)
     numero_factura = models.CharField(max_length=255)
-    habitacion = models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    habitacion = models.CharField(max_length=255)
     habitacion_numero = models.IntegerField()
     fecha_entrada = models.DateField()
     fecha_salida = models.DateField()

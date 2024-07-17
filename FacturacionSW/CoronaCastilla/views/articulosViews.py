@@ -44,9 +44,9 @@ def get_precios(request):
     data = {}
     if articulo:
         data = {
-            'precio1': articulo.precio1,
-            'precio2': articulo.precio2,
-            'precio3': articulo.precio3,
-            'precio4': articulo.precio4
+            'precio1': float(articulo.precio1),
+            'precio2': float(articulo.precio2),
+            'precio3': float(articulo.precio3),
+            'precio4': float(articulo.precio4)
         }
     return JsonResponse(data)

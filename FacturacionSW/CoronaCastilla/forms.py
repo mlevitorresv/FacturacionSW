@@ -50,7 +50,6 @@ class facturaForm(forms.ModelForm):
         self.fields['desayuno_precio'].choices = self.get_initial_choices()
 
     def get_initial_choices(self):
-
         return []
     
     

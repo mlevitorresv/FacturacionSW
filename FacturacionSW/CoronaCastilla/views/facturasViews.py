@@ -68,30 +68,48 @@ def view_factura_id(request, factura_id):
 
 def post_factura(request):
     articulos = Articulo.objects.all()  # Obtener todos los artículos disponibles
+    form = facturaForm(request.POST or None)
+
     if request.method == 'POST':
-        form = facturaForm(request.POST)
         # Cargar dinámicamente las opciones antes de la validación
         tipo_habitacion = request.POST.get('tipoHabitacion')
+        tipo_desayuno = 'desayuno'
+        
         if tipo_habitacion:
-            articulo = Articulo.objects.filter(nombre=tipo_habitacion).first()
-            if articulo:
-                precios = [
-                    (float(articulo.precio1), '€' + str(float(articulo.precio1))),
-                    (float(articulo.precio2), '€' + str(float(articulo.precio2))),
-                    (float(articulo.precio3), '€' + str(float(articulo.precio3))),
-                    (float(articulo.precio4), '€' + str(float(articulo.precio4))),
+            articulo_habitacion = Articulo.objects.filter(nombre=tipo_habitacion).first()
+            if articulo_habitacion:
+                precios_habitacion = [
+                    (float(articulo_habitacion.precio1), '€' + str(float(articulo_habitacion.precio1))),
+                    (float(articulo_habitacion.precio2), '€' + str(float(articulo_habitacion.precio2))),
+                    (float(articulo_habitacion.precio3), '€' + str(float(articulo_habitacion.precio3))),
+                    (float(articulo_habitacion.precio4), '€' + str(float(articulo_habitacion.precio4))),
                 ]
-                form.fields['alojamiento_precio'].choices = precios
-                form.fields['desayuno_precio'].choices = precios
+                print('alojamientos', precios_habitacion)
+                form.fields['alojamiento_precio'].choices = precios_habitacion
+
+        if tipo_desayuno:
+            articulo_desayuno = Articulo.objects.filter(nombre=tipo_desayuno).first()
+            if articulo_desayuno:
+                precios_desayuno = [
+                    (float(articulo_desayuno.precio1), '€' + str(float(articulo_desayuno.precio1))),
+                    (float(articulo_desayuno.precio2), '€' + str(float(articulo_desayuno.precio2))),
+                    (float(articulo_desayuno.precio3), '€' + str(float(articulo_desayuno.precio3))),
+                    (float(articulo_desayuno.precio4), '€' + str(float(articulo_desayuno.precio4))),
+                ]
+                print('desayunos', precios_desayuno)
+                form.fields['desayuno_precio'].choices = precios_desayuno
+
         if form.is_valid():
             form.save()  # Guardar el formulario si es válido
             return redirect('facturasViews.view_facturas')  # Redirigir a la lista de facturas después de guardar
         else:
             print('formulario invalido', form.errors)
-    else:
-        form = facturaForm()  # Formulario vacío para mostrar en GET
-    
+            print('A, precios',form.fields['alojamiento_precio'].choices)
+            print('D, precios',form.fields['desayuno_precio'].choices)
+
     return render(request, 'crearFactura.html', {'form': form, 'articulos': articulos})
+
+
 
 
 def delete_factura(request, factura_id):
