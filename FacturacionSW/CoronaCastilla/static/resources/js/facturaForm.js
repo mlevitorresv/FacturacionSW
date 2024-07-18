@@ -63,8 +63,8 @@ $(document).ready(function () {
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
                         $('#alojamientoPrecio').append($('<option>', {
-                            value: data[key],
-                            text: '€' + data[key]
+                            value: parseFloat(data[key]).toFixed(1),
+                            text: '€' + parseFloat(data[key]).toFixed(1)
                         }));
                     }
                 }
@@ -87,8 +87,8 @@ $(document).ready(function () {
             for (var key in data) {
                 if (data.hasOwnProperty(key)) {
                     $('#desayunoPrecio').append($('<option>', {
-                        value: data[key],
-                        text: '€' + data[key]
+                        value: parseFloat(data[key]).toFixed(1),
+                        text: '€' + parseFloat(data[key]).toFixed(1)
                     }));
                 }
             }
