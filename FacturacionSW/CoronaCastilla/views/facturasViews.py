@@ -127,3 +127,8 @@ def delete_factura(request, factura_id):
     
     # Si no es una solicitud POST, renderiza la página de detalles de factura (o alguna otra vista)
     return render(request, 'gestionarFactura.html', {'factura': factura})
+
+
+
+def update_factura(request, factura_id):
+    return
