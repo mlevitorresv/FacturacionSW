@@ -47,6 +47,12 @@ def view_facturas(request):
 
 def view_factura_id(request, factura_id):
     factura = Factura.objects.get(id=factura_id)
+    form = facturaForm(instance=factura)
+    
+    if request.method == 'POST':
+        form = facturaForm(request.POST, instance=factura)
+        if form.is_Valid():
+            form.save()
     
     alojamiento_importe = factura.alojamiento_dias * factura.alojamiento_precio
     desayuno_importe = factura.desayuno_dias * factura.desayuno_precio
@@ -61,6 +67,7 @@ def view_factura_id(request, factura_id):
         'porcentaje_iva': porcentaje_iva,
         'fecha_entrada': fecha_entrada,
         'fecha_salida': fecha_salida,
+        'form': form
     }
     
     return render(request, 'gestionarFactura.html', context)
