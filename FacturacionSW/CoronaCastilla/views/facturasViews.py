@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.db.models import Q, Sum
 from CoronaCastilla.models import Factura, Articulo
-from CoronaCastilla.forms import facturaForm, facturaEditForm, getFacturas
+from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
 from datetime import datetime
 
 
@@ -49,12 +49,12 @@ def view_factura_id(request, factura_id):
     factura = get_object_or_404(Factura, id=factura_id)
         
     if request.method == 'POST':
-        form = facturaEditForm(request.POST, instance=factura)
+        form = facturaForm(request.POST, instance=factura)
         if form.is_valid():
             form.save()
             return redirect('facturas')
     else:
-        form = facturaEditForm(instance=factura)
+        form = facturaForm(instance=factura)
         
     alojamiento_result = factura.alojamiento_dias * factura.alojamiento_precio
     desayuno_result = factura.desayuno_dias * factura.desayuno_precio
