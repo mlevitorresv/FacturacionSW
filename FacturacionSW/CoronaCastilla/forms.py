@@ -1,5 +1,7 @@
 from django import forms
 from CoronaCastilla.models import Factura, Articulo
+from django.shortcuts import get_object_or_404
+
 
 class facturaForm(forms.ModelForm):
     class Meta:
@@ -48,17 +50,20 @@ class facturaForm(forms.ModelForm):
         
         instance = kwargs.get('instance')
         if instance:
+            self.fields['alojamiento_precio'].choices = self.get_initial_choices(instance.habitacion.nombre)
+            self.fields['desayuno_precio'].choices = self.get_initial_choices('desayuno')
+            
             self.fields['alojamiento_precio'].initial = str(instance.alojamiento_precio)  # Asegúrate de que esto coincida con el valor en las opciones
             self.fields['desayuno_precio'].initial = str(instance.desayuno_precio) # Asegúrate de que esto coincida con el valor en las opciones
             self.fields['tipoHabitacion'].initial = instance.habitacion.nombre  # Asegúrate de que esto coincida con las opciones disponibles
         else:
-            self.fields['alojamiento_precio'].choices = self.get_initial_choices()
-            self.fields['desayuno_precio'].choices = self.get_initial_choices()
+            self.fields['alojamiento_precio'].choices = self.get_initial_choices(instance.habitacion.nombre)
+            self.fields['desayuno_precio'].choices = self.get_initial_choices('desayuno')
         
 
-    def get_initial_choices(self):
-        return []
-    
+    def get_initial_choices(self, tipo):
+        articulo = get_object_or_404(Articulo, nombre=tipo)
+        return [(str(articulo.precio1), f'€{articulo.precio1}'),(str(articulo.precio2), f'€{articulo.precio2}'),(str(articulo.precio3), f'€{articulo.precio3}'),(str(articulo.precio4), f'€{articulo.precio4}') ]    
     
 class articuloEditForm(forms.ModelForm):
     class Meta:
