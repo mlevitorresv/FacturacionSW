@@ -62,16 +62,14 @@ def view_factura_id(request, factura_id):
     
     context = {
         'factura': factura,
-        'alojamiento_importe': alojamiento_importe,
-        'desayuno_importe': desayuno_importe,
-        'porcentaje_iva': porcentaje_iva,
         'fecha_entrada': fecha_entrada,
         'fecha_salida': fecha_salida,
         'form': form
     }
     
     return render(request, 'gestionarFactura.html', context)
-
+    
+    
 
 def post_factura(request):
     articulos = Articulo.objects.all()  # Obtener todos los artículos disponibles
