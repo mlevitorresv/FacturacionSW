@@ -32,7 +32,3 @@ class Factura(models.Model):
     porcentaje_iva = models.IntegerField()
     importe_iva = models.FloatField()
     total_factura = models.FloatField()
-    
-    
-    
-    

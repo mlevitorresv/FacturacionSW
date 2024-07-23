@@ -46,24 +46,23 @@ def view_facturas(request):
 
 
 def view_factura_id(request, factura_id):
-    factura = Factura.objects.get(id=factura_id)
-    form = facturaForm(instance=factura)
-    
+    factura = get_object_or_404(Factura, id=factura_id)
+        
     if request.method == 'POST':
         form = facturaForm(request.POST, instance=factura)
-        if form.is_Valid():
+        if form.is_valid():
             form.save()
-    
-    alojamiento_importe = factura.alojamiento_dias * factura.alojamiento_precio
-    desayuno_importe = factura.desayuno_dias * factura.desayuno_precio
-    porcentaje_iva = int(factura.porcentaje_iva)
-    fecha_entrada = datetime.strptime(str(factura.fecha_entrada) , '%Y-%m-%d').strftime('%Y-%m-%d')
-    fecha_salida = datetime.strptime(str(factura.fecha_salida) , '%Y-%m-%d').strftime('%Y-%m-%d')
-    
+            return redirect('facturas')
+    else:
+        form = facturaForm(instance=factura)
+        
+    alojamiento_result = factura.alojamiento_dias * factura.alojamiento_precio
+    desayuno_result = factura.desayuno_dias * factura.desayuno_precio
+
     context = {
         'factura': factura,
-        'fecha_entrada': fecha_entrada,
-        'fecha_salida': fecha_salida,
+        'alojamiento_result': alojamiento_result,
+        'desayuno_result': desayuno_result,
         'form': form
     }
     

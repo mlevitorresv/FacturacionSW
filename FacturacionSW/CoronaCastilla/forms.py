@@ -45,9 +45,16 @@ class facturaForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        self.fields['alojamiento_precio'].choices = self.get_initial_choices()
-        self.fields['desayuno_precio'].choices = self.get_initial_choices()
+        
+        instance = kwargs.get('instance')
+        if instance:
+            self.fields['alojamiento_precio'].initial = str(instance.alojamiento_precio)  # Asegúrate de que esto coincida con el valor en las opciones
+            self.fields['desayuno_precio'].initial = str(instance.desayuno_precio) # Asegúrate de que esto coincida con el valor en las opciones
+            self.fields['tipoHabitacion'].initial = instance.habitacion.nombre  # Asegúrate de que esto coincida con las opciones disponibles
+        else:
+            self.fields['alojamiento_precio'].choices = self.get_initial_choices()
+            self.fields['desayuno_precio'].choices = self.get_initial_choices()
+        
 
     def get_initial_choices(self):
         return []
