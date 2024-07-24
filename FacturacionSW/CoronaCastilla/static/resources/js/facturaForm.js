@@ -50,8 +50,8 @@ const showResults = () => {
 
 
 $(document).ready(function () {
-    function loadPrices() {
-        var tipoHabitacion = $('#tipoHabitacion').val();
+    $('#tipoHabitacion').change(function () {
+        var tipoHabitacion = $(this).val();
         $.ajax({
             url: '/get-precios/',
             data: {
@@ -60,37 +60,39 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 $('#alojamientoPrecio').empty();
-                $('#desayunoPrecio').empty();
-
-                // Cargar precios de alojamiento
-                for (var key in data.alojamiento) {
-                    if (data.alojamiento.hasOwnProperty(key)) {
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
                         $('#alojamientoPrecio').append($('<option>', {
-                            value: key,
-                            text: '€' + parseFloat(data.alojamiento[key]).toFixed(2)
-                        }));
-                    }
-                }
-
-                // Cargar precios de desayuno
-                for (var key in data.desayuno) {
-                    if (data.desayuno.hasOwnProperty(key)) {
-                        $('#desayunoPrecio').append($('<option>', {
-                            value: key,
-                            text: '€' + parseFloat(data.desayuno[key]).toFixed(2)
+                            value: parseFloat(data[key]).toFixed(1),
+                            text: '€' + parseFloat(data[key]).toFixed(1)
                         }));
                     }
                 }
             }
         });
-    }
+    });
+});
 
-    // Ejecutar al cargar la página
-    loadPrices();
 
-    // Ejecutar cuando cambie el tipo de habitación
-    $('#tipoHabitacion').change(function () {
-        loadPrices();
+$(document).ready(function () {
+    var tipoHabitacion = 'desayuno';
+    $.ajax({
+        url: '/get-precios/',
+        data: {
+            'tipoHabitacion': tipoHabitacion
+        },
+        dataType: 'json',
+        success: function (data) {
+            $('#desayunoPrecio').empty();
+            for (var key in data) {
+                if (data.hasOwnProperty(key)) {
+                    $('#desayunoPrecio').append($('<option>', {
+                        value: parseFloat(data[key]).toFixed(1),
+                        text: '€' + parseFloat(data[key]).toFixed(1)
+                    }));
+                }
+            }
+        }
     });
 });
 
