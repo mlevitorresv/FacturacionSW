@@ -73,26 +73,28 @@ $(document).ready(function () {
     });
 });
 
-
+desayunoDias
 $(document).ready(function () {
-    var tipoHabitacion = 'desayuno';
-    $.ajax({
-        url: '/get-precios/',
-        data: {
-            'tipoHabitacion': tipoHabitacion
-        },
-        dataType: 'json',
-        success: function (data) {
-            $('#desayunoPrecio').empty();
-            for (var key in data) {
-                if (data.hasOwnProperty(key)) {
-                    $('#desayunoPrecio').append($('<option>', {
-                        value: parseFloat(data[key]).toFixed(1),
-                        text: '€' + parseFloat(data[key]).toFixed(1)
-                    }));
+    $('#desayunoDias').change(function () {
+        var tipoHabitacion = 'desayuno';
+        $.ajax({
+            url: '/get-precios/',
+            data: {
+                'tipoHabitacion': tipoHabitacion
+            },
+            dataType: 'json',
+            success: function (data) {
+                $('#desayunoPrecio').empty();
+                for (var key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        $('#desayunoPrecio').append($('<option>', {
+                            value: parseFloat(data[key]).toFixed(1),
+                            text: '€' + parseFloat(data[key]).toFixed(1)
+                        }));
+                    }
                 }
             }
-        }
+        });
     });
 });
 
