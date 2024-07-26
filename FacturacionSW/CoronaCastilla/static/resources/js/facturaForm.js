@@ -4,7 +4,7 @@ const precioAlojamiento = () => {
     result = document.getElementById('alojamientoResult')
 
     total = dias.value * precio.value
-    result.innerHTML = total
+    result.innerHTML = Math.round(total * 100) / 100
 
     showResults()
 }
@@ -15,8 +15,7 @@ const precioDesayuno = () => {
     result = document.getElementById('desayunoResult')
 
     total = dias.value * precio.value
-    result.innerHTML = total
-
+    result.innerHTML = Math.round(total * 100) / 100
     showResults()
 }
 
@@ -37,7 +36,7 @@ const showResults = () => {
 
     const precio = alojamiento + desayuno
     const importeIva = Math.round(precio * (ivaInput.value / 100) * 100) / 100
-    const baseImponible = precio - importeIva
+    const baseImponible = Math.round((precio * 100) / 100) - importeIva
     const totalFactura = baseImponible + importeIva
 
 
@@ -63,8 +62,8 @@ $(document).ready(function () {
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
                         $('#alojamientoPrecio').append($('<option>', {
-                            value: parseFloat(data[key]).toFixed(1),
-                            text: '€' + parseFloat(data[key]).toFixed(1)
+                            value: Math.round((data[key]) * 100) / 100,
+                            text: '€' + Math.round((data[key]) * 100) / 100
                         }));
                     }
                 }
@@ -73,7 +72,6 @@ $(document).ready(function () {
     });
 });
 
-desayunoDias
 $(document).ready(function () {
     $('#desayunoDias').change(function () {
         var tipoHabitacion = 'desayuno';
@@ -88,8 +86,8 @@ $(document).ready(function () {
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
                         $('#desayunoPrecio').append($('<option>', {
-                            value: parseFloat(data[key]).toFixed(1),
-                            text: '€' + parseFloat(data[key]).toFixed(1)
+                            value: parseFloat(Math.round((data[key]) * 100) / 100),
+                            text: '€' + parseFloat(Math.round((data[key]) * 100) / 100)
                         }));
                     }
                 }

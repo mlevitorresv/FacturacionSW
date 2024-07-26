@@ -62,7 +62,10 @@ class facturaForm(forms.ModelForm):
 
     def get_initial_choices(self, tipo):
         articulo = get_object_or_404(Articulo, nombre=tipo)
-        return [(str(articulo.precio1), f'€{articulo.precio1}'),(str(articulo.precio2), f'€{articulo.precio2}'),(str(articulo.precio3), f'€{articulo.precio3}'),(str(articulo.precio4), f'€{articulo.precio4}') ]    
+        return [(str(float(articulo.precio1)), f'€{float(articulo.precio1)}'),
+                (str(float(articulo.precio2)), f'€{float(articulo.precio2)}'),
+                (str(float(articulo.precio3)), f'€{float(articulo.precio3)}'),
+                (str(float(articulo.precio4)), f'€{float(articulo.precio4)}') ]    
     
 class articuloEditForm(forms.ModelForm):
     class Meta:
