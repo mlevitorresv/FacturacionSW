@@ -61,9 +61,10 @@ $(document).ready(function () {
                 $('#alojamientoPrecio').empty();
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
+                        var precio = parseFloat(data[key]).toFixed(1); // Asegurar 2 decimales
                         $('#alojamientoPrecio').append($('<option>', {
-                            value: Math.round((data[key]) * 100) / 100,
-                            text: '€' + Math.round((data[key]) * 100) / 100
+                            value: precio,
+                            text: '€' + precio
                         }));
                     }
                 }
@@ -85,9 +86,10 @@ $(document).ready(function () {
                 $('#desayunoPrecio').empty();
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
+                        var precio = parseFloat(data[key]).toFixed(1); // Asegurar 2 decimales
                         $('#desayunoPrecio').append($('<option>', {
-                            value: parseFloat(Math.round((data[key]) * 100) / 100),
-                            text: '€' + parseFloat(Math.round((data[key]) * 100) / 100)
+                            value: precio,
+                            text: '€' + precio
                         }));
                     }
                 }
