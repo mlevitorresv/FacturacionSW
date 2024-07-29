@@ -13,7 +13,7 @@
         <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
         <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
     </div>
-    <form action="{% url 'editaFactura' factura.id %}" method="POST" class="plantilla__form" id="editForm">
+    <form action="{% url 'facturaDetails' factura.id %}" method="POST" class="plantilla__form" id="editForm">
         {% csrf_token %}
         <div class="plantilla__form__basico">
             <p class="plantilla__form__basico__field">CLIENTE</p>

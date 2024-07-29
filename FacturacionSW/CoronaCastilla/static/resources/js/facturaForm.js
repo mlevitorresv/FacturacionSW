@@ -61,7 +61,7 @@ $(document).ready(function () {
                 $('#alojamientoPrecio').empty();
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
-                        var precio = parseFloat(data[key]).toFixed(1); // Asegurar 2 decimales
+                        var precio = parseFloat(data[key]).toFixed(1);
                         $('#alojamientoPrecio').append($('<option>', {
                             value: precio,
                             text: '€' + precio
@@ -86,7 +86,7 @@ $(document).ready(function () {
                 $('#desayunoPrecio').empty();
                 for (var key in data) {
                     if (data.hasOwnProperty(key)) {
-                        var precio = parseFloat(data[key]).toFixed(1); // Asegurar 2 decimales
+                        var precio = parseFloat(data[key]).toFixed(1);
                         $('#desayunoPrecio').append($('<option>', {
                             value: precio,
                             text: '€' + precio

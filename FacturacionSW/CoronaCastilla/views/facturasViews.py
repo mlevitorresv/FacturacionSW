@@ -4,6 +4,7 @@ from django.db.models import Q, Sum
 from CoronaCastilla.models import Factura, Articulo
 from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
 from datetime import datetime
+from CoronaCastilla.views import articulosViews
 
 
 def view_facturas(request):
@@ -53,6 +54,10 @@ def view_factura_id(request, factura_id):
         if form.is_valid():
             form.save()
             return redirect('facturas')
+        else:
+            print(form.fields['alojamiento_precio'].choices)
+            print(request.POST)
+            print(form.errors)
     else:
         form = facturaForm(instance=factura)
         
