@@ -6,10 +6,12 @@ from pathlib import Path
 
 # Define el directorio base del proyecto
 BASE_DIR = Path(__file__).resolve().parent
-print(BASE_DIR)
+
+# Cambia al directorio donde está manage.py
+os.chdir(BASE_DIR)
 
 # Inicia el servidor de desarrollo de Django
-subprocess.Popen(["python", BASE_DIR / "manage.py", "runserver"])
+subprocess.Popen(["python", "manage.py", "runserver"], cwd=BASE_DIR)
 
 # Espera a que el servidor esté en funcionamiento
 time.sleep(5)
