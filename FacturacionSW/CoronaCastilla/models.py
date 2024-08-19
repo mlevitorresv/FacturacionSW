@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 class Factura(models.Model):
     cliente = models.CharField(max_length=500)
@@ -15,3 +16,4 @@ class Factura(models.Model):
     porcentaje_iva = models.IntegerField()
     importe_iva = models.FloatField()
     total_factura = models.FloatField()
+    fecha_creacion = models.DateField(default=datetime.date.today())
