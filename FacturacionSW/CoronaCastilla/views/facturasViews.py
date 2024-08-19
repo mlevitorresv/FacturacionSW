@@ -50,6 +50,9 @@ def view_factura_id(request, factura_id):
         
     if request.method == 'POST':
         form = facturaForm(request.POST, instance=factura)
+        if factura['fecha_creacion'] - datetime.date.today() > 2:
+            return '<script>alert("No se puede modificar la factura por: CIERRE DE CAJA")</script>'
+        
         if form.is_valid():
             form.save()
             return redirect('facturas')
