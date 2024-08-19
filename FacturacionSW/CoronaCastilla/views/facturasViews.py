@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.db.models import Q, Sum
-from CoronaCastilla.models import Factura, Articulo
+from CoronaCastilla.models import Factura
 from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
 from datetime import datetime
-from CoronaCastilla.views import articulosViews
 
 
 def view_facturas(request):
