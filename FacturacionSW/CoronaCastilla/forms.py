@@ -67,12 +67,6 @@ class facturaForm(forms.ModelForm):
                 (str(float(articulo.precio3)), f'€{float(articulo.precio3)}'),
                 (str(float(articulo.precio4)), f'€{float(articulo.precio4)}') ]    
     
-class articuloEditForm(forms.ModelForm):
-    class Meta:
-        model = Articulo
-        fields = ['precio1', 'precio2', 'precio3', 'precio4']
-        
-        
 class getFacturas(forms.Form):
     select_facturas = forms.ChoiceField(
         choices=[
