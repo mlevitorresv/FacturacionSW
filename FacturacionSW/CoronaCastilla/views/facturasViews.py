@@ -75,53 +75,18 @@ def view_factura_id(request, factura_id):
     
 
 def post_factura(request):
-    articulos = Articulo.objects.all()  # Obtener todos los artículos disponibles
     form = facturaForm(request.POST or None)
 
     if request.method == 'POST':
-        # Cargar dinámicamente las opciones antes de la validación
-        tipo_habitacion = request.POST.get('tipoHabitacion')
-        tipo_desayuno = 'desayuno'
-        
-        if tipo_habitacion:
-            articulo_habitacion = Articulo.objects.filter(nombre=tipo_habitacion).first()
-            if articulo_habitacion:
-                precios_habitacion = [
-                    (float(articulo_habitacion.precio1), '€' + str(float(articulo_habitacion.precio1))),
-                    (float(articulo_habitacion.precio2), '€' + str(float(articulo_habitacion.precio2))),
-                    (float(articulo_habitacion.precio3), '€' + str(float(articulo_habitacion.precio3))),
-                    (float(articulo_habitacion.precio4), '€' + str(float(articulo_habitacion.precio4))),
-                ]
-                form.fields['alojamiento_precio'].choices = precios_habitacion
-
-        if tipo_desayuno:
-            articulo_desayuno = Articulo.objects.filter(nombre=tipo_desayuno).first()
-            if articulo_desayuno:
-                precios_desayuno = [
-                    (float(articulo_desayuno.precio1), '€' + str(float(articulo_desayuno.precio1))),
-                    (float(articulo_desayuno.precio2), '€' + str(float(articulo_desayuno.precio2))),
-                    (float(articulo_desayuno.precio3), '€' + str(float(articulo_desayuno.precio3))),
-                    (float(articulo_desayuno.precio4), '€' + str(float(articulo_desayuno.precio4))),
-                ]
-                form.fields['desayuno_precio'].choices = precios_desayuno
-
         if form.is_valid():
-            factura = form.save(commit=False)
-            
-            tipo_habitacion = form.cleaned_data.get('tipoHabitacion')
-            habitacion = Articulo.objects.filter(nombre=tipo_habitacion).first()
-            
-            if habitacion:
-                factura.habitacion = habitacion
-            
-            # Guardar la factura después de asignar habitacion_id
+            factura = form.save(commit=False)            
             factura.save()
             
             return redirect('index')  # Redirigir a la lista de facturas después de guardar
         else:
             print('formulario invalido', form.errors)
 
-    return render(request, 'crearFactura.html', {'form': form, 'articulos': articulos})
+    return render(request, 'crearFactura.html', {'form': form})
 
 
 
