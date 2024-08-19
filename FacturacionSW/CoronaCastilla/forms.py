@@ -7,7 +7,7 @@ class facturaForm(forms.ModelForm):
         model = Factura
         fields = [
             'cliente', 'numero_factura', 'habitacion_numero', 'fecha_entrada', 'fecha_salida',
-            'alojamiento_dias', 'desayuno_dias', 'alojamiento_precio', 'desayuno_precio', 'base_imponible', 'porcentaje_iva', 'importe_iva', 'total_factura'
+            'alojamiento_dias', 'desayuno_dias', 'alojamiento_precio', 'desayuno_precio', 'base_imponible', 'porcentaje_iva', 'importe_iva', 'total_factura', 'habitacion'
         ]
         widgets = {
             'cliente': forms.Textarea(attrs={'class': 'plantilla__form__basico__area', 'rows': '8'}),
@@ -25,7 +25,7 @@ class facturaForm(forms.ModelForm):
             'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'id': 'totalFactura'})
         }
 
-    tipoHabitacion = forms.ChoiceField(
+    habitacion = forms.ChoiceField(
         choices=[
             ('habitación individual', 'Habitación individual'),
             ('habitación doble', 'Habitación doble'),
