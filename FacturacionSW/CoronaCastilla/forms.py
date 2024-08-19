@@ -1,5 +1,5 @@
 from django import forms
-from CoronaCastilla.models import Factura, Articulo
+from CoronaCastilla.models import Factura
 from django.shortcuts import get_object_or_404
 
 class facturaForm(forms.ModelForm):
@@ -57,15 +57,7 @@ class facturaForm(forms.ModelForm):
             self.fields['tipoHabitacion'].initial = instance.habitacion.nombre  # Asegúrate de que esto coincida con las opciones disponibles
         else:
             self.fields['alojamiento_precio'].choices = []
-            self.fields['desayuno_precio'].choices = []
-        
-
-    def get_initial_choices(self, tipo):
-        articulo = get_object_or_404(Articulo, nombre=tipo)
-        return [(str(float(articulo.precio1)), f'€{float(articulo.precio1)}'),
-                (str(float(articulo.precio2)), f'€{float(articulo.precio2)}'),
-                (str(float(articulo.precio3)), f'€{float(articulo.precio3)}'),
-                (str(float(articulo.precio4)), f'€{float(articulo.precio4)}') ]    
+            self.fields['desayuno_precio'].choices = []    
     
 class getFacturas(forms.Form):
     select_facturas = forms.ChoiceField(
