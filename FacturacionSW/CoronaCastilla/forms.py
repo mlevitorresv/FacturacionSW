@@ -17,21 +17,13 @@ class facturaForm(forms.ModelForm):
             'fecha_salida': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'fechaSalida', 'type': 'date'}),
             'alojamiento_dias': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'numeroDias', 'id': 'alojamientoDias', 'onchange': 'precioAlojamiento()'}),
             'desayuno_dias': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'numeroDias', 'id': 'desayunoDias', 'onchange': 'precioDesayuno()'}),
+            'alojamiento_precio': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioAlojamiento', 'id': 'alojamientoPrecio', 'onchange': 'precioAlojamiento()'}),
+            'desayuno_precio': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioDesayuno', 'id': 'desayunoPrecio', 'onchange': 'precioDesayuno()'}),
             'base_imponible': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'baseImponible', 'id': 'baseImponible'}),
             'porcentaje_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'porcentajeIva', 'value': 10, 'id': 'porcentajeIva', 'onchange': 'showResults()'}),
             'importe_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'importeIva', 'id': 'importeIva'}),
             'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'id': 'totalFactura'})
         }
-
-    alojamiento_precio = forms.ChoiceField(
-        choices=[],
-        widget=forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioHabitacion', 'id': 'alojamientoPrecio', 'onchange': 'precioAlojamiento()'})
-    )
-
-    desayuno_precio = forms.ChoiceField(
-        choices=[],
-        widget=forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioDesayuno', 'id': 'desayunoPrecio', 'onchange': 'precioDesayuno()'})
-    )
 
     tipoHabitacion = forms.ChoiceField(
         choices=[
@@ -42,22 +34,6 @@ class facturaForm(forms.ModelForm):
         ],
         widget=forms.Select(attrs={'class': 'plantilla__form__articulos__inputs__input', 'id': 'tipoHabitacion'})
     )
-
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        
-        instance = kwargs.get('instance')
-        if instance:
-            self.fields['alojamiento_precio'].choices = self.get_initial_choices(instance.habitacion.nombre)
-            self.fields['desayuno_precio'].choices = self.get_initial_choices('desayuno')
-            
-            self.fields['alojamiento_precio'].initial = str(instance.alojamiento_precio)  # Asegúrate de que esto coincida con el valor en las opciones
-            self.fields['desayuno_precio'].initial = str(instance.desayuno_precio) # Asegúrate de que esto coincida con el valor en las opciones
-            self.fields['tipoHabitacion'].initial = instance.habitacion.nombre  # Asegúrate de que esto coincida con las opciones disponibles
-        else:
-            self.fields['alojamiento_precio'].choices = []
-            self.fields['desayuno_precio'].choices = []    
     
 class getFacturas(forms.Form):
     select_facturas = forms.ChoiceField(
