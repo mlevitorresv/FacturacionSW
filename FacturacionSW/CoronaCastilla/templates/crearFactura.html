@@ -4,13 +4,16 @@
 {% block content %}
 <main class="plantilla">
     <div class="plantilla__info">
-        <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
-        <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
-        <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
-        <p class="plantilla__info__text">Fax 923 25 54 11</p>
-        <p class="plantilla__info__text--bold">37184 VILLARES DE LA REINA SALAMANCA</p>
-        <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
-        <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
+        <div class="plantilla__info__data">
+            <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
+            <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
+            <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
+            <p class="plantilla__info__text">Fax 923 25 54 11</p>
+            <p class="plantilla__info__text--bold">37184 VILLARES DE LA REINA SALAMANCA</p>
+            <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
+            <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
+        </div>
+        <img src="{% static './resources/assets/logo.png' %}" alt="logo Hotel Corona de Castilla" class="plantilla__info__logo" />
     </div>
     <form action="" class="plantilla__form" id="facturaForm" method="POST">
         {% csrf_token %}
