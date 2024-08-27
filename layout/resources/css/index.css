@@ -100,12 +100,18 @@ body {
   padding: 2em 5%;
 }
 .plantilla__info {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-bottom: 1em;
+}
+.plantilla__info__data {
   font-size: 0.8em;
   margin-bottom: 3em;
   width: fit-content;
   text-align: center;
 }
-.plantilla__info__text--bold {
+.plantilla__info__data__text--bold {
   font-weight: bold;
 }
 .plantilla__form__basico {
@@ -193,6 +199,17 @@ body {
   .no-print {
     display: none;
   }
+}
+.articulos__articulo {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2em;
+}
+.articulos__articulo__nombre {
+  width: 15%;
+}
+.articulos__articulo__submit {
+  padding: 0.2em 0.5em;
 }
 
 /*# sourceMappingURL=index.css.map */

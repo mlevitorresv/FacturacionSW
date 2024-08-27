@@ -2,14 +2,20 @@
     padding: 2em 5%;
     
     &__info{
-        font-size: .8em;
-        margin-bottom: 3em;
-        width: fit-content;
-        text-align: center;
-
-        &__text--bold{
-            font-weight: bold;
-        }
+        display: flex;
+        justify-content: space-between;
+        width: 70%;
+        margin-bottom: 1em;
+        &__data{
+            font-size: .8em;
+            margin-bottom: 3em;
+            width: fit-content;
+            text-align: center;
+    
+            &__text--bold{
+                font-weight: bold;
+            }
+        }        
     }
 
     &__form{

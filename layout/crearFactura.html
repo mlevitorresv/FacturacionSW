@@ -18,13 +18,16 @@
     </header>
     <main class="plantilla">
         <div class="plantilla__info">
-            <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
-            <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
-            <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
-            <p class="plantilla__info__text">Fax 923 25 54 11</p>
-            <p class="plantilla__info__text--bold">37184 VILLARES DE LA REINA SALAMANCA</p>
-            <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
-            <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
+            <div class="plantilla__info__data">
+                <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
+                <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
+                <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
+                <p class="plantilla__info__text">Fax 923 25 54 11</p>
+                <p class="plantilla__info__text--bold">37184 VILLARES DE LA REINA SALAMANCA</p>
+                <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
+                <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
+            </div>
+            <img src="./resources/assets/logo.png" alt="logo Hotel Corona de Castilla" class="plantilla__info__logo" />
         </div>
         <form action="" class="plantilla__form">
             <div class="plantilla__form__basico">
@@ -68,7 +71,7 @@
                         <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
-                                name="numeroDias"/>
+                                name="numeroDias" />
                         </td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
@@ -85,7 +88,7 @@
                         <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <input type="number" class="plantilla__form__tabla__tbody__trow__tdata__input"
-                                name="numeroDias"/>
+                                name="numeroDias" />
                         </td>
                         <td class="plantilla__form__tabla__tbody__trow__tdata">
                             <select name="precioHabitacion" class="plantilla__form__tabla__tbody__trow__tdata__input">
@@ -110,17 +113,21 @@
                     <p class="plantilla__form__articulos__fields__field">TOTAL FACTURA</p>
                 </div>
                 <div class="plantilla__form__articulos__inputs">
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="baseImponible" disabled value="PRECIO - IVA"/>
-                    <input type="number" class="plantilla__form__articulos__inputs__input" name="porcentajeIva" value="10"/>
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="importeIva" disabled value="precio*10/100"/>
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="totalFactura" disabled value="baseImponible + importeIva"/>
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="baseImponible" disabled
+                        value="PRECIO - IVA" />
+                    <input type="number" class="plantilla__form__articulos__inputs__input" name="porcentajeIva"
+                        value="10" />
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="importeIva" disabled
+                        value="precio*10/100" />
+                    <input type="text" class="plantilla__form__articulos__inputs__input" name="totalFactura" disabled
+                        value="baseImponible + importeIva" />
                 </div>
             </div>
         </form>
 
         <div class="plantilla__buttons no-print">
             <button class="plantilla__buttons__button">Guardar Factura</button>
-            <button class="plantilla__buttons__button">Imprimir Factura</button>
+            <button class="plantilla__buttons__button" onclick=print()>Imprimir Factura</button>
         </div>
 
         <footer class="plantilla__footer">
