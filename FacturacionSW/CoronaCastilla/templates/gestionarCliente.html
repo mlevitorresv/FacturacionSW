@@ -1,43 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Facturas {% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="resources/css/index.css">
-    <title>Facturación | Nueva Factura</title>
-</head>
-
-<body>
-    <header class="header no-print">
-        <ul class="header__list">
-            <li class="header__list__item">Inicio</li>
-            <li class="header__list__item">Facturas</li>
-            <li class="header__list__item">Artículos</li>
-        </ul>
-    </header>
-    <main class="plantilla">
-        <form action="" class="plantilla__form">
-            <div class="plantilla__form__articulos">
-                <div class="plantilla__form__articulos__fields">
-                    <p class="plantilla__form__articulos__fields__field">NOMBRE CLIENTE</p>
-                    <p class="plantilla__form__articulos__fields__field">DIRECCIÓN</p>
-                    <p class="plantilla__form__articulos__fields__field">CÓDIGO POSTAL</p>
-                    <p class="plantilla__form__articulos__fields__field">N.I.F</p>
-                </div>
-                <div class="plantilla__form__articulos__inputs">
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="nombre" />
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="direccion" />
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="codigoPostal" />
-                    <input type="text" class="plantilla__form__articulos__inputs__input" name="nif" />
-                </div>
+{% block content %}
+<main class="plantilla">
+    <form action="" class="plantilla__form">
+        <div class="plantilla__form__articulos">
+            <div class="plantilla__form__articulos__fields">
+                <p class="plantilla__form__articulos__fields__field">NOMBRE CLIENTE</p>
+                <p class="plantilla__form__articulos__fields__field">DIRECCIÓN</p>
+                <p class="plantilla__form__articulos__fields__field">CÓDIGO POSTAL</p>
+                <p class="plantilla__form__articulos__fields__field">N.I.F</p>
             </div>
-        </form>
-
-        <div class="plantilla__buttons no-print">
-            <button class="plantilla__buttons__button">Guardar Cliente</button>
+            <div class="plantilla__form__articulos__inputs">
+                <input type="text" class="plantilla__form__articulos__inputs__input" name="nombre" />
+                <input type="text" class="plantilla__form__articulos__inputs__input" name="direccion" />
+                <input type="text" class="plantilla__form__articulos__inputs__input" name="codigoPostal" />
+                <input type="text" class="plantilla__form__articulos__inputs__input" name="nif" />
+            </div>
         </div>
-    </main>
-</body>
+    </form>
 
-</html>
+    <div class="plantilla__buttons no-print">
+        <button class="plantilla__buttons__button">Guardar Cliente</button>
+    </div>
+</main>
+{% endblock %}
