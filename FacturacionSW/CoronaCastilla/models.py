@@ -17,3 +17,10 @@ class Factura(models.Model):
     importe_iva = models.FloatField()
     total_factura = models.FloatField()
     fecha_creacion = models.DateField(default=datetime.date.today())
+
+
+class Cliente(models.Model):
+    nombre = models.CharField(max_length=255)
+    direccion = models.CharField(max_length=255)
+    codigo_postal = models.CharField(max_length=255)
+    nif = models.CharField(max_length=255)
