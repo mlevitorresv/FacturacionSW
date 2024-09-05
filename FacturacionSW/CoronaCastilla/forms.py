@@ -1,5 +1,5 @@
 from django import forms
-from CoronaCastilla.models import Factura
+from CoronaCastilla.models import Factura, Cliente
 from django.shortcuts import get_object_or_404
 
 class facturaForm(forms.ModelForm):
@@ -44,3 +44,16 @@ class getFacturas(forms.Form):
         ],
         widget=forms.Select(attrs={'class': 'main__buttons__find__select', 'name': 'select_facturas', 'id': 'select-facturas', 'onchange': 'actualizarFacturas()'})
     )
+    
+class clienteForm(forms.ModelForm):
+    class Meta:
+        model = Cliente
+        fields = [
+            'nombre', 'direccion', 'codigoPostal', 'nif'
+        ]
+        widgets = {
+            'nombre': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'nombre'}),
+            'direccion': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'direccion'}),
+            'codigoPostal': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'codigoPostal'}),
+            'nif': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'nif'})
+        }
