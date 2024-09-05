@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css2?family=Esteban&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  width: 1250px;
+  margin: 0 auto;
+  color: white;
+  font-family: "Poppins";
+  font-size: 1em;
+  color: black;
+}
+
+.header {
+  position: relative;
+  width: 50%;
+  margin: 2em 25%;
+  background-color: #cecece;
+  padding: 1em;
+  border-radius: 2em;
+}
+.header__list {
+  display: flex;
+  list-style-type: none;
+  justify-content: space-around;
+}
+.header__list__item {
+  cursor: pointer;
+}
+.header__list__item__secondary {
+  display: none;
+  margin-top: 0.5em;
+  flex-direction: column;
+  list-style-type: none;
+  justify-content: center;
+}
+.header__list__item__secondary__item {
+  border-top: 1px solid black;
+}
+
+.main__bg {
+  height: 80vh;
+  margin: 0 auto;
+  display: block;
+  opacity: 0.5;
+}
+.main__buttons {
+  width: 50%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+.main__buttons__create {
+  background-color: #cecece;
+  border: none;
+  border-radius: 0.9em;
+  padding: 0.5em 1em;
+}
+.main__buttons__find {
+  display: flex;
+  align-items: center;
+}
+.main__buttons__find__select {
+  margin: 0 0.5em;
+  background-color: #cecece;
+  border: none;
+  border-radius: 0.9em;
+  padding: 0.5em 1em;
+}
+.main__buttons__find__input {
+  border-radius: 0.9em;
+  padding: 0.5em 1em;
+}
+.main__table {
+  margin: 3em auto;
+  width: 60%;
+  text-align: center;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.main__table__head__row__th {
+  border: 1px solid black;
+}
+.main__table__body__row {
+  border-bottom: 1px solid black;
+}
+.main__total {
+  text-align: center;
+}
+.main__total__input {
+  text-align: center;
+  font-weight: bold;
+  border: none;
+}
+
+.plantilla {
+  padding: 2em 5%;
+}
+.plantilla__info {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+  margin-bottom: 1em;
+}
+.plantilla__info__data {
+  font-size: 0.8em;
+  margin-bottom: 3em;
+  width: fit-content;
+  text-align: center;
+}
+.plantilla__info__data__text--bold {
+  font-weight: bold;
+}
+.plantilla__form__basico {
+  width: 50%;
+}
+.plantilla__form__basico__field {
+  background-color: #cecece;
+  padding: 0 0.2em;
+  border: 1px solid black;
+}
+.plantilla__form__basico__area {
+  width: 100%;
+  border: 1px solid black;
+  font-weight: bold;
+  padding: 0.2em;
+}
+.plantilla__form__articulos__fields {
+  display: flex;
+}
+.plantilla__form__articulos__fields__field {
+  padding: 0.2em;
+  width: 15%;
+  background-color: #cecece;
+  text-align: center;
+}
+.plantilla__form__articulos__fields__field--description {
+  width: 40%;
+}
+.plantilla__form__articulos__inputs {
+  display: flex;
+}
+.plantilla__form__articulos__inputs__input {
+  padding: 0.2em;
+  width: 15%;
+  text-align: right;
+}
+.plantilla__form__tabla {
+  margin: 3em 0;
+  width: 50%;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.plantilla__form__tabla__thead {
+  font-weight: bold;
+  background-color: #cecece;
+}
+.plantilla__form__tabla__thead__trow__tdata {
+  border: 1px solid white;
+  padding: 0.2em;
+}
+.plantilla__form__tabla__tbody__trow__tdata {
+  border: 1px solid white;
+  padding: 0.2em;
+}
+.plantilla__form__tabla__tbody__trow__tdata:first-child {
+  font-weight: bold;
+  background-color: #cecece;
+}
+.plantilla__buttons {
+  position: relative;
+  margin-top: 2em;
+}
+.plantilla__buttons__button {
+  margin-right: 1.5em;
+  padding: 0.5em;
+}
+.plantilla__buttons__button--eliminar {
+  position: absolute;
+  right: 0;
+}
+.plantilla__footer {
+  font-size: 0.6em;
+  position: absolute;
+  bottom: 0;
+  margin-top: 3em;
+}
+.plantilla__footer__text__bigger {
+  font-size: 1em;
+}
+.plantilla__footer__text__bolder {
+  font-weight: bold;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+.articulos__articulo {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2em;
+}
+.articulos__articulo__nombre {
+  width: 15%;
+}
+.articulos__articulo__submit {
+  padding: 0.2em 0.5em;
+}
+
+/*# sourceMappingURL=index.css.map */
