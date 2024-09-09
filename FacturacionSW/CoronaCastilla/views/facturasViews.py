@@ -3,7 +3,10 @@ from django.http import JsonResponse
 from django.db.models import Q, Sum
 from CoronaCastilla.models import Factura
 from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
-from datetime import datetime
+from django.utils import timezone
+from django.contrib import messages
+
+
 
 
 from django.shortcuts import render
@@ -59,21 +62,24 @@ def view_facturas(request):
     return render(request, 'facturas.html', {'facturas': facturas, 'form': form, 'total_facturado': total_facturado})
 
 
-
 def view_factura_id(request, factura_id):
     factura = get_object_or_404(Factura, id=factura_id)
         
     if request.method == 'POST':
         form = facturaForm(request.POST, instance=factura)
-        if factura['fecha_creacion'] - datetime.date.today() > 2:
-            return '<script>alert("No se puede modificar la factura por: CIERRE DE CAJA")</script>'
+        
+        # Asegúrate de que `fecha_creacion` existe en tu modelo y es una fecha
+        if hasattr(factura, 'fecha_creacion'):
+            days_since_creation = (timezone.now().date() - factura.fecha_creacion).days
+            if days_since_creation > 2:
+                messages.error(request, "No se puede modificar la factura por: CIERRE DE CAJA")
+                return render(request, 'gestionarFactura.html', {'form': form, 'factura': factura})
         
         if form.is_valid():
             form.save()
+            messages.success(request, "Factura actualizada correctamente.")
             return redirect('facturas')
         else:
-            print(form.fields['alojamiento_precio'].choices)
-            print(request.POST)
             print(form.errors)
     else:
         form = facturaForm(instance=factura)
@@ -89,7 +95,7 @@ def view_factura_id(request, factura_id):
     }
     
     return render(request, 'gestionarFactura.html', context)
-    
+
     
 
 def post_factura(request):
