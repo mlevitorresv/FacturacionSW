@@ -31,5 +31,7 @@ urlpatterns = [
     # rutas de clientes
     path("clientes", clientesViews.view_clientes, name='clientes'),
     path("clientes/<int:cliente_id>", clientesViews.view_cliente_id, name='clienteDetails'),
+    path("clientes/nuevo", clientesViews.post_cliente, name='nuevoCliente'),
+    path("clientes/<int:cliente_id>/edit", clientesViews.view_cliente_id, name='editaCliente'),
     path("clientes/<int:cliente_id>/delete", clientesViews.delete_cliente, name='eliminaCliente'),
 ]

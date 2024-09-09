@@ -49,7 +49,7 @@ class clienteForm(forms.ModelForm):
     class Meta:
         model = Cliente
         fields = [
-            'nombre', 'direccion', 'codigoPostal', 'nif'
+            'nombre', 'direccion', 'codigo_postal', 'nif'
         ]
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'nombre'}),
