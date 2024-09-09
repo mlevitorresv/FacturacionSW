@@ -34,4 +34,8 @@ urlpatterns = [
     path("clientes/nuevo", clientesViews.post_cliente, name='nuevoCliente'),
     path("clientes/<int:cliente_id>/edit", clientesViews.view_cliente_id, name='editaCliente'),
     path("clientes/<int:cliente_id>/delete", clientesViews.delete_cliente, name='eliminaCliente'),
+    
+    #rutas de cliente (JSON)
+    path('get_cliente/<int:cliente_id>/', clientesViews.get_cliente, name='get_cliente'),
+
 ]

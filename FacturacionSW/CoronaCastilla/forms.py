@@ -7,10 +7,11 @@ class facturaForm(forms.ModelForm):
         model = Factura
         fields = [
             'cliente', 'numero_factura', 'habitacion_numero', 'fecha_entrada', 'fecha_salida',
-            'alojamiento_dias', 'desayuno_dias', 'alojamiento_precio', 'desayuno_precio', 'base_imponible', 'porcentaje_iva', 'importe_iva', 'total_factura', 'habitacion'
+            'alojamiento_dias', 'desayuno_dias', 'alojamiento_precio', 'desayuno_precio', 
+            'base_imponible', 'porcentaje_iva', 'importe_iva', 'total_factura', 'habitacion'
         ]
         widgets = {
-            'cliente': forms.Textarea(attrs={'class': 'plantilla__form__basico__area', 'rows': '8'}),
+            'cliente': forms.Textarea(attrs={'class': 'plantilla__form__basico__area', 'rows': '8', 'id': 'clienteDetails'}),
             'numero_factura': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'numero'}),
             'habitacion_numero': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'numeroHabitacion'}),
             'fecha_entrada': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'fechaEntrada', 'type': 'date'}),
@@ -24,6 +25,12 @@ class facturaForm(forms.ModelForm):
             'importe_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'importeIva', 'id': 'importeIva'}),
             'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'id': 'totalFactura'})
         }
+
+    # Campo select para seleccionar el cliente (no se enviará con el formulario)
+    clientes = forms.ChoiceField(
+        choices=[('', 'Seleccionar cliente')] + [(cliente.id, cliente.nombre) for cliente in Cliente.objects.all()],
+        widget=forms.Select(attrs={'class': 'plantilla__form__articulos__inputs__input', 'id': 'clientesSelect'})
+    )
 
     habitacion = forms.ChoiceField(
         choices=[

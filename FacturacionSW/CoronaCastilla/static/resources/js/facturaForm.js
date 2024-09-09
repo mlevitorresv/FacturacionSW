@@ -48,54 +48,36 @@ const showResults = () => {
 
 
 
-$(document).ready(function () {
-    $('#tipoHabitacion').change(function () {
-        var tipoHabitacion = $(this).val();
-        $.ajax({
-            url: '/get-precios/',
-            data: {
-                'tipoHabitacion': tipoHabitacion
-            },
-            dataType: 'json',
-            success: function (data) {
-                $('#alojamientoPrecio').empty();
-                for (var key in data) {
-                    if (data.hasOwnProperty(key)) {
-                        var precio = parseFloat(data[key]).toFixed(1);
-                        $('#alojamientoPrecio').append($('<option>', {
-                            value: precio,
-                            text: '€' + precio
-                        }));
-                    }
-                }
-            }
-        });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const clientesSelect = document.getElementById('clientesSelect');
+    const clienteDetails = document.getElementById('clienteDetails');
+
+    clientesSelect.addEventListener('change', function() {
+        const clienteId = this.value;
+
+        if (clienteId) {
+            // Hacer la solicitud AJAX para obtener los datos del cliente
+            fetch(`/get_cliente/${clienteId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Datos del cliente recibidos:", data); // Debug: Verifica los datos en la consola
+
+                    // Rellenar el textarea con los datos del cliente
+                    clienteDetails.value = `
+                        ${data.nombre}\t ${data.nif} \n
+                        ${data.direccion}\n
+                        ${data.codigo_postal}\n
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error al obtener los datos del cliente:', error);
+                    clienteDetails.value = 'Error al obtener los datos del cliente.';
+                });
+        } else {
+            // Si no hay cliente seleccionado, limpiar el textarea
+            clienteDetails.value = '';
+        }
     });
 });
-
-$(document).ready(function () {
-    $('#desayunoDias').change(function () {
-        var tipoHabitacion = 'desayuno';
-        $.ajax({
-            url: '/get-precios/',
-            data: {
-                'tipoHabitacion': tipoHabitacion
-            },
-            dataType: 'json',
-            success: function (data) {
-                $('#desayunoPrecio').empty();
-                for (var key in data) {
-                    if (data.hasOwnProperty(key)) {
-                        var precio = parseFloat(data[key]).toFixed(1);
-                        $('#desayunoPrecio').append($('<option>', {
-                            value: precio,
-                            text: '€' + precio
-                        }));
-                    }
-                }
-            }
-        });
-    });
-});
-
 

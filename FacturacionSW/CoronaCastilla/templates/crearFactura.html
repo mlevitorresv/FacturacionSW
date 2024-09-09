@@ -17,6 +17,16 @@
     </div>
     <form action="" class="plantilla__form" id="facturaForm" method="POST">
         {% csrf_token %}
+
+        <div class="plantilla__form__articulos no-print">
+            <div class="plantilla__form__articulos__fields">
+                <p class="plantilla__form__articulos__fields__field">SELEC. CLIENTE</p>
+            </div>
+            <div class="plantilla__form__articulos__inputs">
+                {{ form.clientes }}
+            </div>
+        </div>
+
         <div class="plantilla__form__basico">
             <p class="plantilla__form__basico__field">CLIENTE</p>
             {{ form.cliente }}

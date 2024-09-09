@@ -1,4 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import JsonResponse
 from CoronaCastilla.models import Cliente
 from CoronaCastilla.forms import clienteForm
 
@@ -55,3 +56,14 @@ def delete_cliente(request, cliente_id):
     
     return render(request, 'gestionarCliente.html', {'cliente': cliente})
     
+
+# Devolver datos de cliente en formato JSON
+def get_cliente(request, cliente_id):
+    cliente = Cliente.objects.get(id=cliente_id)
+    data = {
+        'nombre': cliente.nombre,
+        'direccion': cliente.direccion,
+        'codigo_postal': cliente.codigo_postal,
+        'nif': cliente.nif
+    }
+    return JsonResponse(data)
