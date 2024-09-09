@@ -17,7 +17,8 @@
         </thead>
         <tbody class="main__table__body">
             {% for cliente in clientes %}
-            <tr class="main__table__body__row">
+            <tr class="main__table__body__row"
+                onclick="window.location.href=`{% url 'clienteDetails' cliente_id=cliente.id %}`">
                 <td class="main__table__body__row__th">{{ cliente.nombre }}</td>
                 <td class="main__table__body__row__th">{{ cliente.nif }}</td>
             </tr>
