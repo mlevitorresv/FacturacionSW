@@ -1,19 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Facturas {% endblock %}
+{% block title %} Clientes {% endblock %}
 
 {% block content %}
 <main class="main">
     <div class="main__buttons">
-        <button class="main__buttons__create">Crear cliente</button>
-        <div class="main__buttons__find">
-            <p class="main__buttons__find__text">Obtener: </p>
-            <select class="main__buttons__find__select">
-                <option value="todas">Todas</option>
-                <option value="mes">Último mes</option>
-                <option value="meses">Últimos 3 meses</option>
-            </select>
-        </div>
+        <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevoCliente' %}`">Crear cliente</button>
+        
     </div>
     <table class="main__table">
         <thead class="main__table__head">
@@ -23,77 +16,12 @@
             </tr>
         </thead>
         <tbody class="main__table__body">
+            {% for cliente in clientes %}
             <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
+                <td class="main__table__body__row__th">{{ cliente.nombre }}</td>
+                <td class="main__table__body__row__th">{{ cliente.nif }}</td>
             </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
-            <tr class="main__table__body__row">
-                <td class="main__table__body__row__th">INDUSTRIAS LUPY S.L.</td>
-                <td class="main__table__body__row__th">A-24089021</td>
-            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </main>
