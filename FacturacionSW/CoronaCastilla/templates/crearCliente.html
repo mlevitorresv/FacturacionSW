@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Facturas {% endblock %}
+{% block title %} Nuevo Cliente {% endblock %}
 
 {% block content %}
 <main class="plantilla">
-    <form action="" class="plantilla__form">
+    <form action="" class="plantilla__form" id="clienteForm" method="POST">
+        {% csrf_token %}
         <div class="plantilla__form__articulos">
             <div class="plantilla__form__articulos__fields">
                 <p class="plantilla__form__articulos__fields__field">NOMBRE CLIENTE</p>
@@ -13,16 +14,16 @@
                 <p class="plantilla__form__articulos__fields__field">N.I.F</p>
             </div>
             <div class="plantilla__form__articulos__inputs">
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="nombre" />
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="direccion" />
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="codigoPostal" />
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="nif" />
+                {{ form.nombre }}
+                {{ form.direccion }}
+                {{ form.codigo_postal }}
+                {{ form.nif }}
             </div>
         </div>
     </form>
 
     <div class="plantilla__buttons no-print">
-        <button class="plantilla__buttons__button">Guardar Cliente</button>
+        <button class="plantilla__buttons__button" type="submit" form="clienteForm">Guardar Cliente</button>
     </div>
 </main>
 {% endblock %}

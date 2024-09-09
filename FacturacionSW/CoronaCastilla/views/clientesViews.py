@@ -37,8 +37,7 @@ def post_cliente(request):
     if request.method == 'POST':
         if form.is_valid():
             cliente = form.save()
-            cliente.save()
-            
+            cliente.save()            
             return redirect('clientes')
         else:
             print("formulario invalido", form.errors)

@@ -53,7 +53,7 @@ class clienteForm(forms.ModelForm):
         ]
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'nombre'}),
-            'direccion': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'direccion'}),
-            'codigoPostal': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'codigoPostal'}),
-            'nif': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'nif'})
+            'direccion': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'direccion'}),
+            'codigoPostal': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'codigoPostal'}),
+            'nif': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'nif'})
         }
