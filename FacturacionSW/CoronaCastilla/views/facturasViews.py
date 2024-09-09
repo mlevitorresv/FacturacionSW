@@ -6,6 +6,20 @@ from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
 from datetime import datetime
 
 
+from django.shortcuts import render
+from django.db.models import Sum, Q
+from datetime import datetime
+import re
+
+def extract_name(cliente_text):
+    # Encuentra el NIF en el texto usando una expresión regular
+    match = re.search(r'\d{8}[A-Z]', cliente_text)
+    if match:
+        pos_nif = match.start()
+        # Extraer el nombre del texto
+        return cliente_text[:pos_nif].strip()
+    return cliente_text
+
 def view_facturas(request):
     if request.method == 'GET':
         form = getFacturas(request.GET)
@@ -16,9 +30,8 @@ def view_facturas(request):
     mes_actual = ahora.month
     año_actual = ahora.year
         
-    
     if filtro == 'mes':
-        facturas = Factura.objects.filter(fecha_salida__year =año_actual, fecha_salida__month=mes_actual)
+        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
     
     elif filtro == 'meses':
         meses = [mes_actual, (mes_actual - 1) % 12 or 12, (mes_actual - 2) % 12 or 12]
@@ -39,9 +52,11 @@ def view_facturas(request):
         
     total_facturado = facturas.aggregate(Sum('total_factura'))['total_factura__sum'] or 0
 
-        
-        
-    return render(request, 'facturas.html', {'facturas' : facturas, 'form':form, 'total_facturado': total_facturado})
+    # Extraer el nombre del cliente para cada factura
+    for factura in facturas:
+        factura.cliente_nombre = extract_name(factura.cliente)
+
+    return render(request, 'facturas.html', {'facturas': facturas, 'form': form, 'total_facturado': total_facturado})
 
 
 

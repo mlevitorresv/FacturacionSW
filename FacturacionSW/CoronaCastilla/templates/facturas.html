@@ -28,7 +28,7 @@
                 onclick="window.location.href= `{% url 'facturaDetails' factura_id=factura.id %}`">
                 <td class="main__table__body__row__th">{{ factura.numero_factura }}</td>
                 <td class="main__table__body__row__th">{{ factura.fecha_salida }}</td>
-                <td class="main__table__body__row__th">{{ factura.cliente }}</td>
+                <td class="main__table__body__row__th">{{ factura.cliente_nombre }}</td>
                 <td class="main__table__body__row__th">{{ factura.habitacion }}</td>
             </tr>
             {% endfor %}
