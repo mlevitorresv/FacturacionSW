@@ -4,7 +4,8 @@
 
 {% block content %}
 <main class="plantilla">
-    <form action="" class="plantilla__form">
+    <form action="{% url 'clienteDetails' cliente.id %}" method="POST" class="plantilla__form" id="editForm">
+        {% csrf_token %}
         <div class="plantilla__form__articulos">
             <div class="plantilla__form__articulos__fields">
                 <p class="plantilla__form__articulos__fields__field">NOMBRE CLIENTE</p>
@@ -13,16 +14,21 @@
                 <p class="plantilla__form__articulos__fields__field">N.I.F</p>
             </div>
             <div class="plantilla__form__articulos__inputs">
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="nombre" />
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="direccion" />
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="codigoPostal" />
-                <input type="text" class="plantilla__form__articulos__inputs__input" name="nif" />
+                {{ form.nombre }}
+                {{ form.direccion }}
+                {{ form.codigo_postal }}
+                {{ form.nif }}
             </div>
         </div>
     </form>
 
     <div class="plantilla__buttons no-print">
-        <button class="plantilla__buttons__button">Guardar Cliente</button>
+        <button class="plantilla__buttons__button"  type="submit" form="editForm">Actualizar Cliente</button>
+        <form action="{% url 'eliminaCliente' cliente_id=cliente.id %}" method="POST" style="display:inline;">
+            {% csrf_token %}
+            <button class="plantilla__buttons__button plantilla__buttons__button--eliminar" type="submit">Eliminar
+                Cliente</button>
+        </form>
     </div>
 </main>
 {% endblock %}
