@@ -85,7 +85,7 @@ def post_factura(request):
             factura = form.save(commit=False)            
             factura.save()
             
-            return redirect('index')  # Redirigir a la lista de facturas después de guardar
+            return redirect('facturas')  # Redirigir a la lista de facturas después de guardar
         else:
             print('formulario invalido', form.errors)
 
