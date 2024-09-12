@@ -1,3 +1,7 @@
+function roundToTwo(num) {
+    return +(Math.round(num + "e+2") + "e-2");
+}
+
 const precioAlojamiento = () => {
     dias = document.getElementById('alojamientoDias')
     precio = document.getElementById('alojamientoPrecio')
@@ -34,13 +38,20 @@ const showResults = () => {
     if (isNaN(alojamiento)) alojamiento = 0;
     if (isNaN(desayuno)) desayuno = 0;
 
+    let importeIva = 0;
+    let baseImponible = 0;
+    let totalFactura = 0;
+
     const precio = alojamiento + desayuno
-    const importeIva = Math.round(precio * (ivaInput.value / 100) * 100) / 100
-    const baseImponible = Math.round((precio * 100) / 100) - importeIva
-    const totalFactura = baseImponible + importeIva
-
-
-
+    if (ivaInput.value == 10) {
+        baseImponible = roundToTwo(precio / 1.1)
+        totalFactura = alojamiento + desayuno
+        importeIva = roundToTwo(totalFactura - baseImponible)
+    } else {
+        importeIva = roundToTwo(precio * (ivaInput.value / 100) * 100) / 100
+        baseImponible = roundToTwo((precio * 100) / 100) - importeIva
+        totalFactura = baseImponible + importeIva
+    }
     importeIvaInput.value = importeIva
     baseImponibleInput.value = baseImponible
     totalFacturaInput.value = totalFactura
@@ -49,11 +60,11 @@ const showResults = () => {
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const clientesSelect = document.getElementById('clientesSelect');
     const clienteDetails = document.getElementById('clienteDetails');
 
-    clientesSelect.addEventListener('change', function() {
+    clientesSelect.addEventListener('change', function () {
         const clienteId = this.value;
 
         if (clienteId) {
