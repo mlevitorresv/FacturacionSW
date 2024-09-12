@@ -68,13 +68,6 @@ def view_factura_id(request, factura_id):
     if request.method == 'POST':
         form = facturaForm(request.POST, instance=factura)
         
-        # Asegúrate de que `fecha_creacion` existe en tu modelo y es una fecha
-        if hasattr(factura, 'fecha_creacion'):
-            days_since_creation = (timezone.now().date() - factura.fecha_creacion).days
-            if days_since_creation > 2:
-                messages.error(request, "No se puede modificar la factura por: CIERRE DE CAJA")
-                return render(request, 'gestionarFactura.html', {'form': form, 'factura': factura})
-        
         if form.is_valid():
             form.save()
             messages.success(request, "Factura actualizada correctamente.")
