@@ -13,7 +13,7 @@ from xhtml2pdf import pisa
 
 
 def generate_pdf(factura, output_path):
-    template = 'gestionarFactura.html'
+    template = 'pdfFactura.html'
     context = {'factura': factura}
     html = render_to_string(template, context)
     
