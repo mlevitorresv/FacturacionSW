@@ -14,13 +14,24 @@ from xhtml2pdf import pisa
 
 def generate_pdf(factura, output_path):
     template = 'pdfFactura.html'
-    context = {'factura': factura}
+    alojamiento_result = factura.alojamiento_dias * factura.alojamiento_precio
+    desayuno_result = factura.desayuno_dias * factura.desayuno_precio
+    context = {
+        'factura': factura,
+        'alojamiento_result': alojamiento_result,
+        'desayuno_result': desayuno_result,
+    }
     html = render_to_string(template, context)
     
+    # Guarda el HTML para depuración
+    with open('debug_output.html', 'w') as debug_file:
+        debug_file.write(html)
+        
     with open(output_path, "wb") as pdf_file:
         pisa_status = pisa.CreatePDF(html, dest=pdf_file)
-        
+
     return pisa_status.err
+
 
 def extract_name(cliente_text):
     # Encuentra el NIF en el texto usando una expresión regular
