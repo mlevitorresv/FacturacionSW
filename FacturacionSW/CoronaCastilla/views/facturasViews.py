@@ -5,14 +5,22 @@ from CoronaCastilla.models import Factura
 from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
 from django.utils import timezone
 from django.contrib import messages
-
-
-
-
-from django.shortcuts import render
-from django.db.models import Sum, Q
 from datetime import datetime
 import re
+import os
+from django.template.loader import render_to_string
+from xhtml2pdf import pisa
+
+
+def generate_pdf(factura, output_path):
+    template = 'gestionarFactura.html'
+    context = {'factura': factura}
+    html = render_to_string(template, context)
+    
+    with open(output_path, "wb") as pdf_file:
+        pisa_status = pisa.CreatePDF(html, dest=pdf_file)
+        
+    return pisa_status.err
 
 def extract_name(cliente_text):
     # Encuentra el NIF en el texto usando una expresión regular
@@ -22,6 +30,8 @@ def extract_name(cliente_text):
         # Extraer el nombre del texto
         return cliente_text[:pos_nif].strip()
     return cliente_text
+
+
 
 def view_facturas(request):
     if request.method == 'GET':
@@ -70,6 +80,12 @@ def view_factura_id(request, factura_id):
         
         if form.is_valid():
             form.save()
+            
+            factura_name = f"factura_{factura.numero_factura}_{factura.fecha_creacion.strftime('%Y-%m-%d')}.pdf"
+            external_drive_path = "D:\FACTURAS"
+            output_path = os.path.join(external_drive_path, factura_name)
+            generate_pdf(factura, output_path)
+            
             messages.success(request, "Factura actualizada correctamente.")
             return redirect('facturas')
         else:
@@ -98,6 +114,12 @@ def post_factura(request):
         if form.is_valid():
             factura = form.save(commit=False)            
             factura.save()
+            
+            factura_name = f"factura_{factura.numero_factura}_{factura.fecha_creacion.strftime('%Y-%m-%d')}.pdf"
+            external_drive_path = "D:\FACTURAS"
+            output_path = os.path.join(external_drive_path, factura_name)
+            generate_pdf(factura, output_path)
+            
             
             return redirect('facturas')  # Redirigir a la lista de facturas después de guardar
         else:
