@@ -45,7 +45,7 @@ const showResults = () => {
     const precio = alojamiento + desayuno
     if (ivaInput.value == 10) {
         baseImponible = roundToTwo(precio / 1.1)
-        totalFactura = alojamiento + desayuno
+        totalFactura = roundToTwo(alojamiento + desayuno)
         importeIva = roundToTwo(totalFactura - baseImponible)
     } else {
         importeIva = roundToTwo(precio * (ivaInput.value / 100) * 100) / 100
