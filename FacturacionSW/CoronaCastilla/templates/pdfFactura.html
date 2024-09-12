@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'resources/css/index.css' %}">
+    <title>Facturación | PDF</title>
+    <style>
+        .plantilla {
+            padding: 2em 5%;
+        }
+
+        .plantilla__info {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            margin-bottom: 1em;
+        }
+
+        .plantilla__info__data {
+            font-size: 0.8em;
+            margin-bottom: 3em;
+            width: fit-content;
+            text-align: center;
+        }
+
+        .plantilla__info__data__text--bold {
+            font-weight: bold;
+        }
+
+        .plantilla__form__basico {
+            width: 50%;
+        }
+
+        .plantilla__form__basico__field {
+            background-color: #cecece;
+            padding: 0 0.2em;
+            border: 1px solid black;
+        }
+
+        .plantilla__form__basico__area {
+            width: 100%;
+            border: 1px solid black;
+            font-weight: bold;
+            padding: 0.2em;
+            text-align: left;
+        }
+
+        .plantilla__form__articulos__fields {
+            display: flex;
+        }
+
+        .plantilla__form__articulos__fields__field {
+            padding: 0.2em;
+            width: 15%;
+            background-color: #cecece;
+            text-align: center;
+        }
+
+        .plantilla__form__articulos__fields__field--description {
+            width: 40%;
+        }
+
+        .plantilla__form__articulos__inputs {
+            display: flex;
+        }
+
+        .plantilla__form__articulos__inputs__input {
+            padding: 0.2em;
+            width: 15%;
+            text-align: right;
+        }
+
+        .plantilla__form__tabla {
+            margin: 3em 0;
+            width: 50%;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .plantilla__form__tabla__thead {
+            font-weight: bold;
+            background-color: #cecece;
+        }
+
+        .plantilla__form__tabla__thead__trow__tdata {
+            border: 1px solid white;
+            padding: 0.2em;
+        }
+
+        .plantilla__form__tabla__tbody__trow__tdata {
+            border: 1px solid white;
+            padding: 0.2em;
+        }
+
+        .plantilla__form__tabla__tbody__trow__tdata:first-child {
+            font-weight: bold;
+            background-color: #cecece;
+        }
+
+        .plantilla__buttons {
+            position: relative;
+            margin-top: 2em;
+        }
+
+        .plantilla__buttons__button {
+            margin-right: 1.5em;
+            padding: 0.5em;
+        }
+
+        .plantilla__buttons__button--eliminar {
+            position: absolute;
+            right: 0;
+        }
+
+        .plantilla__footer {
+            font-size: 0.6em;
+            position: absolute;
+            bottom: 0;
+            margin-top: 3em;
+        }
+
+        .plantilla__footer__text__bigger {
+            font-size: 1em;
+        }
+
+        .plantilla__footer__text__bolder {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="plantilla">
+        <div class="plantilla__info">
+            <div class="plantilla__info__data">
+                <h2 class="plantilla__info__title">Hotel "Corona de Castilla"</h2>
+                <p class="plantilla__info__text">Ctra. Zamora, km. 24</p>
+                <p class="plantilla__info__text">Tfnos.: 923 25 54 11 / 923 25 58 51</p>
+                <p class="plantilla__info__text">Fax 923 25 54 11</p>
+                <p class="plantilla__info__text--bold">37184 VILLARES DE LA REINA SALAMANCA</p>
+                <p class="plantilla__info__text">Email: coronahotel@hotmail.com</p>
+                <p class="plantilla__info__text">www.h.coronadecastilla.es</p>
+            </div>
+            <img src="{% static './resources/assets/logo.png' %}" alt="logo Hotel Corona de Castilla"
+                class="plantilla__info__logo" />
+        </div>
+        <form action="{% url 'facturaDetails' factura.id %}" method="POST" class="plantilla__form" id="editForm">
+            {% csrf_token %}
+
+            <div class="plantilla__form__basico">
+                <p class="plantilla__form__basico__field">CLIENTE</p>
+                {{ form.cliente }}
+            </div>
+            <div class="plantilla__form__articulos">
+                <div class="plantilla__form__articulos__fields">
+                    <p class="plantilla__form__articulos__fields__field">NUMERO FACTURA</p>
+                    <p class="plantilla__form__articulos__fields__field">HABITACIÓN (TIPO)</p>
+                    <p class="plantilla__form__articulos__fields__field">HABITACIÓN (Nº)</p>
+                    <p class="plantilla__form__articulos__fields__field">FECHA ENTRADA</p>
+                    <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
+                </div>
+                <div class="plantilla__form__articulos__inputs">
+                    {{ form.numero_factura}}
+                    {{ form.habitacion }}
+                    {{ form.habitacion_numero}}
+                    {{ form.fecha_entrada }}
+                    {{ form.fecha_salida }}
+                </div>
+            </div>
+
+            <table class="plantilla__form__tabla">
+                <thead class="plantilla__form__tabla__thead">
+                    <tr class="plantilla__form__tabla__thead__trow">
+                        <td class="plantilla__form__tabla__thead__trow__tdata"></td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">DIAS</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
+                    </tr>
+                </thead>
+                <tbody class="plantilla__form__tabla__tbody">
+                    <tr class="plantilla__form__tabla__tbody__trow">
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ form.alojamiento_dias }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ form.alojamiento_precio }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult">{{
+                            alojamiento_result }}</td>
+                    </tr>
+
+                    <tr class="plantilla__form__tabla__tbody__trow">
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ form.desayuno_dias }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ form.desayuno_precio }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata" id="desayunoResult">{{ desayuno_result }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="plantilla__form__articulos">
+                <div class="plantilla__form__articulos__fields">
+                    <p class="plantilla__form__articulos__fields__field">BASE IMPONIBLE</p>
+                    <p class="plantilla__form__articulos__fields__field">% IVA</p>
+                    <p class="plantilla__form__articulos__fields__field">IMPORTE IVA</p>
+                    <p class="plantilla__form__articulos__fields__field">TOTAL FACTURA</p>
+                </div>
+                <div class="plantilla__form__articulos__inputs">
+                    {{ form.base_imponible}}
+                    {{ form.porcentaje_iva}}
+                    {{ form.importe_iva}}
+                    {{ form.total_factura}}
+                </div>
+            </div>
+        </form>
+
+        <footer class="plantilla__footer">
+            <p class="plantilla__footer__text">
+                <span class="plantilla__footer__text__bigger">CORONA ASENSIO, S.L. - C.I.F. B-56831837</span> · La
+                recogida y uso de datos se hará de acuerdo con la ley orgánica 15/1999 de 13 de Diciembre <span
+                    class="plantilla__footer__text__bolder">de protección de datos de carácter personal y al amparo de
+                    lo
+                    dispuesto en el artículo 12.1 de la ley orgánica</span> 01/1992 de 21 de Febrero sobre protección de
+                la seguridad ciudadana.
+            </p>
+        </footer>
+    </main>
+
+</body>
+
+</html>
