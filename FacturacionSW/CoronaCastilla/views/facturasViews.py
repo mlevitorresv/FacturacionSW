@@ -92,7 +92,7 @@ def view_factura_id(request, factura_id):
         if form.is_valid():
             form.save()
             
-            factura_name = f"factura_{factura.numero_factura}_{factura.fecha_creacion.strftime('%Y-%m-%d')}.pdf"
+            factura_name = f"factura_{str(factura.numero_factura).replace('/', '_')}.pdf"
             external_drive_path = "D:\FACTURAS"
             output_path = os.path.join(external_drive_path, factura_name)
             generate_pdf(factura, output_path)
@@ -145,7 +145,7 @@ def post_factura(request):
 
             factura.save()
 
-            factura_name = f"factura_{factura.numero_factura}_{factura.fecha_creacion.strftime('%Y-%m-%d')}.pdf"
+            factura_name = f"factura_{str(factura.numero_factura).replace('/', '_')}.pdf"
             external_drive_path = "D:\FACTURAS"
             output_path = os.path.join(external_drive_path, factura_name)
             generate_pdf(factura, output_path)
