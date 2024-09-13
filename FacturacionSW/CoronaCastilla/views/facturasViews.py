@@ -123,7 +123,20 @@ def post_factura(request):
 
     if request.method == 'POST':
         if form.is_valid():
-            factura = form.save(commit=False)            
+            factura = form.save(commit=False)
+            # Generar el número de factura
+            year = datetime.now().year
+            last_invoice = Factura.objects.filter(numero_factura__contains=f'/{year}').order_by('-id').first()
+            
+            if last_invoice:
+                # Extraer el número secuencial del último número de factura
+                last_number = int(last_invoice.numero_factura.split('/')[0])
+                new_number = last_number + 1
+            else:
+                # Si no hay facturas anteriores, empezar con el número 1
+                new_number = 1
+            
+            factura.numero_factura = f"{new_number}/{year % 100}"
             factura.save()
             
             factura_name = f"factura_{factura.numero_factura}_{factura.fecha_creacion.strftime('%Y-%m-%d')}.pdf"
