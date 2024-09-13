@@ -55,7 +55,7 @@ def view_facturas(request):
     año_actual = ahora.year
         
     if filtro == 'mes':
-        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
+        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual).order_by('id').values()
     
     elif filtro == 'meses':
         meses = [mes_actual, (mes_actual - 1) % 12 or 12, (mes_actual - 2) % 12 or 12]
@@ -70,9 +70,9 @@ def view_facturas(request):
         query = Q(fecha_salida__year=años[0], fecha_salida__month=meses[0]) | \
                 Q(fecha_salida__year=años[1], fecha_salida__month=meses[1]) | \
                 Q(fecha_salida__year=años[2], fecha_salida__month=meses[2])
-        facturas = Factura.objects.filter(query)
+        facturas = Factura.objects.filter(query).order_by('id')
     else:
-        facturas = Factura.objects.all()
+        facturas = Factura.objects.all().order_by('-id')
         
     total_facturado = facturas.aggregate(Sum('total_factura'))['total_factura__sum'] or 0
 
