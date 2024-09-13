@@ -124,10 +124,14 @@ def post_factura(request):
     if request.method == 'POST':
         if form.is_valid():
             factura = form.save(commit=False)
-            # Generar el número de factura
+
+            # Obtener el año actual
             year = datetime.now().year
-            last_invoice = Factura.objects.filter(numero_factura__contains=f'/{year}').order_by('-id').first()
-            
+            year_suffix = year % 100
+
+            # Filtrar facturas del año actual y obtener la más reciente
+            last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
+
             if last_invoice:
                 # Extraer el número secuencial del último número de factura
                 last_number = int(last_invoice.numero_factura.split('/')[0])
@@ -135,16 +139,17 @@ def post_factura(request):
             else:
                 # Si no hay facturas anteriores, empezar con el número 1
                 new_number = 1
-            
-            factura.numero_factura = f"{new_number}/{year % 100}"
+
+            # Generar el nuevo número de factura en el formato correcto
+            factura.numero_factura = f"{new_number}/{year_suffix}"
+
             factura.save()
-            
+
             factura_name = f"factura_{factura.numero_factura}_{factura.fecha_creacion.strftime('%Y-%m-%d')}.pdf"
             external_drive_path = "D:\FACTURAS"
             output_path = os.path.join(external_drive_path, factura_name)
             generate_pdf(factura, output_path)
-            
-            
+
             return redirect('facturas')  # Redirigir a la lista de facturas después de guardar
         else:
             print('formulario invalido', form.errors)
