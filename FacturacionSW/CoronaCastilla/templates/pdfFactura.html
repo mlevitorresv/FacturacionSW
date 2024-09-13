@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,46 +37,26 @@
         }
 
         .plantilla__form__basico {
+            flex-direction: column;
+            margin-bottom: 1em;
             width: 50%;
         }
 
         .plantilla__form__basico__field {
             background-color: #cecece;
-            padding: 0 0.2em;
-            border: 1px solid black;
-        }
-
-        .plantilla__form__basico__area {
-            width: 100%;
+            padding: 0.5em;
             border: 1px solid black;
             font-weight: bold;
-            padding: 0.2em;
             text-align: left;
+            margin: 0;
+            white-space: nowrap;
         }
 
-        .plantilla__form__articulos__fields {
-            display: flex;
-        }
-
-        .plantilla__form__articulos__fields__field {
-            padding: 0.2em;
-            width: 15%;
-            background-color: #cecece;
-            text-align: center;
-        }
-
-        .plantilla__form__articulos__fields__field--description {
-            width: 40%;
-        }
-
-        .plantilla__form__articulos__inputs {
-            display: flex;
-        }
-
-        .plantilla__form__articulos__inputs__input {
-            padding: 0.2em;
-            width: 15%;
-            text-align: right;
+        .plantilla__form__basico__value {
+            padding: 0.5em;
+            margin: 0;
+            border: 1px solid black;
+            text-align: left;
         }
 
         .plantilla__form__tabla {
@@ -91,33 +72,18 @@
         }
 
         .plantilla__form__tabla__thead__trow__tdata {
-            border: 1px solid white;
+            border: 1px solid black;
             padding: 0.2em;
+            background-color: #cecece;
         }
 
         .plantilla__form__tabla__tbody__trow__tdata {
-            border: 1px solid white;
+            border: 1px solid black;
             padding: 0.2em;
         }
 
         .plantilla__form__tabla__tbody__trow__tdata:first-child {
             font-weight: bold;
-            background-color: #cecece;
-        }
-
-        .plantilla__buttons {
-            position: relative;
-            margin-top: 2em;
-        }
-
-        .plantilla__buttons__button {
-            margin-right: 1.5em;
-            padding: 0.5em;
-        }
-
-        .plantilla__buttons__button--eliminar {
-            position: absolute;
-            right: 0;
         }
 
         .plantilla__footer {
@@ -136,6 +102,7 @@
         }
     </style>
 </head>
+
 <body>
     <main class="plantilla">
         <div class="plantilla__info">
@@ -150,32 +117,46 @@
             </div>
         </div>
         <div class="plantilla__form">
-
             <div class="plantilla__form__basico">
                 <p class="plantilla__form__basico__field">CLIENTE</p>
-                <p>{{ factura.cliente }}</p>
-            </div>
-            <div class="plantilla__form__articulos">
-                <div class="plantilla__form__articulos__fields">
-                    <p class="plantilla__form__articulos__fields__field">NUMERO FACTURA</p>
-                    <p class="plantilla__form__articulos__fields__field">HABITACIÓN (TIPO)</p>
-                    <p class="plantilla__form__articulos__fields__field">HABITACIÓN (Nº)</p>
-                    <p class="plantilla__form__articulos__fields__field">FECHA ENTRADA</p>
-                    <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
-                </div>
-                <div class="plantilla__form__articulos__inputs">
-                    <p>{{ factura.numero_factura }}</p>
-                    <p>{{ factura.habitacion }}</p>
-                    <p>{{ factura.habitacion_numero }}</p>
-                    <p>{{ factura.fecha_entrada }}</p>
-                    <p>{{ factura.fecha_salida }}</p>
-                </div>
+                <p class="plantilla__form__basico__value">{{ factura.cliente }}</p>
             </div>
 
             <table class="plantilla__form__tabla">
                 <thead class="plantilla__form__tabla__thead">
                     <tr class="plantilla__form__tabla__thead__trow">
-                        <td class="plantilla__form__tabla__thead__trow__tdata"></td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">NUMERO FACTURA</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">HABITACIÓN (TIPO)</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">HABITACIÓN (Nº)</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">FECHA ENTRADA</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">FECHA SALIDA</td>
+                    </tr>
+                </thead>
+                <tbody class="plantilla__form__tabla__tbody">
+                    <tr class="plantilla__form__tabla__tbody__trow">
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.numero_factura }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.habitacion }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.habitacion_numero }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.fecha_entrada }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.fecha_salida }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="plantilla__form__tabla">
+                <thead class="plantilla__form__tabla__thead">
+                    <tr class="plantilla__form__tabla__thead__trow">
+                        <td class="plantilla__form__tabla__thead__trow__tdata">        </td>
                         <td class="plantilla__form__tabla__thead__trow__tdata">DIAS</td>
                         <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
                         <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
@@ -210,22 +191,32 @@
                 </tbody>
             </table>
 
-            <div class="plantilla__form__articulos">
-                <div class="plantilla__form__articulos__fields">
-                    <p class="plantilla__form__articulos__fields__field">BASE IMPONIBLE</p>
-                    <p class="plantilla__form__articulos__fields__field">% IVA</p>
-                    <p class="plantilla__form__articulos__fields__field">IMPORTE IVA</p>
-                    <p class="plantilla__form__articulos__fields__field">TOTAL FACTURA</p>
-                </div>
-                <div class="plantilla__form__articulos__inputs">
-                    <p>{{ factura.base_imponible }}</p>
-                    <p>{{ factura.porcentaje_iva }}</p>
-                    <p>{{ factura.importe_iva }}</p>
-                    <p>{{ factura.total_factura }}</p>
-                </div>
-            </div>
-        </div>
-
+            <table class="plantilla__form__tabla">
+                <thead class="plantilla__form__tabla__thead">
+                    <tr class="plantilla__form__tabla__thead__trow">
+                        <td class="plantilla__form__tabla__thead__trow__tdata">BASE IMPONIBLE</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">% IVA</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE IVA</td>
+                        <td class="plantilla__form__tabla__thead__trow__tdata">TOTAL FACTURA</td>
+                    </tr>
+                </thead>
+                <tbody class="plantilla__form__tabla__tbody">
+                    <tr class="plantilla__form__tabla__tbody__trow">
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.base_imponible }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.porcentaje_iva }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.importe_iva }}
+                        </td>
+                        <td class="plantilla__form__tabla__tbody__trow__tdata">
+                            {{ factura.total_factura }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         <footer class="plantilla__footer">
             <p class="plantilla__footer__text">
                 <span class="plantilla__footer__text__bigger">CORONA ASENSIO, S.L. - C.I.F. B-56831837</span> · La
@@ -238,4 +229,5 @@
         </footer>
     </main>
 </body>
+
 </html>
