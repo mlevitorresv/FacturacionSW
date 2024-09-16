@@ -119,43 +119,51 @@ def view_factura_id(request, factura_id):
     
 
 def post_factura(request):
-    form = facturaForm(request.POST or None)
-
     if request.method == 'POST':
+        form = facturaForm(request.POST)
         if form.is_valid():
             factura = form.save(commit=False)
-
-            # Obtener el año actual
-            year = datetime.now().year
-            year_suffix = year % 100
-
-            # Filtrar facturas del año actual y obtener la más reciente
-            last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
-
-            if last_invoice:
-                # Extraer el número secuencial del último número de factura
-                last_number = int(last_invoice.numero_factura.split('/')[0])
-                new_number = last_number + 1
-            else:
-                # Si no hay facturas anteriores, empezar con el número 1
-                new_number = 1
-
-            # Generar el nuevo número de factura en el formato correcto
-            factura.numero_factura = f"{new_number}/{year_suffix}"
-
+            # El número de factura se calcula automáticamente en la vista, no se modifica en el formulario
             factura.save()
-
-            factura_name = f"factura_{str(factura.numero_factura).replace('/', '_')}.pdf"
-            external_drive_path = "D:\FACTURAS"
+            
+            # Obtener el nombre del archivo PDF y guardarlo
+            factura_name = f"factura_{factura.numero_factura.replace('/', '_')}.pdf"
+            external_drive_path = "D:\\FACTURAS"
+            if not os.path.exists(external_drive_path):
+                os.makedirs(external_drive_path)
             output_path = os.path.join(external_drive_path, factura_name)
-            generate_pdf(factura, output_path)
+            
+            try:
+                generate_pdf(factura, output_path)
+            except FileNotFoundError as e:
+                print(f"Error al generar el PDF: {e}")
+                return render(request, 'crearFactura.html', {'form': form, 'error': f"Error al generar el archivo PDF: {str(e)}"})
 
-            return redirect('facturas')  # Redirigir a la lista de facturas después de guardar
+            return redirect('facturas')
         else:
-            print('formulario invalido', form.errors)
+            print('Formulario inválido:', form.errors)
+    else:
+        # Crear un nuevo formulario con el número de factura automáticamente calculado
+        form = facturaForm()
+        # Obtener el año actual
+        year = timezone.now().year
+        year_suffix = year % 100
+
+        # Filtrar facturas del año actual y obtener la más reciente
+        last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
+
+        if last_invoice:
+            # Extraer el número secuencial del último número de factura
+            last_number = int(last_invoice.numero_factura.split('/')[0])
+            new_number = last_number + 1
+        else:
+            # Si no hay facturas anteriores, empezar con el número 1
+            new_number = 1
+
+        # Establecer el nuevo número de factura en el formulario
+        form.fields['numero_factura'].initial = f"{new_number}/{year_suffix}"
 
     return render(request, 'crearFactura.html', {'form': form})
-
 
 
 

@@ -33,12 +33,14 @@
         </div>
         <div class="plantilla__form__articulos">
             <div class="plantilla__form__articulos__fields">
+                <p class="plantilla__form__articulos__fields__field">NUMERO FACTURA</p>
                 <p class="plantilla__form__articulos__fields__field">HABITACIÓN (TIPO)</p>
                 <p class="plantilla__form__articulos__fields__field">HABITACIÓN (Nº)</p>
                 <p class="plantilla__form__articulos__fields__field">FECHA ENTRADA</p>
                 <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
             </div>
             <div class="plantilla__form__articulos__inputs">
+                {{ form.numero_factura}}
                 {{ form.habitacion }}
                 {{ form.habitacion_numero }}
                 {{ form.fecha_entrada }}
