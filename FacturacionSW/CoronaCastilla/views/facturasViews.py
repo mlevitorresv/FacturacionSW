@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.db.models import Q, Sum
 from CoronaCastilla.models import Factura
 from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
@@ -10,6 +10,32 @@ import re
 import os
 from django.template.loader import render_to_string
 from xhtml2pdf import pisa
+import openpyxl
+
+
+def generate_excel(request):
+    mes_actual = datetime.now().month
+    año_actual = datetime.now().year
+    facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_ssalida__month=mes_actual)
+    
+    #crear archivo
+    wb = openpyxl.Workbook()
+    ws = wb.active
+    ws.title = 'Facturas'
+    
+    # encabezados
+    ws.append(['Número', 'Fecha', 'Cliente', 'Concepto', 'BASE IVA', '% IVA', 'Cuota', 'Total'])
+
+    #añadir datos
+    for factura in facturas:
+        ws.append([factura.numero_factura, factura.fecha_salida, factura.cliente, factura.habitacion, factura.importe_iva, factura.porcentaje_iva, factura.total_factura])
+
+    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename="facturas_{mes_actual}_{año_actual}.xlsx"'
+
+    wb.save(response)
+    return response
+
 
 
 def generate_pdf(factura, output_path):
