@@ -12,6 +12,7 @@
                 {{ form.select_facturas }}
             </form>
         </div>
+        <button class="main__buttons__create" onclick="window.location.href= `{% url 'exportar_facturas' %}`">Descargar resumen de facturas</button>
     </div>
     <table class="main__table">
         <thead class="main__table__head">
