@@ -27,6 +27,8 @@ urlpatterns = [
     path("facturas/nueva", facturasViews.post_factura, name='nuevaFactura'),
     path("facturas/<int:factura_id>/edit", facturasViews.view_factura_id, name='editaFactura'),
     path("facturas/<int:factura_id>/delete", facturasViews.delete_factura, name='eliminaFactura'),
+    #ruta para descargar resumen
+    path('exportar-facturas', facturasViews.generate_excel, name='exportar_facturas'),
     
     # rutas de clientes
     path("clientes", clientesViews.view_clientes, name='clientes'),
