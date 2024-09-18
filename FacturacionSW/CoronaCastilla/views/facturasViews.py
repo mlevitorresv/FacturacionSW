@@ -16,7 +16,7 @@ import openpyxl
 def generate_excel(request):
     mes_actual = datetime.now().month
     año_actual = datetime.now().year
-    facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_ssalida__month=mes_actual)
+    facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
     
     #crear archivo
     wb = openpyxl.Workbook()
@@ -28,7 +28,16 @@ def generate_excel(request):
 
     #añadir datos
     for factura in facturas:
-        ws.append([factura.numero_factura, factura.fecha_salida, factura.cliente, factura.habitacion, factura.importe_iva, factura.porcentaje_iva, factura.total_factura])
+        cliente_data = " ".join(factura.cliente.split())
+        nif_match = re.search(r'\b\d{8}[A-Z]\b', cliente_data)
+        if nif_match:
+            nif = nif_match.group(0)
+            # El nombre es todo lo que está antes del NIF
+            nombre = cliente_data.split(nif)[0].strip()
+
+        
+        cliente = nombre + " " + nif
+        ws.append([factura.numero_factura, factura.fecha_salida, cliente, factura.habitacion, factura.base_imponible, factura.porcentaje_iva, factura.importe_iva,factura.total_factura])
 
     response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = f'attachment; filename="facturas_{mes_actual}_{año_actual}.xlsx"'
@@ -81,7 +90,7 @@ def view_facturas(request):
     año_actual = ahora.year
         
     if filtro == 'mes':
-        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual).order_by('id').values()
+        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual).order_by('-id')
     
     elif filtro == 'meses':
         meses = [mes_actual, (mes_actual - 1) % 12 or 12, (mes_actual - 2) % 12 or 12]
@@ -96,7 +105,7 @@ def view_facturas(request):
         query = Q(fecha_salida__year=años[0], fecha_salida__month=meses[0]) | \
                 Q(fecha_salida__year=años[1], fecha_salida__month=meses[1]) | \
                 Q(fecha_salida__year=años[2], fecha_salida__month=meses[2])
-        facturas = Factura.objects.filter(query).order_by('id')
+        facturas = Factura.objects.filter(query).order_by('-id')
     else:
         facturas = Factura.objects.all().order_by('-id')
         
