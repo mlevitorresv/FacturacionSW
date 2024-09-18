@@ -11,23 +11,44 @@ import os
 from django.template.loader import render_to_string
 from xhtml2pdf import pisa
 import openpyxl
+from io import BytesIO
+
 
 
 def generate_excel(request):
-    mes_actual = datetime.now().month
-    año_actual = datetime.now().year
-    facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
+    meses_en_espanol = [
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+        'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+    ]
     
-    #crear archivo
-    wb = openpyxl.Workbook()
-    ws = wb.active
-    ws.title = 'Facturas'
-    
-    # encabezados
-    ws.append(['Número', 'Fecha', 'Cliente', 'Concepto', 'BASE IVA', '% IVA', 'Cuota', 'Total'])
+    # Construir la ruta del archivo de plantilla
+    template_path = os.path.join(os.path.dirname(__file__), '..', '..', 'FACTURAS.xlsx')
 
-    #añadir datos
-    for factura in facturas:
+    # Verificar que el archivo existe
+    if not os.path.exists(template_path):
+        return HttpResponse("Error: El archivo de plantilla no se encuentra.", status=404)
+
+    try:
+        # Cargar plantilla
+        wb = openpyxl.load_workbook(template_path)
+    except Exception as e:
+        return HttpResponse(f"Error al cargar el archivo de plantilla: {str(e)}", status=500)
+
+    # Hoja activa
+    ws = wb.active
+
+    ahora = datetime.now()
+    mes_actual = ahora.month
+    año_actual = ahora.year
+    facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
+
+    # Comenzar a rellenar desde la fila 7 (por ejemplo)
+    start_row = 7
+
+    # Actualizar información en la hoja de cálculo
+    ws["C3"] = f"HOSTELERÍA-EJERCICIO {meses_en_espanol[mes_actual - 1]} {año_actual}"
+    for index, factura in enumerate(facturas, start=start_row):
+        # Extraer cliente y NIF
         cliente_data = " ".join(factura.cliente.split())
         nif_match = re.search(r'\b\d{8}[A-Z]\b', cliente_data)
         if nif_match:
@@ -35,14 +56,30 @@ def generate_excel(request):
             # El nombre es todo lo que está antes del NIF
             nombre = cliente_data.split(nif)[0].strip()
 
-        
-        cliente = nombre + " " + nif
-        ws.append([factura.numero_factura, factura.fecha_salida, cliente, factura.habitacion, factura.base_imponible, factura.porcentaje_iva, factura.importe_iva,factura.total_factura])
+        # Insertar datos en celdas. Por ejemplo:
+        ws[f"A{index}"] = factura.numero_factura
+        ws[f"B{index}"] = factura.fecha_salida.strftime('%Y-%m-%d')
+        ws[f"C{index}"] = nif 
+        ws[f"D{index}"] = nombre
+        if factura.desayuno_dias > 0:
+            ws[f"E{index}"] = factura.habitacion + ' - Desayunos'
+        else:
+            ws[f"E{index}"] = factura.habitacion
+        ws[f"F{index}"] = factura.base_imponible
+        ws[f"G{index}"] = factura.porcentaje_iva
 
-    response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-    response['Content-Disposition'] = f'attachment; filename="facturas_{mes_actual}_{año_actual}.xlsx"'
+    # Crear un archivo en memoria
+    output = BytesIO()
+    wb.save(output)
+    output.seek(0)
 
-    wb.save(response)
+    # Crear nombre de archivo con mes en español
+    nombre_archivo = f"facturas_{meses_en_espanol[mes_actual - 1]}_{año_actual}.xlsx"
+
+    # Configurar la respuesta HTTP
+    response = HttpResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename="{nombre_archivo}"'
+
     return response
 
 
