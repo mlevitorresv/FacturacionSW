@@ -14,6 +14,12 @@
         </div>
         <button class="main__buttons__create" onclick="window.location.href= `{% url 'exportar_facturas' %}`">Descargar resumen de facturas</button>
     </div>
+    <div class="main__filter">
+        <form id="filter-client-form" action="{% url 'facturas' %}" method="GET">
+            <input type="text" name="cliente" placeholder="Buscar por nombre de cliente" class="main__filter__input" 
+                   value="{{ request.GET.cliente }}" onchange="this.form.submit()">
+        </form>
+    </div>
     <table class="main__table">
         <thead class="main__table__head">
             <tr class="main__table__head__row">

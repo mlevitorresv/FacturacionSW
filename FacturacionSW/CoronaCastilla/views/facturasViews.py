@@ -121,6 +121,7 @@ def view_facturas(request):
         form = getFacturas(request.GET)
         
     filtro = request.GET.get('select_facturas')
+    cliente_nombre = request.GET.get('cliente', '')
     
     ahora = datetime.now()
     mes_actual = ahora.month
@@ -145,6 +146,9 @@ def view_facturas(request):
         facturas = Factura.objects.filter(query).order_by('-id')
     else:
         facturas = Factura.objects.all().order_by('-id')
+        
+    if cliente_nombre:
+        facturas = facturas.filter(cliente__icontains=cliente_nombre)
         
     total_facturado = facturas.aggregate(Sum('total_factura'))['total_factura__sum'] or 0
 
