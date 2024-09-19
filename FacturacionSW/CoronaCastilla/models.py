@@ -17,6 +17,7 @@ class Factura(models.Model):
     importe_iva = models.FloatField()
     total_factura = models.FloatField()
     fecha_creacion = models.DateField(default=datetime.date.today())
+    numero_cuenta = models.CharField(max_length=255)
 
 
 class Cliente(models.Model):
