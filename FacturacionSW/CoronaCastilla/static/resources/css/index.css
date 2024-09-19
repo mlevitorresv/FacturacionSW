@@ -74,6 +74,16 @@ body {
   border-radius: 0.9em;
   padding: 0.5em 1em;
 }
+.main__filter {
+  width: 100%;
+  text-align: center;
+  margin: 1em 0 auto;
+}
+.main__filter__input{
+  padding: .5em;
+  border-radius: .9em;
+  color: black;
+}
 .main__table {
   margin: 3em auto;
   width: 60%;
