@@ -7,6 +7,11 @@ from CoronaCastilla.forms import clienteForm
 def view_clientes(request):
     if request.method == "GET":
         clientes = Cliente.objects.all()
+    
+    cliente_nombre = request.GET.get('cliente', '')
+    
+    if cliente_nombre:
+        clientes = clientes.filter(nombre__icontains=cliente_nombre)
         
     return render(request, 'clientes.html', {'clientes' : clientes})
 

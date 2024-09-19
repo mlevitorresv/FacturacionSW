@@ -5,8 +5,14 @@
 {% block content %}
 <main class="main">
     <div class="main__buttons">
-        <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevoCliente' %}`">Crear cliente</button>
-        
+        <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevoCliente' %}`">Crear
+            cliente</button>
+    </div>
+    <div class="main__filter"></div>
+        <form id="filter-client-form" action="{% url 'facturas' %}" method="GET">
+            <input type="text" name="cliente" placeholder="Buscar por nombre de cliente" class="main__filter__input" 
+                   value="{{ request.GET.cliente }}" onchange="this.form.submit()">
+        </form>
     </div>
     <table class="main__table">
         <thead class="main__table__head">
