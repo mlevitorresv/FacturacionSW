@@ -125,6 +125,7 @@ body {
   font-weight: bold;
 }
 .plantilla__form__basico {
+  margin-top: 1em;
   width: 50%;
 }
 .plantilla__form__basico__field {
