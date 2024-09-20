@@ -30,5 +30,11 @@
                 Cliente</button>
         </form>
     </div>
+    <div class="plantilla__buttons no-print"></div>
+        <form action="{% url 'nuevaFactura' %}" method="GET" style="display:inline;">
+            {% csrf_token %}
+            <button class="plantilla__buttons__button plantilla__buttons__button--eliminar" type="submit" form="editForm">Nueva Factura</button>
+        </form>
+    </div>
 </main>
 {% endblock %}
