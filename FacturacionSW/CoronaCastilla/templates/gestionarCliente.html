@@ -4,6 +4,7 @@
 
 {% block content %}
 <main class="plantilla">
+    <!-- Formulario para editar el cliente -->
     <form action="{% url 'clienteDetails' cliente.id %}" method="POST" class="plantilla__form" id="editForm">
         {% csrf_token %}
         <div class="plantilla__form__articulos">
@@ -22,18 +23,25 @@
         </div>
     </form>
 
+    <!-- Botones para acciones -->
     <div class="plantilla__buttons no-print">
-        <button class="plantilla__buttons__button"  type="submit" form="editForm">Actualizar Cliente</button>
+        <!-- Botón para actualizar cliente -->
+        <button class="plantilla__buttons__button" type="submit" form="editForm">Actualizar Cliente</button>
+
+        <!-- Botón para eliminar cliente -->
         <form action="{% url 'eliminaCliente' cliente_id=cliente.id %}" method="POST" style="display:inline;">
             {% csrf_token %}
-            <button class="plantilla__buttons__button plantilla__buttons__button--eliminar" type="submit">Eliminar
-                Cliente</button>
+            <button class="plantilla__buttons__button plantilla__buttons__button--eliminar" type="submit">
+                Eliminar Cliente
+            </button>
         </form>
-    </div>
-    <div class="plantilla__buttons no-print"></div>
+
+        <!-- Botón para nueva factura -->
+        <!-- No relacionar con "editForm" -->
         <form action="{% url 'nuevaFactura' %}" method="GET" style="display:inline;">
             {% csrf_token %}
-            <button class="plantilla__buttons__button plantilla__buttons__button--eliminar" type="submit" form="editForm">Nueva Factura</button>
+            <input type="hidden" name="cliente_id" value="{{ cliente.id }}">
+            <button class="plantilla__buttons__button" type="submit">Nueva Factura</button>
         </form>
     </div>
 </main>

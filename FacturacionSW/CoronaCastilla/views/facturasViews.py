@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Q, Sum
-from CoronaCastilla.models import Factura
+from CoronaCastilla.models import Factura, Cliente
 from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
 from django.utils import timezone
 from django.contrib import messages
@@ -195,6 +195,24 @@ def view_factura_id(request, factura_id):
     
 
 def post_factura(request):
+    cliente_id = request.GET.get('cliente_id')
+    
+    if cliente_id:
+        cliente = Cliente.objects.get(id=cliente_id)
+        cliente_info = f"{cliente.nombre}\n{cliente.direccion}\n{cliente.codigo_postal}\nNIF: {cliente.nif}"
+    else:
+        cliente_info = ''
+    
+
+    
+    if request.method == 'GET':
+        form = facturaForm(initial={
+            'cliente': cliente_info
+        })
+
+    print(f"Valor del cliente en el formulario: {form.initial.get('cliente')}")
+
+
     if request.method == 'POST':
         form = facturaForm(request.POST)
         if form.is_valid():

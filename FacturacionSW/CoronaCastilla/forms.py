@@ -27,13 +27,6 @@ class facturaForm(forms.ModelForm):
             'numero_cuenta': forms.Textarea(attrs={'class': 'plantilla__form__basico__area', 'rows': '1', 'id': 'numero_cuenta', 'required': 'False'}),
         }
 
-    # Campo select para seleccionar el cliente (no se enviará con el formulario)
-    clientes = forms.ChoiceField(
-        choices=[('', 'Seleccionar cliente')] + [(cliente.id, cliente.nombre) for cliente in Cliente.objects.all()],
-        widget=forms.Select(attrs={'class': 'plantilla__form__articulos__inputs__input', 'id': 'clientesSelect'}),
-        required=False
-    )
-
     habitacion = forms.ChoiceField(
         choices=[
             ('habitación individual', 'Habitación individual'),
