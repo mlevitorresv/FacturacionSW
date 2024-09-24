@@ -202,15 +202,6 @@ def post_factura(request):
         cliente_info = f"{cliente.nombre}\n{cliente.direccion}\n{cliente.codigo_postal}\nNIF: {cliente.nif}"
     else:
         cliente_info = ''
-    
-
-    
-    if request.method == 'GET':
-        form = facturaForm(initial={
-            'cliente': cliente_info
-        })
-
-    print(f"Valor del cliente en el formulario: {form.initial.get('cliente')}")
 
 
     if request.method == 'POST':
@@ -256,6 +247,8 @@ def post_factura(request):
 
         # Establecer el nuevo número de factura en el formulario
         form.fields['numero_factura'].initial = f"{new_number}/{year_suffix}"
+        form.fields['cliente'].initial = cliente_info
+
 
     return render(request, 'crearFactura.html', {'form': form})
 
