@@ -118,47 +118,49 @@ def extract_name(cliente_text):
 
 def view_facturas(request):
     if request.method == 'GET':
-        form = getFacturas(request.GET)
+        form = getFacturas(request.GET)  # Cargar el formulario con los datos del GET
         
-    filtro = request.GET.get('select_facturas')
-    cliente_nombre = request.GET.get('cliente', '')
-    
-    ahora = datetime.now()
-    mes_actual = ahora.month
-    año_actual = ahora.year
-        
-    if filtro == 'mes':
-        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual).order_by('-id')
-    
-    elif filtro == 'meses':
-        meses = [mes_actual, (mes_actual - 1) % 12 or 12, (mes_actual - 2) % 12 or 12]
-        años = [año_actual] * 3
-        
-        if mes_actual == 1:
-            años[1] -= 1
-            años[2] -= 1
-        elif mes_actual == 2:
-            años[2] -= 1
+        # Obtener el año desde la URL o usar el año actual si no se proporciona
+        año = request.GET.get('año', datetime.now().year)
 
-        query = Q(fecha_salida__year=años[0], fecha_salida__month=meses[0]) | \
-                Q(fecha_salida__year=años[1], fecha_salida__month=meses[1]) | \
-                Q(fecha_salida__year=años[2], fecha_salida__month=meses[2])
+        # Extraer meses seleccionados (marcados en el checkbox)
+        meses_seleccionados = []
+        for i in range(1, 13):
+            mes_key = f'{i}'
+            if request.GET.get(mes_key) == 'on':  # Verificar si el mes está marcado
+                meses_seleccionados.append(i)
+
+        # Si no se selecciona ningún mes, usar el mes actual por defecto
+        if not meses_seleccionados:
+            ahora = datetime.now()
+            meses_seleccionados = [ahora.month]
+
+        # Filtro inicial de facturas por los meses seleccionados y el año
+        query = Q()
+        for mes in meses_seleccionados:
+            query |= Q(fecha_salida__year=año, fecha_salida__month=mes)
+
         facturas = Factura.objects.filter(query).order_by('-id')
-    else:
-        facturas = Factura.objects.all().order_by('-id')
+
+        # Filtrar por nombre de cliente si está en la URL
+        cliente_nombre = request.GET.get('cliente', '')
+        if cliente_nombre:
+            facturas = facturas.filter(cliente__icontains=cliente_nombre)
+
+        # Total facturado
+        total_facturado = facturas.aggregate(Sum('total_factura'))['total_factura__sum'] or 0
+
+        # Extraer el nombre del cliente para cada factura (si tienes esta función)
+        for factura in facturas:
+            factura.cliente_nombre = extract_name(factura.cliente)
+
+        return render(request, 'facturas.html', {
+            'facturas': facturas,
+            'form': form,
+            'total_facturado': total_facturado,
+        })
         
-    if cliente_nombre:
-        facturas = facturas.filter(cliente__icontains=cliente_nombre)
         
-    total_facturado = facturas.aggregate(Sum('total_factura'))['total_factura__sum'] or 0
-
-    # Extraer el nombre del cliente para cada factura
-    for factura in facturas:
-        factura.cliente_nombre = extract_name(factura.cliente)
-
-    return render(request, 'facturas.html', {'facturas': facturas, 'form': form, 'total_facturado': total_facturado})
-
-
 def view_factura_id(request, factura_id):
     factura = get_object_or_404(Factura, id=factura_id)
         
