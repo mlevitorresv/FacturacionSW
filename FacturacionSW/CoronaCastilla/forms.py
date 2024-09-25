@@ -38,14 +38,27 @@ class facturaForm(forms.ModelForm):
     )
     
 class getFacturas(forms.Form):
-    select_facturas = forms.ChoiceField(
-        choices=[
-            ('todas', 'todas'),
-            ('mes', 'Último mes'),
-            ('meses', 'Últimos 3 meses')
-        ],
-        widget=forms.Select(attrs={'class': 'main__buttons__find__select', 'name': 'select_facturas', 'id': 'select-facturas', 'onchange': 'actualizarFacturas()'})
-    )
+    uno = forms.BooleanField(required=False, label='Enero')
+    dos = forms.BooleanField(required=False, label='Febrero')
+    tres = forms.BooleanField(required=False, label='Marzo')
+    cuatro = forms.BooleanField(required=False, label='Abril')
+    cinco = forms.BooleanField(required=False, label='Mayo')
+    seis = forms.BooleanField(required=False, label='Junio')
+    siete = forms.BooleanField(required=False, label='Julio')
+    ocho = forms.BooleanField(required=False, label='Agosto')
+    nueve = forms.BooleanField(required=False, label='Septiembre')
+    diez = forms.BooleanField(required=False, label='Octubre')
+    once = forms.BooleanField(required=False, label='Noviembre')
+    doce = forms.BooleanField(required=False, label='Diciembre')
+    
+    año = forms.IntegerField(widget=forms.NumberInput(attrs={'class': 'main__buttons__find__create', 'placeholder': 'Año'}), label='Año', required=True)
+    
+    def get_selected_months(self):
+        selected_months = []
+        for i, month in enumerate(self.fields, start=1):
+            if self.cleaned_data.get(month):
+                selected_months.append(i)
+        return selected_months
     
 class clienteForm(forms.ModelForm):
     class Meta:

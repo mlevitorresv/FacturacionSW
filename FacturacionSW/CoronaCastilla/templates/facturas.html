@@ -5,19 +5,33 @@
 {% block content %}
 <main class="main">
     <div class="main__buttons">
-        <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevaFactura' %}`">Crear Factura</button>
-        <div class="main__buttons__find">
-            <p class="main__buttons__find__text">Obtener: </p>
-            <form id="filter-form" action="{% url 'facturas' %}" method="GET">
-                {{ form.select_facturas }}
-            </form>
-        </div>
-        <button class="main__buttons__create" onclick="window.location.href= `{% url 'exportar_facturas' %}`">Descargar resumen de facturas</button>
+        <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevaFactura' %}`">Crear
+            Factura</button>
+        <button class="main__buttons__create" onclick="window.location.href= `{% url 'exportar_facturas' %}`">Descargar
+            resumen de facturas</button>
     </div>
     <div class="main__filter">
         <form id="filter-client-form" action="{% url 'facturas' %}" method="GET">
-            <input type="text" name="cliente" placeholder="Buscar por nombre de cliente" class="main__filter__input" 
-                   value="{{ request.GET.cliente }}" onchange="this.form.submit()">
+            <input type="text" name="cliente" placeholder="Buscar por nombre de cliente" class="main__filter__input"
+                value="{{ request.GET.cliente }}" onchange="this.form.submit()">
+        </form>
+    </div>
+    <div class="main__buttons main__buttons-big">
+        <form id="filter-form" action="{% url 'facturas' %}" method="GET" class="main__buttons__find">
+            {{ form.uno }} 01
+            {{ form.dos }} 02
+            {{ form.tres }} 03
+            {{ form.cuatro }} 04
+            {{ form.cinco }} 05
+            {{ form.seis }} 06
+            {{ form.siete }} 07
+            {{ form.ocho }} 08
+            {{ form.nueve }} 09
+            {{ form.diez }} 10
+            {{ form.once }} 11
+            {{ form.doce }} 12
+            {{ form.año }}
+            <button class="main__buttons__create" type="submit">Mostrar</button>
         </form>
     </div>
     <table class="main__table">
