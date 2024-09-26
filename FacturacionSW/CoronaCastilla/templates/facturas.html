@@ -13,24 +13,21 @@
     <div class="main__filter">
         <form id="filter-client-form" action="{% url 'facturas' %}" method="GET">
             <input type="text" name="cliente" placeholder="Buscar por nombre de cliente" class="main__filter__input"
-                value="{{ request.GET.cliente }}" onchange="this.form.submit()">
-        </form>
-    </div>
-    <div class="main__buttons main__buttons-big">
-        <form id="filter-form" action="{% url 'facturas' %}" method="GET" class="main__buttons__find">
-            {{ form.uno }} 01
-            {{ form.dos }} 02
-            {{ form.tres }} 03
-            {{ form.cuatro }} 04
-            {{ form.cinco }} 05
-            {{ form.seis }} 06
-            {{ form.siete }} 07
-            {{ form.ocho }} 08
-            {{ form.nueve }} 09
-            {{ form.diez }} 10
-            {{ form.once }} 11
-            {{ form.doce }} 12
-            {{ form.año }}
+                value="{{ request.GET.cliente }}">
+            
+            <input type="checkbox" label="Enero" name="mes" value="01">01
+            <input type="checkbox" label="Febrero" name="mes" value="02">02
+            <input type="checkbox" label="Marzo" name="mes" value="03">03
+            <input type="checkbox" label="Abril" name="mes" value="04">04
+            <input type="checkbox" label="Mayo" name="mes" value="05">05
+            <input type="checkbox" label="Junio" name="mes" value="06">06
+            <input type="checkbox" label="Julio" name="mes" value="07">07
+            <input type="checkbox" label="Agosto" name="mes" value="08">08
+            <input type="checkbox" label="Septiembre" name="mes" value="09">09
+            <input type="checkbox" label="Octubre" name="mes" value="10">10
+            <input type="checkbox" label="Noviembre" name="mes" value="11">11
+            <input type="checkbox" label="Diciembre" name="mes" value="12">12
+            <input type="number" name="año" placeholder="Año" class="main__buttons__find__create" required>
             <button class="main__buttons__create" type="submit">Mostrar</button>
         </form>
     </div>

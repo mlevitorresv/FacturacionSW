@@ -92,6 +92,8 @@ body {
   padding: .5em;
   border-radius: .9em;
   color: black;
+  display: block;
+  margin: 0 auto 1em; 
 }
 .main__table {
   margin: 3em auto;

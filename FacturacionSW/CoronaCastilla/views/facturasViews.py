@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Q, Sum
 from CoronaCastilla.models import Factura, Cliente
-from CoronaCastilla.forms import facturaForm, facturaForm, getFacturas
+from CoronaCastilla.forms import facturaForm, facturaForm
 from django.utils import timezone
 from django.contrib import messages
 from datetime import datetime
@@ -118,17 +118,14 @@ def extract_name(cliente_text):
 
 def view_facturas(request):
     if request.method == 'GET':
-        form = getFacturas(request.GET)  # Cargar el formulario con los datos del GET
+        form = facturaForm(request.GET)  # Cargar el formulario con los datos del GET
         
         # Obtener el año desde la URL o usar el año actual si no se proporciona
         año = request.GET.get('año', datetime.now().year)
 
         # Extraer meses seleccionados (marcados en el checkbox)
-        meses_seleccionados = []
-        for i in range(1, 13):
-            mes_key = f'{i}'
-            if request.GET.get(mes_key) == 'on':  # Verificar si el mes está marcado
-                meses_seleccionados.append(i)
+        meses_seleccionados = request.GET.getlist('mes')
+
 
         # Si no se selecciona ningún mes, usar el mes actual por defecto
         if not meses_seleccionados:
