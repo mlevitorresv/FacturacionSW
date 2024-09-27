@@ -35,6 +35,12 @@ class HabitacionForm(forms.ModelForm):
             'alojamiento_precio': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'precioAlojamiento'}),
         }
 
+HabitacionFormSet = forms.modelformset_factory(
+    Habitacion,
+    form=HabitacionForm,
+    extra=1,
+    can_delete=True
+)
 
 class clienteForm(forms.ModelForm):
     class Meta:
