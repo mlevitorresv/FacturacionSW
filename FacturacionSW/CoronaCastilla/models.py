@@ -25,3 +25,18 @@ class Cliente(models.Model):
     direccion = models.CharField(max_length=255)
     codigo_postal = models.CharField(max_length=255)
     nif = models.CharField(max_length=255)
+    
+class Habitacion(models.Model):
+    factura = models.ForeignKey('Factura', related_name='habitaciones', on_delete=models.CASCADE)
+    tipo_habitacion = models.CharField(max_length=255, choices=[
+        ('individual', 'Habitación individual'),
+        ('doble', 'Habitación doble'),
+        ('triple', 'Habitación triple'),
+        ('cuadruple', 'Habitación cuadruple')
+    ])
+    numero_habitacion = models.IntegerField()
+    alojamiento_dias = models.IntegerField()
+    alojamiento_precio = models.FloatField()
+
+    def __str__(self):
+        return f'{self.tipo_habitacion} - {self.numero_habitacion}'
