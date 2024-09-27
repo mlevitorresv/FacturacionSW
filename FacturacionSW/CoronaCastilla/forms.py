@@ -1,5 +1,5 @@
 from django import forms
-from CoronaCastilla.models import Factura, Cliente
+from CoronaCastilla.models import Factura, Cliente, Habitacion
 from django.shortcuts import get_object_or_404
 
 class FacturaForm(forms.ModelForm):
@@ -23,6 +23,18 @@ class FacturaForm(forms.ModelForm):
             'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'id': 'totalFactura'}),
             'numero_cuenta': forms.Textarea(attrs={'class': 'plantilla__form__basico__area', 'rows': '1', 'id': 'numero_cuenta', 'required': 'False'}),
         }
+        
+class HabitacionForm(forms.ModelForm):
+    class Meta:
+        model = Habitacion
+        fields = ['tipo_habitacion', 'numero_habitacion', 'alojamiento_dias', 'alojamiento_precio']
+        widgets = {
+            'tipo_habitacion': forms.Select(attrs={'class': 'plantilla__form__articulos__inputs__input', 'id': 'tipoHabitacion'}),
+            'numero_habitacion': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'numeroHabitacion'}),
+            'alojamiento_dias': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'numeroDias'}),
+            'alojamiento_precio': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'precioAlojamiento'}),
+        }
+
 
 class clienteForm(forms.ModelForm):
     class Meta:
