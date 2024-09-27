@@ -27,15 +27,11 @@
         <div class="plantilla__form__articulos">
             <div class="plantilla__form__articulos__fields">
                 <p class="plantilla__form__articulos__fields__field">NUMERO FACTURA</p>
-                <p class="plantilla__form__articulos__fields__field">HABITACIÓN (TIPO)</p>
-                <p class="plantilla__form__articulos__fields__field">HABITACIÓN (Nº)</p>
                 <p class="plantilla__form__articulos__fields__field">FECHA ENTRADA</p>
                 <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
             </div>
             <div class="plantilla__form__articulos__inputs">
                 {{ form.numero_factura}}
-                {{ form.habitacion }}
-                {{ form.habitacion_numero }}
                 {{ form.fecha_entrada }}
                 {{ form.fecha_salida }}
             </div>
@@ -45,6 +41,8 @@
             <thead class="plantilla__form__tabla__thead">
                 <tr class="plantilla__form__tabla__thead__trow">
                     <td class="plantilla__form__tabla__thead__trow__tdata"></td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION (TIPO)</td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION Nº</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">DIAS</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
@@ -54,6 +52,12 @@
             <tbody class="plantilla__form__tabla__tbody">
                 <tr class="plantilla__form__tabla__tbody__trow">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ form.alojamiento_dias }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ form.alojamiento_dias }}
+                    </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
                         {{ form.alojamiento_dias }}
                     </td>
