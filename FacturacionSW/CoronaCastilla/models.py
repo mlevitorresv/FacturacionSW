@@ -4,13 +4,9 @@ import datetime
 class Factura(models.Model):
     cliente = models.CharField(max_length=500)
     numero_factura = models.CharField(max_length=255)
-    habitacion = models.CharField(max_length=255)
-    habitacion_numero = models.IntegerField()
     fecha_entrada = models.DateField()
     fecha_salida = models.DateField()
-    alojamiento_dias = models.IntegerField()
     desayuno_dias = models.IntegerField()
-    alojamiento_precio = models.FloatField()
     desayuno_precio = models.FloatField()
     base_imponible = models.FloatField()
     porcentaje_iva = models.IntegerField()
@@ -19,6 +15,8 @@ class Factura(models.Model):
     fecha_creacion = models.DateField(default=datetime.date.today())
     numero_cuenta = models.CharField(max_length=255, blank=True, null=True)
 
+    def __str__(self):
+        return f'Factura {self.numero_factura} - {self.cliente}'
 
 class Cliente(models.Model):
     nombre = models.CharField(max_length=255)
