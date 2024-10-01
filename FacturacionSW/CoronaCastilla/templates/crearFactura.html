@@ -48,6 +48,7 @@
                     <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
                 </tr>
             </thead>
+            {{ habitacion_formset.management_form }}  <!-- Añadir los campos ocultos del formset -->
 
             <tbody class="plantilla__form__tabla__tbody">
                 {% for habitacion in habitacion_formset %}

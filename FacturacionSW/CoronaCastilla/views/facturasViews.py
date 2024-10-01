@@ -217,10 +217,12 @@ def post_factura(request):
 
             # Guardar cada habitación en el FormSet
             for habitacion_form in habitacion_formset:
+                print(habitacion_form.cleaned_data)  # Depuración
                 if habitacion_form.cleaned_data and habitacion_form not in habitacion_formset.deleted_forms:
                     habitacion = habitacion_form.save(commit=False)
                     habitacion.factura = factura  # Asignar la factura a cada habitación
                     habitacion.save()
+
 
             # Generar y guardar el PDF de la factura
             factura_name = f"factura_{factura.numero_factura.replace('/', '_')}.pdf"
@@ -237,7 +239,11 @@ def post_factura(request):
             
             return redirect('facturas')
         else:
-            print('Formulario inválido:', form.errors, habitacion_formset.errors)
+            print('Formulario inválido:')
+            if form.errors:
+                print('errores de form:', form.errors)
+            else:
+                print('errores de formset:',habitacion_formset.errors)
 
     else:
         # Crear un nuevo formulario con el número de factura automáticamente calculado
