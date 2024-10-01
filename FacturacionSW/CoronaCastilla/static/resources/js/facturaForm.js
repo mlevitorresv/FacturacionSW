@@ -56,3 +56,7 @@ const showResults = () => {
     baseImponibleInput.value = baseImponible
     totalFacturaInput.value = totalFactura
 }
+
+const showFields = () => {
+
+}

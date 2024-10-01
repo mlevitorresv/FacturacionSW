@@ -50,25 +50,29 @@
             </thead>
 
             <tbody class="plantilla__form__tabla__tbody">
+                {% for habitacion in habitacion_formset %}
                 <tr class="plantilla__form__tabla__tbody__trow">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ form.alojamiento_dias }}
+                        {{ habitacion.tipo_habitacion }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ form.alojamiento_dias }}
+                        {{ habitacion.numero_habitacion }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ form.alojamiento_dias }}
+                        {{ habitacion.alojamiento_dias }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ form.alojamiento_precio }}
-                    </td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ habitacion.alojamiento_precio }}
+                    </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult"></td>
                 </tr>
+                {% endfor %}
 
                 <tr class="plantilla__form__tabla__tbody__trow">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
                         {{ form.desayuno_dias }}
                     </td>

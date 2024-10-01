@@ -29,10 +29,10 @@ class HabitacionForm(forms.ModelForm):
         model = Habitacion
         fields = ['tipo_habitacion', 'numero_habitacion', 'alojamiento_dias', 'alojamiento_precio']
         widgets = {
-            'tipo_habitacion': forms.Select(attrs={'class': 'plantilla__form__articulos__inputs__input', 'id': 'tipoHabitacion'}),
-            'numero_habitacion': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'numeroHabitacion'}),
-            'alojamiento_dias': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'numeroDias'}),
-            'alojamiento_precio': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'precioAlojamiento'}),
+            'tipo_habitacion': forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'id': 'tipoHabitacion'}),
+            'numero_habitacion': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'numeroHabitacion'}),
+            'alojamiento_dias': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'numeroDias'}),
+            'alojamiento_precio': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioAlojamiento'}),
         }
 
 HabitacionFormSet = forms.modelformset_factory(
