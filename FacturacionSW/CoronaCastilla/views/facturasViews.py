@@ -180,8 +180,9 @@ def view_factura_id(request, factura_id):
             print(form.errors)
     else:
         form = FacturaForm(instance=factura)
-        
-    alojamiento_result = factura.alojamiento_dias * factura.alojamiento_precio
+    
+    for habitacion in factura.habitaciones.all():
+        alojamiento_result = habitacion.alojamiento_dias * habitacion.alojamiento_precio
     desayuno_result = factura.desayuno_dias * factura.desayuno_precio
 
     context = {
