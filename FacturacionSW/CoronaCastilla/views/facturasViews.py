@@ -162,37 +162,57 @@ def view_facturas(request):
         
 def view_factura_id(request, factura_id):
     factura = get_object_or_404(Factura, id=factura_id)
-        
+    
+    # Crear el FormSet para las habitaciones
+    HabitacionFormSet = modelformset_factory(Habitacion, form=HabitacionForm, extra=1, can_delete=True)
+    
     if request.method == 'POST':
         form = FacturaForm(request.POST, instance=factura)
+        habitacion_formset = HabitacionFormSet(request.POST, queryset=factura.habitaciones.all())
         
-        if form.is_valid():
+        if form.is_valid() and habitacion_formset.is_valid():
             form.save()
             
+            # Guardar cada habitación en el FormSet
+            for habitacion_form in habitacion_formset:
+                if habitacion_form.cleaned_data and habitacion_form not in habitacion_formset.deleted_forms:
+                    habitacion = habitacion_form.save(commit=False)
+                    habitacion.factura = factura  # Asignar la factura a la habitación
+                    habitacion.save()
+            
+            # Eliminar las habitaciones marcadas para eliminar
+            for habitacion_form in habitacion_formset.deleted_forms:
+                habitacion_form.instance.delete()
+
+            # Generar y guardar el PDF de la factura
             factura_name = f"factura_{str(factura.numero_factura).replace('/', '_')}.pdf"
-            external_drive_path = "D:\FACTURAS"
+            external_drive_path = "D:\\FACTURAS"
             output_path = os.path.join(external_drive_path, factura_name)
             generate_pdf(factura, output_path)
-            
+
             messages.success(request, "Factura actualizada correctamente.")
             return redirect('facturas')
         else:
-            print(form.errors)
+            print('Errores:', form.errors, habitacion_formset.errors)
     else:
         form = FacturaForm(instance=factura)
+        habitacion_formset = HabitacionFormSet(queryset=factura.habitaciones.all())
     
-    for habitacion in factura.habitaciones.all():
-        alojamiento_result = habitacion.alojamiento_dias * habitacion.alojamiento_precio
+    # Calcular resultados de alojamiento y desayuno
+    habitaciones = factura.habitaciones.all()
+    alojamiento_result = sum(habitacion.alojamiento_dias * habitacion.alojamiento_precio for habitacion in habitaciones)
     desayuno_result = factura.desayuno_dias * factura.desayuno_precio
 
     context = {
         'factura': factura,
+        'form': form,
+        'habitacion_formset': habitacion_formset,  # Incluir el formset en el contexto
         'alojamiento_result': alojamiento_result,
-        'desayuno_result': desayuno_result,
-        'form': form
+        'desayuno_result': desayuno_result
     }
     
     return render(request, 'gestionarFactura.html', context)
+
 
     
 
