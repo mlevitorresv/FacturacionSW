@@ -53,6 +53,7 @@
             <thead class="plantilla__form__tabla__thead">
                 <tr class="plantilla__form__tabla__thead__trow">
                     <td class="plantilla__form__tabla__thead__trow__tdata"></td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata no-print">BORRAR</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION (TIPO)</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION Nº</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">DIAS</td>
@@ -65,6 +66,9 @@
                 {% for habitacion in habitacion_formset %}
                 <tr class="plantilla__form__tabla__tbody__trow">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata no-print">
+                        {{ habitacion.DELETE }}
+                    </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
                         {{ habitacion.tipo_habitacion }}
                     </td>
@@ -78,11 +82,13 @@
                         {{ habitacion.alojamiento_precio }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult">{{ alojamiento_result }}</td>
+                    <td style="display:none;">{{ habitacion.id }}</td>
                 </tr>
                 {% endfor %}
 
                 <tr class="plantilla__form__tabla__tbody__trow">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">

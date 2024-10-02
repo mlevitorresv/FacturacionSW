@@ -193,7 +193,10 @@ def view_factura_id(request, factura_id):
             messages.success(request, "Factura actualizada correctamente.")
             return redirect('facturas')
         else:
-            print('Errores:', form.errors, habitacion_formset.errors)
+            print('Errores de form:', form.errors)
+            print('Errores de formset:', habitacion_formset.errors)
+            
+            
     else:
         form = FacturaForm(instance=factura)
         habitacion_formset = HabitacionFormSet(queryset=factura.habitaciones.all())
