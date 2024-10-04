@@ -60,32 +60,8 @@ const showResults = () => {
 
 const tbody = document.querySelector('.plantilla__form__tabla__tbody');
 
-const showFields = (n) => {
-    tbody.innerHTML = ''
-    for (let i = 0; i < n; i++) {
-
-        const newRow = document.createElement('tr')
-        newRow.classList.add('plantilla__form__tabla__tbody__trow')
-
-        newRow.innerHTML = `
-            <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
-            <td class="plantilla__form__tabla__tbody__trow__tdata">
-                <input type="text" name="habitacion_tipo_${i + 1}" placeholder="Tipo Habitación">
-            </td>
-            <td class="plantilla__form__tabla__tbody__trow__tdata">
-                <input type="number" name="habitacion_numero_${i + 1}" placeholder="Número Habitación">
-            </td>
-            <td class="plantilla__form__tabla__tbody__trow__tdata">
-                <input type="number" name="dias_${i + 1}" placeholder="Días">
-            </td>
-            <td class="plantilla__form__tabla__tbody__trow__tdata">
-                <input type="number" step="0.01" name="precio_${i + 1}" placeholder="Euros">
-            </td>
-            <td class="plantilla__form__tabla__tbody__trow__tdata">
-                <span id="importe_${i + 1}"></span>
-            </td>
-        `
-
-        tbody.appendChild(newRow)
-    }
+const showFields = () => {
+    let fields = document.getElementById('alojamientoClonar')
+    let clon = fields.cloneNode(true)
+    tbody.appendChild(clon)
 }

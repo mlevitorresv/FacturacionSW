@@ -71,7 +71,7 @@
             {{ habitacion_formset.management_form }}  <!-- Añadir los campos ocultos del formset -->
             <tbody class="plantilla__form__tabla__tbody">
                 {% for habitacion in habitacion_formset %}
-                <tr class="plantilla__form__tabla__tbody__trow">
+                <tr class="plantilla__form__tabla__tbody__trow" id="alojamientoClonar">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata no-print">
                         {{ habitacion.DELETE }}
