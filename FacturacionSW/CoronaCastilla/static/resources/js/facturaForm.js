@@ -59,23 +59,28 @@ const showResults = () => {
 
 
 const tbody = document.querySelector('.plantilla__form__tabla__tbody');
-let formCount= document.querySelectorAll('.plantilla__form__tabla__tbody__trow').length
+let formCount = document.querySelectorAll('.plantilla__form__tabla__tbody__trow').length;
 
 const showFields = () => {
-    let fields = document.getElementById('alojamientoClonar')
-    let clon = fields.cloneNode(true)
-    
-    clon.id = `form-${formCount}`
+    let fields = document.getElementById('alojamientoClonar');
+    let clon = fields.cloneNode(true);  // Clonar la fila
 
-    const inputs = clon.querySelectorAll('innput, select')
+    clon.id = `form-${formCount}`;  // Asignar un nuevo ID único al clon
+
+    // Seleccionar todos los inputs y selects del clon
+    const inputs = clon.querySelectorAll('input, select');
     inputs.forEach((input) => {
-        const name = input.name
-        if (name){
-            input.name = name.replace('__prefix__', formCount)
-            input.id = `id_${input.name}`
+        const name = input.name;
+        if (name) {
+            input.name = name.replace('__prefix__', formCount);  // Reemplazar __prefix__ por el formCount actual
+            input.id = `id_${input.name}`;  // Actualizar el id también
         }
+        input.value = '';  // Limpiar el valor del campo clonado
     });
 
-    tbody.appendChild(clon)
-    formCount++;
-}
+    tbody.appendChild(clon);  // Añadir el clon al tbody
+    formCount++;  // Incrementar el contador de formularios
+
+    // Actualizar el valor de TOTAL_FORMS en el formset
+    document.getElementById('id_form-TOTAL_FORMS').value = formCount;  // Asegúrate de que esto esté en el FormSet
+};

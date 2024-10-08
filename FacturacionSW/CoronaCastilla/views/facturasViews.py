@@ -1,4 +1,4 @@
-from django.forms import modelformset_factory
+from django.forms import inlineformset_factory
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse, HttpResponse
 from django.db.models import Q, Sum
@@ -164,7 +164,7 @@ def view_factura_id(request, factura_id):
     factura = get_object_or_404(Factura, id=factura_id)
     
     # Crear el FormSet para las habitaciones
-    HabitacionFormSet = modelformset_factory(Habitacion, form=HabitacionForm, extra=1, can_delete=True)
+    HabitacionFormSet = inlineformset_factory(Factura, Habitacion, HabitacionForm)
     
     if request.method == 'POST':
         form = FacturaForm(request.POST, instance=factura)
@@ -229,7 +229,7 @@ def post_factura(request):
         cliente_info = ''
     
     # Crear el FormSet para las habitaciones
-    HabitacionFormSet = modelformset_factory(Habitacion, form=HabitacionForm, extra=1, can_delete=True)
+    HabitacionFormSet = inlineformset_factory(Factura, Habitacion, HabitacionForm)
     
     if request.method == 'POST':
         form = FacturaForm(request.POST)

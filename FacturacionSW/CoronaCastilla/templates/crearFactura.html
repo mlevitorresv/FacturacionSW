@@ -20,9 +20,9 @@
     <form action="" class="plantilla__form" id="facturaForm" method="POST">
         {% csrf_token %}
         <div class="plantilla__form__articulos no-print"></div>
-            <div class="plantilla__form__articulos__fields">
-                <p class="plantilla__form__articulos__fields__field" onclick="showFields()">AÑADIR HABITACIÓN</p>
-            </div>
+        <div class="plantilla__form__articulos__fields">
+            <p class="plantilla__form__articulos__fields__field" onclick="showFields()">AÑADIR HABITACIÓN</p>
+        </div>
         </div>
 
         <div class="plantilla__form__basico">
@@ -53,7 +53,7 @@
                     <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
                 </tr>
             </thead>
-            {{ habitacion_formset.management_form }}  <!-- Añadir los campos ocultos del formset -->
+            {{ habitacion_formset.management_form }} <!-- Añadir los campos ocultos del formset -->
 
             <tbody class="plantilla__form__tabla__tbody">
                 <tr class="plantilla__form__tabla__tbody__trow">
@@ -68,8 +68,24 @@
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata" id="desayunoResult"></td>
                 </tr>
+                <tr class="plantilla__form__tabla__tbody__trow" id="alojamientoClonar">
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ habitacion_formset.empty_form.tipo_habitacion }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ habitacion_formset.empty_form.numero_habitacion }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ habitacion_formset.empty_form.alojamiento_dias }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ habitacion_formset.empty_form.alojamiento_precio }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult"></td>
+                </tr>
                 {% for habitacion in habitacion_formset %}
-                <tr class="plantilla__form__tabla__tbody__trow"  id="alojamientoClonar">
+                <tr class="plantilla__form__tabla__tbody__trow">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
                         {{ habitacion.tipo_habitacion }}
@@ -86,6 +102,7 @@
                     <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult"></td>
                 </tr>
                 {% endfor %}
+
             </tbody>
 
         </table>
