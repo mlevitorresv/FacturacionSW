@@ -59,9 +59,23 @@ const showResults = () => {
 
 
 const tbody = document.querySelector('.plantilla__form__tabla__tbody');
+let formCount= document.querySelectorAll('.plantilla__form__tabla__tbody__trow').length
 
 const showFields = () => {
     let fields = document.getElementById('alojamientoClonar')
     let clon = fields.cloneNode(true)
+    
+    clon.id = `form-${formCount}`
+
+    const inputs = clon.querySelectorAll('innput, select')
+    inputs.forEach((input) => {
+        const name = input.name
+        if (name){
+            input.name = name.replace('__prefix__', formCount)
+            input.id = `id_${input.name}`
+        }
+    });
+
     tbody.appendChild(clon)
+    formCount++;
 }
