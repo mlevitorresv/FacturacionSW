@@ -3,23 +3,26 @@ function roundToTwo(num) {
 }
 
 const precioAlojamiento = () => {
-    dias = document.getElementById('alojamientoDias')
+    entrada = document.getElementById('fechaEntrada')
+    salida = document.getElementById('fechaSalida')
     precio = document.getElementById('alojamientoPrecio')
     result = document.getElementById('alojamientoResult')
+    const fechaEntrada = new Date(entrada.value);
+    const fechaSalida = new Date(salida.value);
 
-    total = dias.value * precio.value
-    result.innerHTML = Math.round(total * 100) / 100
+    const diferenciaTiempo = fechaSalida - fechaEntrada;
+    const dias = diferenciaTiempo / (1000 * 60 * 60 * 24);
+    total = dias * precio.value
+    result.innerHTML = roundToTwo(total)
 
     showResults()
 }
 
 const precioDesayuno = () => {
-    dias = document.getElementById('desayunoDias')
     precio = document.getElementById('desayunoPrecio')
     result = document.getElementById('desayunoResult')
 
-    total = dias.value * precio.value
-    result.innerHTML = Math.round(total * 100) / 100
+    result.innerHTML = precio.value
     showResults()
 }
 
