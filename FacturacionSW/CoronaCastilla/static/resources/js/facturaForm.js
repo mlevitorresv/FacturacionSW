@@ -1,5 +1,5 @@
 function roundToTwo(num) {
-    return +(Math.round(num + "e+2") + "e-2");
+    return num.toFixed(2)
 }
 
 const precioAlojamiento = () => {
