@@ -3,11 +3,10 @@ import datetime
 
 class Factura(models.Model):
     cliente = models.CharField(max_length=500)
-    numero_factura = models.CharField(max_length=255)
+    numero_factura = models.CharField(max_length=255, null=True)
     fecha_entrada = models.DateField()
     fecha_salida = models.DateField()
-    desayuno_dias = models.IntegerField()
-    desayuno_precio = models.FloatField()
+    desayuno_precio = models.FloatField(null=True)
     base_imponible = models.FloatField()
     porcentaje_iva = models.IntegerField()
     importe_iva = models.FloatField()
@@ -33,7 +32,6 @@ class Habitacion(models.Model):
         ('cuadruple', 'Habitación cuadruple')
     ])
     numero_habitacion = models.IntegerField()
-    alojamiento_dias = models.IntegerField()
     alojamiento_precio = models.FloatField()
 
     def __str__(self):
