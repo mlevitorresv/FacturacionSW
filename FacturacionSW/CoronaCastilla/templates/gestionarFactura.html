@@ -53,28 +53,12 @@
                     <td class="plantilla__form__tabla__thead__trow__tdata no-print">BORRAR</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION (TIPO)</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION Nº</td>
-                    <td class="plantilla__form__tabla__thead__trow__tdata">DIAS</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
                 </tr>
             </thead>
             {{ habitacion_formset.management_form }}  <!-- Añadir los campos ocultos del formset -->
             <tbody class="plantilla__form__tabla__tbody">
-                <tr class="plantilla__form__tabla__tbody__trow">
-                    <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata"></td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ form.desayuno_dias }}
-                    </td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ form.desayuno_precio }}
-                    </td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata" id="desayunoResult">{{ desayuno_result }}
-                    </td>
-                </tr>
-                
                 {% for habitacion in habitacion_formset %}
                 <tr class="plantilla__form__tabla__tbody__trow" id="alojamientoClonar">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">ALOJAMIENTO</td>
@@ -82,22 +66,39 @@
                         {{ habitacion.DELETE }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ habitacion.tipo_habitacion }}
+                        {{ habitacion_formset.empty_form.tipo_habitacion }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ habitacion.numero_habitacion }}
+                        {{ habitacion_formset.empty_form.numero_habitacion }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ habitacion.alojamiento_dias }}
+                        {{ habitacion_formset.empty_form.alojamiento_precio }}
                     </td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata">
-                        {{ habitacion.alojamiento_precio }}
-                    </td>
-                    <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult">{{ alojamiento_result }}</td>
-                    <td style="display:none;">{{ habitacion.id }}</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult"></td>
                 </tr>
                 {% endfor %}
+
             </tbody>
+        </table>
+
+        <table class="plantilla__form__tabla">
+            <thead class="plantilla__form__tabla__thead">
+                <tr class="plantilla__form__tabla__thead__trow">
+                    <td class="plantilla__form__tabla__thead__trow__tdata"></td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
+                </tr>
+            </thead>
+            <tbody class="plantilla__form__tabla__tbody">
+                <tr class="plantilla__form__tabla__tbody__trow">
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ form.desayuno_precio }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata" id="desayunoResult"></td>
+                </tr>
+            </tbody>
+
         </table>
 
         <div class="plantilla__form__articulos">

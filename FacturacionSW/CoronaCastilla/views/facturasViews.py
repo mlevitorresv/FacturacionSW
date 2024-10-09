@@ -203,15 +203,15 @@ def view_factura_id(request, factura_id):
     
     # Calcular resultados de alojamiento y desayuno
     habitaciones = factura.habitaciones.all()
-    alojamiento_result = sum(habitacion.alojamiento_dias * habitacion.alojamiento_precio for habitacion in habitaciones)
-    desayuno_result = factura.desayuno_dias * factura.desayuno_precio
+    # alojamiento_result = sum(habitacion.alojamiento_dias * habitacion.alojamiento_precio for habitacion in habitaciones)
+    # desayuno_result = factura.desayuno_dias * factura.desayuno_precio
 
     context = {
         'factura': factura,
         'form': form,
         'habitacion_formset': habitacion_formset,  # Incluir el formset en el contexto
-        'alojamiento_result': alojamiento_result,
-        'desayuno_result': desayuno_result
+        # 'alojamiento_result': alojamiento_result,
+        # 'desayuno_result': desayuno_result
     }
     
     return render(request, 'gestionarFactura.html', context)
