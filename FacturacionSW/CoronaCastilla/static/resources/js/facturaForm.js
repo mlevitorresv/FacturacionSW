@@ -87,3 +87,11 @@ const showFields = () => {
     // Actualizar el valor de TOTAL_FORMS en el formset
     document.getElementById('id_form-TOTAL_FORMS').value = formCount;  // Asegúrate de que esto esté en el FormSet
 };
+
+
+const printSave = () => {
+    form = document.getElementById('facturaForm')
+
+    form.submit()
+    print()
+}
