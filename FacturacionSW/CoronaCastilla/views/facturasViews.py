@@ -87,9 +87,10 @@ def generate_excel(request):
 
 def generate_pdf(factura, output_path):
     template = 'pdfFactura.html'
-    for habitacion in factura.habitaciones.all():
-        alojamiento_result = habitacion.alojamiento_dias * habitacion.alojamiento_precio
-    desayuno_result = factura.desayuno_dias * factura.desayuno_precio
+    habitaciones = factura.habitaciones.all()
+    dias = factura.fecha_entrada - factura.fecha_salida
+    alojamiento_result = sum(dias.days * habitacion.alojamiento_precio for habitacion in habitaciones)
+    desayuno_result = factura.desayuno_precio
     context = {
         'factura': factura,
         'alojamiento_result': alojamiento_result,
