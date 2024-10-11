@@ -16,7 +16,7 @@ from io import BytesIO
 
 
 
-def generate_excel(request):
+def generate_excel(request, mes_actual, año_actual):
     meses_en_espanol = [
         'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
         'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -38,9 +38,6 @@ def generate_excel(request):
     # Hoja activa
     ws = wb.active
 
-    ahora = datetime.now()
-    mes_actual = ahora.month
-    año_actual = ahora.year
     facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
 
     # Comenzar a rellenar desde la fila 7 (por ejemplo)
@@ -62,10 +59,16 @@ def generate_excel(request):
         ws[f"B{index}"] = factura.fecha_salida.strftime('%Y-%m-%d')
         ws[f"C{index}"] = nif 
         ws[f"D{index}"] = nombre
-        if factura.desayuno_dias > 0:
-            ws[f"E{index}"] = factura.habitacion + ' - Desayunos'
+        
+        habitaciones = factura.habitaciones.all()
+        habitaciones_str = ', '.join(str(habitacion) for habitacion in habitaciones)
+
+        
+        
+        if factura.desayuno_precio > 0:
+            ws[f"E{index}"] = habitaciones_str + ' - Desayunos'
         else:
-            ws[f"E{index}"] = factura.habitacion
+            ws[f"E{index}"] = habitaciones_str
         ws[f"F{index}"] = factura.base_imponible
         ws[f"G{index}"] = factura.porcentaje_iva
 

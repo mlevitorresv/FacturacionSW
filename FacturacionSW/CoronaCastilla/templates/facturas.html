@@ -7,7 +7,7 @@
     <div class="main__buttons">
         <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevaFactura' %}`">Crear
             Factura</button>
-        <button class="main__buttons__create" onclick="window.location.href= `{% url 'exportar_facturas' %}`">Descargar
+        <button class="main__buttons__create" onclick="window.location.href= `{% url 'exportar_facturas' mes_actual=request.GET.mes año_actual=request.GET.año %}`">Descargar
             resumen de facturas</button>
     </div>
     <div class="main__filter">
