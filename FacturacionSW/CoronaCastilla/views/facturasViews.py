@@ -168,7 +168,7 @@ def view_factura_id(request, factura_id):
     factura = get_object_or_404(Factura, id=factura_id)
     
     # Crear el FormSet para las habitaciones
-    HabitacionFormSet = inlineformset_factory(Factura, Habitacion, HabitacionForm)
+    HabitacionFormSet = inlineformset_factory(Factura, Habitacion, HabitacionForm, extra=0)
     
     if request.method == 'POST':
         form = FacturaForm(request.POST, instance=factura)
