@@ -172,7 +172,7 @@ def view_factura_id(request, factura_id):
     
     if request.method == 'POST':
         form = FacturaForm(request.POST, instance=factura)
-        habitacion_formset = HabitacionFormSet(request.POST, queryset=factura.habitaciones.all())
+        habitacion_formset = HabitacionFormSet(request.POST, instance=factura)
         
         if form.is_valid() and habitacion_formset.is_valid():
             form.save()
@@ -203,10 +203,11 @@ def view_factura_id(request, factura_id):
             
     else:
         form = FacturaForm(instance=factura)
-        habitacion_formset = HabitacionFormSet(queryset=factura.habitaciones.all())
+        habitacion_formset = HabitacionFormSet(instance=factura)
     
     # Calcular resultados de alojamiento y desayuno
     habitaciones = factura.habitaciones.all()
+    print('habitaciones: ', list(habitaciones))
     dias = factura.fecha_entrada - factura.fecha_salida
     alojamiento_result = sum(dias.days * habitacion.alojamiento_precio for habitacion in habitaciones)
 
@@ -233,25 +234,27 @@ def post_factura(request):
         cliente_info = ''
     
     # Crear el FormSet para las habitaciones
-    HabitacionFormSet = inlineformset_factory(Factura, Habitacion, HabitacionForm)
+    HabitacionFormSet = inlineformset_factory(Factura, Habitacion, form=HabitacionForm, extra=1, can_delete=True)
     
     if request.method == 'POST':
         form = FacturaForm(request.POST)
-        habitacion_formset = HabitacionFormSet(request.POST, queryset=Habitacion.objects.none())
-        
+        habitacion_formset = HabitacionFormSet(request.POST, instance=None)  # Importante: establecer `instance=None`
+
         if form.is_valid() and habitacion_formset.is_valid():
+            # Guardar la factura primero
             factura = form.save(commit=False)
-            # Guardar la factura primero, ya que las habitaciones dependen de esta factura
             factura.save()
 
-            # Guardar cada habitación en el FormSet
-            for habitacion_form in habitacion_formset:
-                print(habitacion_form.cleaned_data)  # Depuración
-                if habitacion_form.cleaned_data and habitacion_form not in habitacion_formset.deleted_forms:
-                    habitacion = habitacion_form.save(commit=False)
-                    habitacion.factura = factura  # Asignar la factura a cada habitación
-                    habitacion.save()
+            # Asignar la factura a cada habitación antes de guardarlas
+            habitaciones = habitacion_formset.save(commit=False)
+            for habitacion in habitaciones:
+                habitacion.factura = factura  # Asignar la factura a cada habitación
+                habitacion.save()
 
+            # Manejar la eliminación de habitaciones (si el formset tiene la opción de eliminación)
+            for form_del in habitacion_formset.deleted_forms:
+                if form_del.instance.pk:
+                    form_del.instance.delete()
 
             # Generar y guardar el PDF de la factura
             factura_name = f"factura_{factura.numero_factura.replace('/', '_')}.pdf"
@@ -259,25 +262,25 @@ def post_factura(request):
             if not os.path.exists(external_drive_path):
                 os.makedirs(external_drive_path)
             output_path = os.path.join(external_drive_path, factura_name)
-            
+
             try:
                 generate_pdf(factura, output_path)
             except FileNotFoundError as e:
                 print(f"Error al generar el PDF: {e}")
                 return render(request, 'crearFactura.html', {'form': form, 'habitacion_formset': habitacion_formset, 'error': f"Error al generar el archivo PDF: {str(e)}"})
-            
+
             return redirect('facturas')
         else:
             print('Formulario inválido:')
             if form.errors:
                 print('errores de form:', form.errors)
             else:
-                print('errores de formset:',habitacion_formset.errors)
+                print('errores de formset:', habitacion_formset.errors)
 
     else:
         # Crear un nuevo formulario con el número de factura automáticamente calculado
         form = FacturaForm()
-        
+
         # Obtener el año actual
         year = timezone.now().year
         year_suffix = year % 100
@@ -301,6 +304,7 @@ def post_factura(request):
         habitacion_formset = HabitacionFormSet(queryset=Habitacion.objects.none())
 
     return render(request, 'crearFactura.html', {'form': form, 'habitacion_formset': habitacion_formset})
+
 
 
 
