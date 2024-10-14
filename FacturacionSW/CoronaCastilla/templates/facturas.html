@@ -7,14 +7,17 @@
     <div class="main__buttons">
         <button class="main__buttons__create" onclick="window.location.href= `{% url 'nuevaFactura' %}`">Crear
             Factura</button>
-        <button class="main__buttons__create" onclick="window.location.href= `{% url 'exportar_facturas' mes_actual=request.GET.mes año_actual=request.GET.año %}`">Descargar
+        {% if request.GET.mes and request.GET.año %}
+        <button class="main__buttons__create"
+            onclick="window.location.href= `{% url 'exportar_facturas' mes_actual=request.GET.mes año_actual=request.GET.año %}`">Descargar
             resumen de facturas</button>
+        {% endif %}
     </div>
     <div class="main__filter">
         <form id="filter-client-form" action="{% url 'facturas' %}" method="GET">
             <input type="text" name="cliente" placeholder="Buscar por nombre de cliente" class="main__filter__input"
                 value="{{ request.GET.cliente }}">
-            
+
             <input type="checkbox" label="Enero" name="mes" value="01">01
             <input type="checkbox" label="Febrero" name="mes" value="02">02
             <input type="checkbox" label="Marzo" name="mes" value="03">03
