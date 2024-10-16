@@ -89,7 +89,7 @@ const showFields = () => {
     inputs.forEach((input) => {
         const name = input.name;
         if (name) {
-            input.name = name.replace('__prefix__', formCount);  // Reemplazar __prefix__ por el formCount actual
+            input.name = name.replace(/habitaciones-\d+/, `habitaciones-${formCount}`);  // Reemplazar el índice en el name
             input.id = `id_${input.name}`;  // Actualizar el id también
         }
         input.value = '';  // Limpiar el valor del campo clonado
@@ -109,8 +109,9 @@ const showFields = () => {
     console.log("creado form nuevo:", clon);
 
     // Actualizar el valor de TOTAL_FORMS en el formset
-    document.getElementById('id_form-TOTAL_FORMS').value = formCount;
+    document.getElementById('id_habitaciones-TOTAL_FORMS').value = formCount;
 };
+
 
 
 
