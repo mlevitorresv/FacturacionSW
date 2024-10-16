@@ -4,31 +4,29 @@ function roundToTwo(num) {
 
 const precioAlojamiento = () => {
     const rows = document.querySelectorAll('.plantilla__form__tabla__tbody__trow');  // Seleccionar todas las filas
-    const entrada = document.getElementById('fechaEntrada')
-    const salida = document.getElementById('fechaSalida')
+    const entrada = document.getElementById('fechaEntrada');
+    const salida = document.getElementById('fechaSalida');
 
-    console.log('fechas ', entrada.value, salida.value)
+    if (!entrada || !salida) return;
+
+
+    const fechaEntrada = new Date(entrada.value);
+    const fechaSalida = new Date(salida.value);
+    const diferenciaTiempo = fechaSalida - fechaEntrada;
+    const dias = diferenciaTiempo / (1000 * 60 * 60 * 24);
+
 
     rows.forEach((row, index) => {
-        console.log('dentro del for')
-        const precio = row.querySelector(`#alojamientoPrecio_${index}`);
-        console.log('precio', precio)
-        const result = row.querySelector(`#alojamientoResult_${index}`);
-        console.log('result', result)
-
-        if (entrada && salida && precio) {
-            const fechaEntrada = new Date(entrada.value);
-            const fechaSalida = new Date(salida.value);
-            console.log('fechas: ', salida, entrada)
-            const diferenciaTiempo = fechaSalida - fechaEntrada;
-            console.log('dif de tiempo: ', diferenciaTiempo)
-
-            const dias = diferenciaTiempo / (1000 * 60 * 60 * 24);
-            console.log('dias', dias)
-            const total = dias * precio.value;
-            console.log('total', total)
-
-            result.innerHTML = roundToTwo(total);
+        
+        // Modificación para seleccionar correctamente los inputs sin depender del índice en el ID
+        const precioInput = row.querySelector('input[name$="alojamiento_precio"]');
+        const resultCell = row.querySelector('td[id^="alojamientoResult"]');
+        
+        if (precioInput && resultCell) {            
+            const precioPorNoche = parseFloat(precioInput.value) || 0;
+            const total = dias * precioPorNoche;
+            
+            resultCell.innerHTML = roundToTwo(total);
         }
     });
 
@@ -36,13 +34,6 @@ const precioAlojamiento = () => {
 };
 
 
-const precioDesayuno = () => {
-    precio = document.getElementById('desayunoPrecio')
-    result = document.getElementById('desayunoResult')
-
-    result.innerHTML = precio.value
-    showResults()
-}
 
 const showResults = () => {
     let alojamientoTotal = 0;
@@ -55,10 +46,10 @@ const showResults = () => {
             alojamientoTotal += value;
         }
     });
+    console.log("alojamientoTotal: ", alojamientoTotal)
+    let desayuno = parseFloat(document.getElementById('desayunoPrecio').value);
+    console.log("desayuno: ", desayuno)
 
-    let desayuno = parseFloat(document.getElementById('desayunoResult').innerText || 0);
-
-    if (isNaN(desayuno)) desayuno = 0;
 
     let importeIva = 0;
     let baseImponible = 0;
@@ -66,7 +57,7 @@ const showResults = () => {
 
     const precio = alojamientoTotal + desayuno;
     const ivaInput = document.getElementById('porcentajeIva');
-
+    console.log('total: ', precio)
     if (ivaInput.value == 10) {
         baseImponible = roundToTwo(precio / 1.1);
         totalFactura = roundToTwo(precio);
@@ -76,7 +67,7 @@ const showResults = () => {
         baseImponible = roundToTwo(precio - importeIva);
         totalFactura = roundToTwo(baseImponible + importeIva);
     }
-
+    console.log(`importeIva ${importeIva}, baseImponible ${baseImponible}, totalFctura ${totalFactura}`)
     document.getElementById('importeIva').value = importeIva;
     document.getElementById('baseImponible').value = baseImponible;
     document.getElementById('totalFactura').value = totalFactura;
