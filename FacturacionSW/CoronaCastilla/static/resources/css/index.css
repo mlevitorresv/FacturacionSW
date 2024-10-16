@@ -173,7 +173,6 @@ body {
 }
 .plantilla__form__tabla {
   margin: 3em 0;
-  width: 50%;
   border: 1px solid black;
   border-collapse: collapse;
 }
