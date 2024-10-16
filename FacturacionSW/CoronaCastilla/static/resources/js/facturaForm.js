@@ -95,13 +95,18 @@ const showFields = () => {
         input.value = '';  // Limpiar el valor del campo clonado
     });
 
-    // Asignar nuevos IDs para las fechas y precio
-    clon.querySelector('input[name$="alojamiento_precio"]').id = `alojamientoPrecio_${formCount}`;
-    clon.querySelector('td[id$="alojamientoResult"]').id = `alojamientoResult_${formCount}`;
+    const alojamientoResult = clon.querySelector('td[id$="alojamientoResult_0"]');
+    
+    if (alojamientoResult) {
+        // Asignar un nuevo ID único para este clon
+        alojamientoResult.id = `alojamientoResult_${formCount}`;
+    } else {
+        console.error('No se encontró el elemento con id que termina en "alojamientoResult". Verifica el HTML.');
+    }
 
     tbody.appendChild(clon);  // Añadir el clon al tbody
     formCount++;  // Incrementar el contador de formularios
-    console.log("creado form nuevo:", clon)
+    console.log("creado form nuevo:", clon);
 
     // Actualizar el valor de TOTAL_FORMS en el formset
     document.getElementById('id_form-TOTAL_FORMS').value = formCount;
