@@ -300,3 +300,30 @@ def delete_factura(request, factura_id):
     
     # Si no es una solicitud POST, renderiza la página de detalles de factura (o alguna otra vista)
     return render(request, 'gestionarFactura.html', {'factura': factura})
+
+
+def close_factura(request, factura_id):
+    factura = get_object_or_404(Factura, id=factura_id)
+    
+    if factura.numero_factura is None:
+        # Obtener el año actual
+        year = timezone.now().year
+        year_suffix = year % 100
+        
+        # Buscar la última factura cerrada del año para asignar el siguiente número
+        last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
+
+        if last_invoice:
+            last_number = int(last_invoice.numero_factura.split('/')[0])
+            new_number = last_number + 1
+        else:
+            new_number = 1
+        
+        factura.numero_factura = f"{new_number} / {year_suffix}"
+        factura.save()
+        
+        messages.success(request, f"Factura {factura.numero_factura} cerrada correctamente.")
+    else:
+        messages.error(request, "La factura ya está cerrada.")
+
+    return redirect('facturas')
