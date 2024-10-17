@@ -3,7 +3,7 @@ import datetime
 
 class Factura(models.Model):
     cliente = models.CharField(max_length=500)
-    numero_factura = models.CharField(max_length=255, null=True)
+    numero_factura = models.CharField(max_length=255, null=True, blank=True)
     fecha_entrada = models.DateField()
     fecha_salida = models.DateField()
     desayuno_precio = models.FloatField(null=True)

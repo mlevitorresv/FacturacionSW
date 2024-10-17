@@ -243,6 +243,7 @@ def post_factura(request):
         if form.is_valid() and habitacion_formset.is_valid():
             # Guardar la factura primero
             factura = form.save(commit=False)
+            factura.numero_factura = None
             factura.save()
 
             # Asignar la factura a cada habitación antes de guardarlas
@@ -280,24 +281,6 @@ def post_factura(request):
     else:
         # Crear un nuevo formulario con el número de factura automáticamente calculado
         form = FacturaForm()
-
-        # Obtener el año actual
-        year = timezone.now().year
-        year_suffix = year % 100
-
-        # Filtrar facturas del año actual y obtener la más reciente
-        last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
-
-        if last_invoice:
-            # Extraer el número secuencial del último número de factura
-            last_number = int(last_invoice.numero_factura.split('/')[0])
-            new_number = last_number + 1
-        else:
-            # Si no hay facturas anteriores, empezar con el número 1
-            new_number = 1
-
-        # Establecer el nuevo número de factura en el formulario
-        form.fields['numero_factura'].initial = f"{new_number}/{year_suffix}"
         form.fields['cliente'].initial = cliente_info
 
         # Crear un formset vacío para las habitaciones
