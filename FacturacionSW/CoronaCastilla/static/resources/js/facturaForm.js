@@ -67,7 +67,7 @@ const showResults = () => {
         baseImponible = roundToTwo(precio - importeIva);
         totalFactura = roundToTwo(baseImponible + importeIva);
     }
-    console.log(`importeIva ${importeIva}, baseImponible ${baseImponible}, totalFctura ${totalFactura}`)
+    console.log(`importeIva ${importeIva}, baseImponible ${baseImponible}, totalFactura ${totalFactura}`)
     document.getElementById('importeIva').value = importeIva;
     document.getElementById('baseImponible').value = baseImponible;
     document.getElementById('totalFactura').value = totalFactura;
@@ -119,4 +119,8 @@ const printSave = () => {
     form = document.getElementById('facturaForm')
     form.submit()
     print()
+}
+
+window.onload = function () {
+    precioAlojamiento()
 }
