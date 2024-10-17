@@ -257,19 +257,6 @@ def post_factura(request):
                 if form_del.instance.pk:
                     form_del.instance.delete()
 
-            # Generar y guardar el PDF de la factura
-            factura_name = f"factura_{factura.numero_factura.replace('/', '_')}.pdf"
-            external_drive_path = "D:\\FACTURAS"
-            if not os.path.exists(external_drive_path):
-                os.makedirs(external_drive_path)
-            output_path = os.path.join(external_drive_path, factura_name)
-
-            try:
-                generate_pdf(factura, output_path)
-            except FileNotFoundError as e:
-                print(f"Error al generar el PDF: {e}")
-                return render(request, 'crearFactura.html', {'form': form, 'habitacion_formset': habitacion_formset, 'error': f"Error al generar el archivo PDF: {str(e)}"})
-
             return redirect('facturas')
         else:
             print('Formulario inválido:')
@@ -323,6 +310,15 @@ def close_factura(request, factura_id):
         factura.save()
         
         messages.success(request, f"Factura {factura.numero_factura} cerrada correctamente.")
+        # Generar y guardar el PDF de la factura
+        factura_name = f"factura_{factura.numero_factura.replace('/', '_')}.pdf"
+        external_drive_path = "D:\\FACTURAS"
+        if not os.path.exists(external_drive_path):
+            os.makedirs(external_drive_path)
+        output_path = os.path.join(external_drive_path, factura_name)
+
+        generate_pdf(factura, output_path)
+       
     else:
         messages.error(request, "La factura ya está cerrada.")
 
