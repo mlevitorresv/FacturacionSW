@@ -191,6 +191,8 @@ def view_factura_id(request, factura_id):
             # Generar y guardar el PDF de la factura
             factura_name = f"factura_{str(factura.numero_factura).replace('/', '_')}.pdf"
             external_drive_path = "D:\\FACTURAS"
+            if not os.path.exists("D"):
+                return redirect('facturas')
             output_path = os.path.join(external_drive_path, factura_name)
             generate_pdf(factura, output_path)
 
@@ -313,8 +315,8 @@ def close_factura(request, factura_id):
         # Generar y guardar el PDF de la factura
         factura_name = f"factura_{factura.numero_factura.replace('/', '_')}.pdf"
         external_drive_path = "D:\\FACTURAS"
-        if not os.path.exists(external_drive_path):
-            os.makedirs(external_drive_path)
+        if not os.path.exists("D"):
+            return redirect('facturas')
         output_path = os.path.join(external_drive_path, factura_name)
 
         generate_pdf(factura, output_path)
