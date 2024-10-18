@@ -306,7 +306,7 @@ def close_factura(request, factura_id):
         else:
             new_number = 1
         
-        factura.numero_factura = f"{new_number}/{year_suffix}"
+        factura.numero_factura = f"{new_number:03}/{year_suffix}"
         factura.save()
         
         messages.success(request, f"Factura {factura.numero_factura} cerrada correctamente.")
