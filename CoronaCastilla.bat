@@ -9,4 +9,4 @@ REM Espera de 5 segundos para asegurar que el servidor está en funcionamiento
 timeout /t 5 /nobreak >nul
 
 REM Abre el navegador en la dirección del poryecto django
-start http://localhost:8000
+start python run_app.py
