@@ -2,21 +2,29 @@ import webview
 import subprocess
 import time
 import os
+import requests
 
 # Función para iniciar el servidor Django
 def start_django_server():
-    # Si estás en un entorno virtual, asegúrate de que el comando `python` apunte a la versión correcta de Python.
-    # Inicia el servidor Django en segundo plano
     subprocess.Popen(['python', 'manage.py', 'runserver'])
-    time.sleep(5)  # Esperar 2 segundos para que el servidor Django arranque
 
-# Ruta del servidor local (cambia si usas otro puerto o dominio)
+def wait_for_django_server(url, timeout=30):
+    start_time = time.time()
+    while time.time() - start_time < timeout:
+        try:
+            response = requests.get(url)
+            if response.status_code == 200:
+                return True
+        except requests.exceptions.ConnectionError:
+            time.sleep(0.5)
+    return False
+
+
 django_url = 'http://localhost:8000'
 
 if __name__ == '__main__':
-    # Verificar si ya se está ejecutando el servidor Django
     start_django_server()
 
-    # Crear la ventana de la aplicación
-    webview.create_window('FacturacionSW', django_url)
-    webview.start()
+    if wait_for_django_server(django_url):
+        webview.create_window('FacturacionSW', django_url)
+        webview.start()
