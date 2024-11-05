@@ -124,3 +124,29 @@ const printSave = () => {
 window.onload = function () {
     precioAlojamiento()
 }
+
+
+const deleteCheckboxes = $("input[type='checkbox'][name*='DELETE']");
+deleteCheckboxes.on("change", async function(event) {
+    event.preventDefault();  // Evitar el comportamiento predeterminado
+    const urlCompleta = window.location.href;
+
+    const form = document.getElementById("editForm");
+    
+    // Enviar el formulario y esperar a que se procese antes de redirigir
+    try {
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: new FormData(form)
+        });
+
+        // Redirigir solo si la respuesta es exitosa
+        if (response.ok) {
+            window.location.href = urlCompleta;
+        } else {
+            console.error("Hubo un problema al enviar el formulario:", response.status);
+        }
+    } catch (error) {
+        console.error("Error al enviar el formulario:", error);
+    }
+});
