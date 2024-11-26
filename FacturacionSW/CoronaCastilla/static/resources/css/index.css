@@ -221,6 +221,18 @@ body {
   .no-print {
     display: none;
   }
+  .plantilla__footer{
+    position: absolute;
+    bottom: 0;
+  }
+  .plantilla__form__articulos-print{
+    position: absolute;
+    bottom: 7em;
+  }
+  .plantilla__form__basico-print{
+    position: absolute;
+    bottom: 3em;
+  }
 }
 .articulos__articulo {
   display: flex;
