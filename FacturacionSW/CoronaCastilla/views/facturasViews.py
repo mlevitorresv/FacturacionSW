@@ -345,9 +345,7 @@ def close_new_factura(request):
 
         if form.is_valid() and habitacion_formset.is_valid():
             # Guardar la factura primero
-            factura = form.save(commit=False)
-            factura.numero_factura = None
-            factura.save()
+            factura = form.save()
 
             # Asignar la factura a cada habitación antes de guardarlas
             habitaciones = habitacion_formset.save(commit=False)
