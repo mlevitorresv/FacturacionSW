@@ -28,6 +28,8 @@ urlpatterns = [
     path("facturas/<int:factura_id>/edit", facturasViews.view_factura_id, name='editaFactura'),
     path("facturas/<int:factura_id>/delete", facturasViews.delete_factura, name='eliminaFactura'),
     path('facturas/<int:factura_id>/cerrar/', facturasViews.close_factura, name='cerrar_factura'),
+    path('facturas/cerrar/', facturasViews.close_new_factura, name='cerrar_factura_sin_id'),
+
 
     #ruta para descargar resumen
     path('exportar-facturas/<int:mes_actual>/<int:año_actual>/', facturasViews.generate_excel, name='exportar_facturas'),

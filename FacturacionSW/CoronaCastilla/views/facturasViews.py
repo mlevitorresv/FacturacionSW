@@ -325,3 +325,55 @@ def close_factura(request, factura_id):
         messages.error(request, "La factura ya está cerrada.")
 
     return redirect('facturas')
+
+
+def close_new_factura(request):
+    cliente_id = request.GET.get('cliente_id')
+    
+    if cliente_id:
+        cliente = Cliente.objects.get(id=cliente_id)
+        cliente_info = f"{cliente.nombre}\n{cliente.direccion}\n{cliente.codigo_postal}\nNIF: {cliente.nif}"
+    else:
+        cliente_info = ''
+    
+    # Crear el FormSet para las habitaciones
+    HabitacionFormSet = inlineformset_factory(Factura, Habitacion, form=HabitacionForm, extra=1, can_delete=True)
+    
+    if request.method == 'POST':
+        form = FacturaForm(request.POST)
+        habitacion_formset = HabitacionFormSet(request.POST, instance=None)  # Importante: establecer `instance=None`
+
+        if form.is_valid() and habitacion_formset.is_valid():
+            # Guardar la factura primero
+            factura = form.save(commit=False)
+            factura.numero_factura = None
+            factura.save()
+
+            # Asignar la factura a cada habitación antes de guardarlas
+            habitaciones = habitacion_formset.save(commit=False)
+            for habitacion in habitaciones:
+                habitacion.factura = factura  # Asignar la factura a cada habitación
+                habitacion.save()
+
+            # Manejar la eliminación de habitaciones (si el formset tiene la opción de eliminación)
+            for form_del in habitacion_formset.deleted_forms:
+                if form_del.instance.pk:
+                    form_del.instance.delete()
+
+            return redirect('facturas')
+        else:
+            print('Formulario inválido:')
+            if form.errors:
+                print('errores de form:', form.errors)
+            else:
+                print('errores de formset:', habitacion_formset.errors)
+
+    else:
+        # Crear un nuevo formulario con el número de factura automáticamente calculado
+        form = FacturaForm()
+        form.fields['cliente'].initial = cliente_info
+
+        # Crear un formset vacío para las habitaciones
+        habitacion_formset = HabitacionFormSet(queryset=Habitacion.objects.none())
+
+    return render(request, 'crearFactura.html', {'form': form, 'habitacion_formset': habitacion_formset})
