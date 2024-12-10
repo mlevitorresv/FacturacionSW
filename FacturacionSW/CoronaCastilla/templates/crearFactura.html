@@ -36,7 +36,7 @@
                 <p class="plantilla__form__articulos__fields__field">FECHA SALIDA</p>
             </div>
             <div class="plantilla__form__articulos__inputs">
-                {{ form.numero_factura}}
+                {{ form.numero_factura }}
                 {{ form.fecha_entrada }}
                 {{ form.fecha_salida }}
             </div>
@@ -52,7 +52,9 @@
                     <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
                 </tr>
             </thead>
-            {{ habitacion_formset.management_form }} <!-- Añadir los campos ocultos del formset -->
+
+            <!-- Aquí debes incluir el management_form del habitacion_formset -->
+            {{ habitacion_formset.management_form }} <!-- Los campos ocultos necesarios para el formset -->
 
             <tbody class="plantilla__form__tabla__tbody">
                 {% for habitacion in habitacion_formset %}
@@ -70,7 +72,6 @@
                     <td class="plantilla__form__tabla__tbody__trow__tdata" id="alojamientoResult_0"></td>
                 </tr>
                 {% endfor %}
-
             </tbody>
 
         </table>
@@ -90,9 +91,7 @@
                     </td>
                 </tr>
             </tbody>
-
         </table>
-
 
         <div class="plantilla__form__articulos">
             <div class="plantilla__form__articulos__fields">
@@ -102,25 +101,29 @@
                 <p class="plantilla__form__articulos__fields__field">TOTAL FACTURA</p>
             </div>
             <div class="plantilla__form__articulos__inputs">
-                {{ form.base_imponible}}
-                {{ form.porcentaje_iva}}
-                {{ form.importe_iva}}
-                {{ form.total_factura}}
+                {{ form.base_imponible }}
+                {{ form.porcentaje_iva }}
+                {{ form.importe_iva }}
+                {{ form.total_factura }}
             </div>
+        </div>
+
+        <div class="plantilla__form__basico">
+            <p class="plantilla__form__basico__field">NUMERO DE CUENTA</p>
+            {{ form.numero_cuenta }}
+        </div>
+
+        <div class="plantilla__buttons no-print">
+            <button class="plantilla__buttons__button" type="submit" form="facturaForm">Guardar Factura</button>
+            <!-- Este formulario ahora también contiene el management_form -->
+            <form method="POST" action="{% url 'cerrar_factura_sin_id' %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="plantilla__buttons__button" onclick="printSave()">Cerrar e imprimir
+                    Factura</button>
+            </form>
         </div>
     </form>
 
-    <div class="plantilla__form__basico">
-        <p class="plantilla__form__basico__field">NUMERO DE CUENTA</p>
-        {{ form.numero_cuenta }}
-    </div>
-
-    <div class="plantilla__buttons no-print">
-        <button class="plantilla__buttons__button" type="submit" form="facturaForm">Guardar Factura</button>
-        <form method="POST" action="{% url 'cerrar_factura_sin_id'%}" style="display: inline;">
-            {% csrf_token %}
-            <button type="submit" class="plantilla__buttons__button" onclick="printSave()">Cerrar e imprimir Factura</button>
-        </form>
     </div>
 
     <footer class="plantilla__footer">
