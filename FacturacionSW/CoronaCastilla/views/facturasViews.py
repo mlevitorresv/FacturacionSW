@@ -411,4 +411,4 @@ def close_new_factura(request):
         # Crear un formset vacío para las habitaciones
         habitacion_formset = HabitacionFormSet(queryset=Habitacion.objects.none())
 
-    return render(request, 'crearFactura.html', {'form': form, 'habitacion_formset': habitacion_formset})
+    return redirect('facturas')
