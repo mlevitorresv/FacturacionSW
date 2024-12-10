@@ -238,6 +238,20 @@ def post_factura(request):
     # Crear el FormSet para las habitaciones
     HabitacionFormSet = inlineformset_factory(Factura, Habitacion, form=HabitacionForm, extra=1, can_delete=True)
     
+    # Calcular el siguiente número de factura
+    year = timezone.now().year
+    year_suffix = year % 100
+
+    # Buscar la última factura del año y calcular el siguiente número
+    last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
+    if last_invoice:
+        last_number = int(last_invoice.numero_factura.split('/')[0])
+        new_number = last_number + 1
+    else:
+        new_number = 1
+
+    numero_factura = f"{new_number:03}/{year_suffix}"
+    
     if request.method == 'POST':
         form = FacturaForm(request.POST)
         habitacion_formset = HabitacionFormSet(request.POST, instance=None)  # Importante: establecer `instance=None`
@@ -271,6 +285,7 @@ def post_factura(request):
         # Crear un nuevo formulario con el número de factura automáticamente calculado
         form = FacturaForm()
         form.fields['cliente'].initial = cliente_info
+        form.fields['numero_factura'].initial = numero_factura
 
         # Crear un formset vacío para las habitaciones
         habitacion_formset = HabitacionFormSet(queryset=Habitacion.objects.none())
