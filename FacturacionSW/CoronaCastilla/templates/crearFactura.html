@@ -118,7 +118,7 @@
             <!-- Este formulario ahora también contiene el management_form -->
             <form method="POST" action="{% url 'cerrar_factura_sin_id' %}" style="display: inline;">
                 {% csrf_token %}
-                <button type="submit" class="plantilla__buttons__button" onclick="printSave()">Cerrar e imprimir
+                <button type="submit" class="plantilla__buttons__button" onclick="print()">Cerrar e imprimir
                     Factura</button>
             </form>
         </div>

@@ -364,6 +364,8 @@ def close_factura(request, factura_id):
     return redirect('facturas')
 
 
+
+
 def close_new_factura(request):
     cliente_id = request.GET.get('cliente_id')
     
@@ -383,6 +385,22 @@ def close_new_factura(request):
         if form.is_valid() and habitacion_formset.is_valid():
             # Guardar la factura primero
             factura = form.save()
+            
+            # Obtener el año actual
+            year = timezone.now().year
+            year_suffix = year % 100
+        
+            # Buscar la última factura cerrada del año para asignar el siguiente número
+            last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
+
+            if last_invoice:
+                last_number = int(last_invoice.numero_factura.split('/')[0])
+                new_number = last_number + 1
+            else:
+                new_number = 1
+            factura.numero_factura = f"{new_number:03}/{year_suffix}"
+            print(f'pasado por generación de nuevo numero {factura.numero_factura}')
+            factura.save()
 
             # Asignar la factura a cada habitación antes de guardarlas
             habitaciones = habitacion_formset.save(commit=False)
