@@ -113,14 +113,6 @@ const showFields = () => {
 };
 
 
-
-
-const printSave = () => {
-    form = document.getElementById('facturaForm')
-    form.submit()
-    print()
-}
-
 window.onload = function () {
     precioAlojamiento()
 }
