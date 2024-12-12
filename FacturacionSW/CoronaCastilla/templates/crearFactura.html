@@ -115,13 +115,9 @@
 
         <div class="plantilla__buttons no-print">
             <button class="plantilla__buttons__button" type="submit" form="facturaForm">Guardar Factura</button>
-            <!-- Este formulario ahora también contiene el management_form -->
-            <form method="POST" action="{% url 'cerrar_factura_sin_id' %}" style="display: inline;">
-                {% csrf_token %}
-                <button type="submit" class="plantilla__buttons__button" onclick="print()">Cerrar e imprimir
-                    Factura</button>
-            </form>
-        </div>
+            <button class="plantilla__buttons__button" type="button" onclick="cerrarNueva()">Cerrar e imprimir Factura</button>
+    </form>
+    </div>
     </form>
 
     </div>

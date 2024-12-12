@@ -17,15 +17,15 @@ const precioAlojamiento = () => {
 
 
     rows.forEach((row, index) => {
-        
+
         // Modificación para seleccionar correctamente los inputs sin depender del índice en el ID
         const precioInput = row.querySelector('input[name$="alojamiento_precio"]');
         const resultCell = row.querySelector('td[id^="alojamientoResult"]');
-        
-        if (precioInput && resultCell) {            
+
+        if (precioInput && resultCell) {
             const precioPorNoche = parseFloat(precioInput.value) || 0;
             const total = dias * precioPorNoche;
-            
+
             resultCell.innerHTML = roundToTwo(total);
         }
     });
@@ -96,7 +96,7 @@ const showFields = () => {
     });
 
     const alojamientoResult = clon.querySelector('td[id$="alojamientoResult_0"]');
-    
+
     if (alojamientoResult) {
         // Asignar un nuevo ID único para este clon
         alojamientoResult.id = `alojamientoResult_${formCount}`;
@@ -119,12 +119,12 @@ window.onload = function () {
 
 
 const deleteCheckboxes = $("input[type='checkbox'][name*='DELETE']");
-deleteCheckboxes.on("change", async function(event) {
+deleteCheckboxes.on("change", async function (event) {
     event.preventDefault();  // Evitar el comportamiento predeterminado
     const urlCompleta = window.location.href;
 
     const form = document.getElementById("editForm");
-    
+
     // Enviar el formulario y esperar a que se procese antes de redirigir
     try {
         const response = await fetch(form.action, {
@@ -142,3 +142,27 @@ deleteCheckboxes.on("change", async function(event) {
         console.error("Error al enviar el formulario:", error);
     }
 });
+
+
+
+const cerrarNueva = async () => {
+    const form = document.getElementById('facturaForm');
+
+    if (!form) {
+        alert("Formulario no encontrado");
+        return;
+    }
+
+    try {
+        // Enviar datos del formulario al backend
+        const response = await fetch('http://localhost:8000/facturas/cerrar/', {
+            method: form.method || 'POST', // Asegura que haya un método definido
+            body: new FormData(form)
+        });
+
+        await print()
+        window.location.href = 'http://localhost:8000/facturas'
+    } catch (error) {
+        console.error("Error al enviar el formulario", error);
+    }
+};
