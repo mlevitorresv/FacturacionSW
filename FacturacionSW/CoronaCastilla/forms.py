@@ -19,7 +19,7 @@ class FacturaForm(forms.ModelForm):
             'porcentaje_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'porcentajeIva', 'value': 10, 'id': 'porcentajeIva', 'onchange': 'showResults()'}),
             'importe_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'importeIva', 'id': 'importeIva'}),
             'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'id': 'totalFactura'}),
-            'numero_cuenta': forms.Textarea(attrs={'class': 'plantilla__form__basico__area', 'rows': '1', 'id': 'numero_cuenta', 'required': 'False'}),
+            'numero_cuenta': forms.Textarea(attrs={'class': 'plantilla__form__basico__area', 'rows': '1', 'id': 'numero_cuenta'}),
         }
         
 class HabitacionForm(forms.ModelForm):
