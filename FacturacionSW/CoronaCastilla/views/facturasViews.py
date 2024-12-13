@@ -48,16 +48,18 @@ def generate_excel(request, mes_actual, año_actual):
     for index, factura in enumerate(facturas, start=start_row):
         # Extraer cliente y NIF
         cliente_data = " ".join(factura.cliente.split())
+        nif = ''
+        nombre = cliente_data
         nif_match = re.search(r'\b\d{8}[A-Z]\b', cliente_data)
         if nif_match:
             nif = nif_match.group(0)
             # El nombre es todo lo que está antes del NIF
-            nombre = cliente_data.split(nif)[0].strip()
+            nombre = cliente_data.split(nif)[0].strip()[:-5]
 
         # Insertar datos en celdas. Por ejemplo:
         ws[f"A{index}"] = factura.numero_factura
         ws[f"B{index}"] = factura.fecha_salida.strftime('%Y-%m-%d')
-        ws[f"C{index}"] = nif 
+        ws[f"C{index}"] = nif
         ws[f"D{index}"] = nombre
         
         habitaciones = factura.habitaciones.all()
