@@ -50,11 +50,15 @@ def generate_excel(request, mes_actual, año_actual):
         cliente_data = " ".join(factura.cliente.split())
         nif = ''
         nombre = cliente_data
-        nif_match = re.search(r'\b\d{8}[A-Z]\b', cliente_data)
+
+        # Buscar "NIF:" seguido de un espacio opcional y el valor del NIF
+        nif_match = re.search(r'NIF:\s*(\S+)', cliente_data)
         if nif_match:
-            nif = nif_match.group(0)
-            # El nombre es todo lo que está antes del NIF
-            nombre = cliente_data.split(nif)[0].strip()[:-5]
+            # Capturar el NIF encontrado
+            nif = nif_match.group(1)
+            # El nombre es todo lo que está antes de "NIF:"
+            nombre = cliente_data.split('NIF:')[0].strip()
+
 
         # Insertar datos en celdas. Por ejemplo:
         ws[f"A{index}"] = factura.numero_factura
@@ -115,7 +119,7 @@ def generate_pdf(factura, output_path):
 
 def extract_name(cliente_text):
     # Encuentra el NIF en el texto usando una expresión regular
-    match = re.search(r'\d{8}[A-Z]', cliente_text)
+    match = re.search(r'NIF:\s*(\S+)', cliente_text)
     if match:
         pos_nif = match.start()
         # Extraer el nombre del texto
@@ -255,9 +259,9 @@ def post_factura(request):
     
     if cliente_id:
         cliente = Cliente.objects.get(id=cliente_id)
-        cliente_info = f"{cliente.nombre}\n{cliente.direccion}\n{cliente.codigo_postal}\nNIF: {cliente.nif}"
+        cliente_info = f"{cliente.nombre}\n{cliente.direccion}\n{cliente.codigo_postal}\nNIF:{cliente.nif}"
     else:
-        cliente_info = ''
+        cliente_info = f'\n\n\nNIF:'
     
     # Crear el FormSet para las habitaciones
     HabitacionFormSet = inlineformset_factory(Factura, Habitacion, form=HabitacionForm, extra=1, can_delete=True)
@@ -373,9 +377,9 @@ def close_new_factura(request):
     
     if cliente_id:
         cliente = Cliente.objects.get(id=cliente_id)
-        cliente_info = f"{cliente.nombre}\n{cliente.direccion}\n{cliente.codigo_postal}\nNIF: {cliente.nif}"
+        cliente_info = f"{cliente.nombre}\n{cliente.direccion}\n{cliente.codigo_postal}\nNIF:{cliente.nif}"
     else:
-        cliente_info = ''
+        cliente_info = f'\n\n\nNIF:'
     
     # Crear el FormSet para las habitaciones
     HabitacionFormSet = inlineformset_factory(Factura, Habitacion, form=HabitacionForm, extra=1, can_delete=True)
