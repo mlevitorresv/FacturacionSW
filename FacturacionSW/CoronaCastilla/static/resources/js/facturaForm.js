@@ -4,27 +4,17 @@ function roundToTwo(num) {
 
 const precioAlojamiento = () => {
     const rows = document.querySelectorAll('.plantilla__form__tabla__tbody__trow');  // Seleccionar todas las filas
-    const entrada = document.getElementById('fechaEntrada');
-    const salida = document.getElementById('fechaSalida');
-
-    if (!entrada || !salida) return;
-
-
-    const fechaEntrada = new Date(entrada.value);
-    const fechaSalida = new Date(salida.value);
-    const diferenciaTiempo = fechaSalida - fechaEntrada;
-    const dias = diferenciaTiempo / (1000 * 60 * 60 * 24);
-
 
     rows.forEach((row, index) => {
 
         // Modificación para seleccionar correctamente los inputs sin depender del índice en el ID
         const precioInput = row.querySelector('input[name$="alojamiento_precio"]');
+        const diasInput = row.querySelector('input[name$="alojamiento_dias"]');
         const resultCell = row.querySelector('td[id^="alojamientoResult"]');
 
         if (precioInput && resultCell) {
             const precioPorNoche = parseFloat(precioInput.value) || 0;
-            const total = dias * precioPorNoche;
+            const total = diasInput.value * precioPorNoche;
 
             resultCell.innerHTML = roundToTwo(total);
         }
