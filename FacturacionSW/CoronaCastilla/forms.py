@@ -25,7 +25,7 @@ class FacturaForm(forms.ModelForm):
 class HabitacionForm(forms.ModelForm):
     class Meta:
         model = Habitacion
-        fields = ['tipo_habitacion', 'numero_habitacion', 'alojamiento_precio']
+        fields = ['tipo_habitacion', 'numero_habitacion', 'alojamiento_dias', 'alojamiento_precio']
         widgets = {
             'tipo_habitacion': forms.Select(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'id': 'tipoHabitacion'}),
             'numero_habitacion': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'numeroHabitacion'}),
