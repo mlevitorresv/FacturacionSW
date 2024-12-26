@@ -48,6 +48,7 @@
                     <td class="plantilla__form__tabla__thead__trow__tdata"></td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION (TIPO)</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">HABITACION Nº</td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata">DÍAS</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
                 </tr>
@@ -65,6 +66,9 @@
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
                         {{ habitacion.numero_habitacion }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ habitacion.alojamiento_dias }}
                     </td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
                         {{ habitacion.alojamiento_precio }}
