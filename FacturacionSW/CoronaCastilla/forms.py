@@ -6,7 +6,7 @@ class FacturaForm(forms.ModelForm):
     class Meta:
         model = Factura
         fields = [
-            'cliente', 'numero_factura', 'fecha_entrada', 'fecha_salida', 'desayuno_precio', 
+            'cliente', 'numero_factura', 'fecha_entrada', 'fecha_salida', 'desayuno_cantidad','desayuno_precio', 'desayuno_cantidad2','desayuno_precio2', 
             'base_imponible', 'porcentaje_iva', 'importe_iva', 'total_factura', 'numero_cuenta'
         ]
         widgets = {
@@ -14,8 +14,11 @@ class FacturaForm(forms.ModelForm):
             'numero_factura': forms.TextInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'numero'}),
             'fecha_entrada': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'fechaEntrada', 'type': 'date', 'id': 'fechaEntrada'}),
             'fecha_salida': forms.DateInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'fechaSalida', 'type': 'date', 'id': 'fechaSalida'}),
+            'desayuno_cantidad': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'cantidadDesayuno', 'id': 'desayunoCantidad', 'onchange': 'showResults()'}),
             'desayuno_precio': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioDesayuno', 'id': 'desayunoPrecio', 'onchange': 'showResults()'}),
             'base_imponible': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'baseImponible', 'id': 'baseImponible'}),
+            'desayuno2_cantidad': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'cantidadDesayuno2', 'id': 'desayunoCantidad2', 'onchange': 'showResults()'}),
+            'desayuno2_precio': forms.NumberInput(attrs={'class': 'plantilla__form__tabla__tbody__trow__tdata__input', 'name': 'precioDesayuno2', 'id': 'desayunoPrecio2', 'onchange': 'showResults()'}),
             'porcentaje_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'porcentajeIva', 'value': 10, 'id': 'porcentajeIva', 'onchange': 'showResults()'}),
             'importe_iva': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'importeIva', 'id': 'importeIva'}),
             'total_factura': forms.NumberInput(attrs={'class': 'plantilla__form__articulos__inputs__input', 'name': 'totalFactura', 'id': 'totalFactura'}),
