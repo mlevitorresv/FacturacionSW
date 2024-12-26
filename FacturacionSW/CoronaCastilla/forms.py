@@ -6,7 +6,7 @@ class FacturaForm(forms.ModelForm):
     class Meta:
         model = Factura
         fields = [
-            'cliente', 'numero_factura', 'fecha_entrada', 'fecha_salida', 'desayuno_cantidad','desayuno_precio', 'desayuno_cantidad2','desayuno_precio2', 
+            'cliente', 'numero_factura', 'fecha_entrada', 'fecha_salida', 'desayuno_cantidad','desayuno_precio', 'desayuno2_cantidad','desayuno2_precio', 
             'base_imponible', 'porcentaje_iva', 'importe_iva', 'total_factura', 'numero_cuenta'
         ]
         widgets = {
