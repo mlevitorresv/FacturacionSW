@@ -84,6 +84,8 @@
             <thead class="plantilla__form__tabla__thead">
                 <tr class="plantilla__form__tabla__thead__trow">
                     <td class="plantilla__form__tabla__thead__trow__tdata"></td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata">CANTIDAD</td>
+                    <td class="plantilla__form__tabla__thead__trow__tdata">EUROS</td>
                     <td class="plantilla__form__tabla__thead__trow__tdata">IMPORTE</td>
                 </tr>
             </thead>
@@ -91,10 +93,26 @@
                 <tr class="plantilla__form__tabla__tbody__trow">
                     <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS</td>
                     <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ form.desayuno_cantidad }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
                         {{ form.desayuno_precio }}
                     </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata" id="desayunoTotal"></td>
+
+                </tr>
+                <tr class="plantilla__form__tabla__tbody__trow">
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">DESAYUNOS 2</td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ form.desayuno2_cantidad }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata">
+                        {{ form.desayuno2_precio }}
+                    </td>
+                    <td class="plantilla__form__tabla__tbody__trow__tdata" id="desayuno2Total"></td>
                 </tr>
             </tbody>
+
         </table>
 
         <div class="plantilla__form__articulos">
