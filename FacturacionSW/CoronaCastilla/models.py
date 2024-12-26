@@ -32,6 +32,7 @@ class Habitacion(models.Model):
         ('cuadruple', 'Habitación cuadruple')
     ])
     numero_habitacion = models.IntegerField()
+    alojamiento_dias = models.IntegerField()
     alojamiento_precio = models.FloatField()
 
     def __str__(self):
