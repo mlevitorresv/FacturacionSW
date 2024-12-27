@@ -24,6 +24,18 @@ const precioAlojamiento = () => {
 };
 
 
+const precioDesayunos = () => {
+    const cantidad1 = document.getElementById("desayunoCantidad")
+    const precio1 = document.getElementById("desayunoPrecio")
+    const cantidad2 = document.getElementById("desayunoCantidad2")
+    const precio2 = document.getElementById("desayunoPrecio2")
+
+    const total1input = document.getElementById("desayunoTotal")
+    const total2input = document.getElementById("desayuno2Total")
+
+    total1input.innerHTML = roundToTwo(parseFloat(cantidad1.value + precio1.value))
+    total2input.innerHTML = roundToTwo(parseFloat(cantidad2.value + precio2.value))
+}
 
 const showResults = () => {
     let alojamientoTotal = 0;
@@ -105,6 +117,7 @@ const showFields = () => {
 
 window.onload = function () {
     precioAlojamiento()
+    precioDesayunos()
 }
 
 
