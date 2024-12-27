@@ -35,6 +35,8 @@ const precioDesayunos = () => {
 
     total1input.innerHTML = roundToTwo(parseFloat(cantidad1.value + precio1.value))
     total2input.innerHTML = roundToTwo(parseFloat(cantidad2.value + precio2.value))
+
+    showResults();  // Actualizar el resultado total
 }
 
 const showResults = () => {
