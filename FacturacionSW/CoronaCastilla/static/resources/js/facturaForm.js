@@ -51,7 +51,7 @@ const showResults = () => {
         }
     });
     console.log("alojamientoTotal: ", alojamientoTotal)
-    let desayuno = parseFloat(document.getElementById('desayunoPrecio').value);
+    let desayuno = parseFloat(document.getElementById('desayunoTotal').textContent) + parseFloat(document.getElementById('desayuno2Total').textContent);
     console.log("desayuno: ", desayuno)
 
 
