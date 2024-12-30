@@ -39,7 +39,7 @@ class HabitacionForm(forms.ModelForm):
 HabitacionFormSet = forms.modelformset_factory(
     Habitacion,
     form=HabitacionForm,
-    extra=1,
+    extra=0,
     can_delete=True
 )
 
