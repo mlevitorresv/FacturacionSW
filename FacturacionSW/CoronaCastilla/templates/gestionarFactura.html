@@ -21,6 +21,9 @@
     <form action="{% url 'facturaDetails' factura.id %}" method="POST" class="plantilla__form" id="editForm">
         {% csrf_token %}
 
+        <div class="plantilla__form__articulos__fields no-print">
+            <p class="plantilla__form__articulos__fields__field" onclick="showFields()">AÑADIR HABITACIÓN</p>
+        </div>
         <div class="plantilla__form__basico">
             <p class="plantilla__form__basico__field">CLIENTE</p>
             {{ form.cliente }}
