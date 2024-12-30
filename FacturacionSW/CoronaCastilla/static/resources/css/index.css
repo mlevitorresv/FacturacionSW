@@ -233,6 +233,14 @@ body {
     position: absolute;
     bottom: 3em;
   }
+  select {
+    -webkit-appearance: none; /* Deshabilita la apariencia predeterminada */
+    -moz-appearance: none;    /* Firefox */
+    appearance: none;         /* Estándar */
+    background: none;         /* Opcional: elimina el fondo */
+    border: 1px solid #ccc;   /* Opcional: puedes personalizar el borde */
+    padding: 5px;             /* Opcional: ajustar padding para alineación */
+  }
 }
 .articulos__articulo {
   display: flex;
