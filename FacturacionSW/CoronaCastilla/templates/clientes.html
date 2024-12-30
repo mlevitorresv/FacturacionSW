@@ -9,7 +9,7 @@
             cliente</button>
     </div>
     <div class="main__filter">
-        <form id="filter-client-form" action="{% url 'facturas' %}" method="GET">
+        <form id="filter-client-form" action="{% url 'clientes' %}" method="GET">
             <input type="text" name="cliente" placeholder="Buscar por nombre de cliente" class="main__filter__input" 
                    value="{{ request.GET.cliente }}" onchange="this.form.submit()">
         </form>
