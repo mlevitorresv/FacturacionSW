@@ -19,10 +19,10 @@
     </div>
     <form action="" class="plantilla__form" id="facturaForm" method="POST">
         {% csrf_token %}
-        <div class="plantilla__form__articulos no-print"></div>
-        <div class="plantilla__form__articulos__fields">
-            <p class="plantilla__form__articulos__fields__field" onclick="showFields()">AÑADIR HABITACIÓN</p>
-        </div>
+        <div class="plantilla__form__articulos no-print">
+            <div class="plantilla__form__articulos__fields">
+                <p class="plantilla__form__articulos__fields__field" onclick="showFields()">AÑADIR HABITACIÓN</p>
+            </div>
         </div>
 
         <div class="plantilla__form__basico">
@@ -137,7 +137,8 @@
 
         <div class="plantilla__buttons no-print">
             <button class="plantilla__buttons__button" type="submit" form="facturaForm">Guardar Factura</button>
-            <button class="plantilla__buttons__button" type="button" onclick="cerrarNueva()">Cerrar e imprimir Factura</button>
+            <button class="plantilla__buttons__button" type="button" onclick="cerrarNueva()">Cerrar e imprimir
+                Factura</button>
     </form>
     </div>
     </form>
