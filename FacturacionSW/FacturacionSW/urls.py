@@ -32,7 +32,7 @@ urlpatterns = [
 
 
     #ruta para descargar resumen
-    path('exportar-facturas/<str:cliente>/<int:mes_actual>/<int:año_actual>/', facturasViews.generate_excel, name='exportar_facturas'),
+    path('exportar-facturas/<int:mes_actual>/<int:año_actual>', facturasViews.generate_excel, name='exportar_facturas'),
     
     # rutas de clientes
     path("clientes", clientesViews.view_clientes, name='clientes'),

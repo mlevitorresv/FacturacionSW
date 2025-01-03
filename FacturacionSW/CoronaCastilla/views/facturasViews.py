@@ -16,7 +16,7 @@ from io import BytesIO
 
 
 
-def generate_excel(request, mes_actual, año_actual, cliente=''):
+def generate_excel(request, mes_actual, año_actual):
     meses_en_espanol = [
         'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
         'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
@@ -38,10 +38,13 @@ def generate_excel(request, mes_actual, año_actual, cliente=''):
     # Hoja activa
     ws = wb.active
 
-    if cliente == '':
-        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
-    else:
+    cliente = request.GET.get('cliente')
+    print(cliente)
+    
+    if cliente:
         facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual, cliente__icontains=cliente)
+    else:
+        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
 
     # Comenzar a rellenar desde la fila 7 (por ejemplo)
     start_row = 7
@@ -87,10 +90,10 @@ def generate_excel(request, mes_actual, año_actual, cliente=''):
     output.seek(0)
 
     # Crear nombre de archivo con mes en español
-    if cliente == '':
-        nombre_archivo = f"facturas_{meses_en_espanol[mes_actual - 1]}_{año_actual}.xlsx"
-    else:
+    if cliente:
         nombre_archivo = f"facturas_{meses_en_espanol[mes_actual - 1]}_{año_actual}_{cliente}.xlsx"
+    else:
+        nombre_archivo = f"facturas_{meses_en_espanol[mes_actual - 1]}_{año_actual}.xlsx"
 
     # Configurar la respuesta HTTP
     response = HttpResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')

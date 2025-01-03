@@ -9,7 +9,8 @@
             Factura</button>
         {% if request.GET.mes and request.GET.año %}
         <button class="main__buttons__create"
-            onclick="window.location.href= `{% url 'exportar_facturas' mes_actual=request.GET.mes año_actual=request.GET.año %}`">Descargar
+            onclick="window.location.href = 
+        `{% url 'exportar_facturas' mes_actual=request.GET.mes año_actual=request.GET.año %}?cliente={{ request.GET.cliente|default:'' }}`">Descargar
             resumen de facturas</button>
         {% endif %}
     </div>
