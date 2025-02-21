@@ -158,7 +158,10 @@ def view_facturas(request):
         for mes in meses_seleccionados:
             query |= Q(fecha_salida__year=año, fecha_salida__month=mes)
 
-        facturas = Factura.objects.filter(query).order_by('-numero_factura')
+        if not request.GET.getlist('mes'):
+            facturas = Factura.objects.filter(numero_factura__isnull=True)
+        else:
+            facturas = Factura.objects.filter(query).order_by('-numero_factura')
 
         # Filtrar por nombre de cliente si está en la URL
         cliente_nombre = request.GET.get('cliente', '')
