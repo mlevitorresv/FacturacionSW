@@ -140,7 +140,7 @@
     </div>
 
     <div class="plantilla__buttons no-print">
-        <button class="plantilla__buttons__button" type="submit" form="editForm">Actualizar Factura</button>
+        <button class="plantilla__buttons__button" type="submit" form="editForm">Guardar Factura</button>
         <button class="plantilla__buttons__button" onclick="print()">Imprimir Factura</button>
         <form action="{% url 'eliminaFactura' factura_id=factura.id %}" method="POST" style="display:inline;">
             {% csrf_token %}
