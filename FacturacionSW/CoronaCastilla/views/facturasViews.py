@@ -158,10 +158,7 @@ def view_facturas(request):
         for mes in meses_seleccionados:
             query |= Q(fecha_salida__year=año, fecha_salida__month=mes)
 
-        if not request.GET.getlist('mes'):
-            facturas = Factura.objects.filter(numero_factura__isnull=True)
-        else:
-            facturas = Factura.objects.filter(query).order_by('-numero_factura')
+        facturas = Factura.objects.filter(query).order_by('numero_factura')
 
         # Filtrar por nombre de cliente si está en la URL
         cliente_nombre = request.GET.get('cliente', '')
@@ -224,26 +221,7 @@ def view_factura_id(request, factura_id):
     else:
         form = FacturaForm(instance=factura)
         habitacion_formset = HabitacionFormSet(instance=factura)    
-        
-        if factura.numero_factura is None:
-            # Calcular el siguiente número de factura
-            year = timezone.now().year
-            year_suffix = year % 100
 
-            # Buscar la última factura del año
-            last_invoice = Factura.objects.filter(numero_factura__endswith=f'/{year_suffix}').order_by('-numero_factura').first()
-            
-            if last_invoice:
-                try:
-                    last_number = int(last_invoice.numero_factura.split('/')[0])
-                except ValueError:
-                    last_number = 0
-                new_number = last_number + 1
-            else:
-                new_number = 1
-
-            numero_factura = f"{new_number:03}/{year_suffix}"
-            form.initial['numero_factura'] = numero_factura
 
             
     
