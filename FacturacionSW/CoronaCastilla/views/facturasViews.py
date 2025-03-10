@@ -164,6 +164,12 @@ def view_facturas(request):
         cliente_nombre = request.GET.get('cliente', '')
         if cliente_nombre:
             facturas = facturas.filter(cliente__icontains=cliente_nombre)
+            
+        estado = request.GET.get('closed')
+        if estado == 'none':
+            facturas = facturas.filter(numero_factura__isnull=True)
+        
+        
 
         # Total facturado
         total_facturado = facturas.aggregate(Sum('total_factura'))['total_factura__sum'] or 0
