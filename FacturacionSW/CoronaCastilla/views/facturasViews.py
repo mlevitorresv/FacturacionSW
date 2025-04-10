@@ -18,84 +18,78 @@ from io import BytesIO
 
 def generate_excel(request, mes_actual, año_actual):
     meses_en_espanol = [
-        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+        'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
         'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
     ]
     
-    # Construir la ruta del archivo de plantilla
+    # Ruta del archivo de plantilla
     template_path = os.path.join(os.path.dirname(__file__), '..', '..', 'FACTURAS.xlsx')
 
-    # Verificar que el archivo existe
     if not os.path.exists(template_path):
         return HttpResponse("Error: El archivo de plantilla no se encuentra.", status=404)
 
     try:
-        # Cargar plantilla
         wb = openpyxl.load_workbook(template_path)
     except Exception as e:
         return HttpResponse(f"Error al cargar el archivo de plantilla: {str(e)}", status=500)
 
-    # Hoja activa
     ws = wb.active
 
-    cliente = request.GET.get('cliente')
-    print(cliente)
+    cliente_param = request.GET.get('cliente')
     
-    if cliente:
-        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual, cliente__icontains=cliente)
+    if cliente_param:
+        facturas = Factura.objects.filter(
+            fecha_salida__year=año_actual,
+            fecha_salida__month=mes_actual,
+            cliente__icontains=cliente_param
+        )
     else:
-        facturas = Factura.objects.filter(fecha_salida__year=año_actual, fecha_salida__month=mes_actual)
+        facturas = Factura.objects.filter(
+            fecha_salida__year=año_actual,
+            fecha_salida__month=mes_actual
+        )
 
-    # Comenzar a rellenar desde la fila 7 (por ejemplo)
     start_row = 7
-
-    # Actualizar información en la hoja de cálculo
     ws["C3"] = f"HOSTELERÍA-EJERCICIO {meses_en_espanol[mes_actual - 1]} {año_actual}"
+
     for index, factura in enumerate(facturas, start=start_row):
-        # Extraer cliente y NIF
-        cliente_data = " ".join(factura.cliente.split())
+        cliente_lines = factura.cliente.strip().splitlines()
+        nombre = cliente_lines[0] if cliente_lines else ''
+        
         nif = ''
-        nombre = cliente_data
+        for line in cliente_lines:
+            nif_match = re.search(r'NIF:\s*(\S+)', line)
+            if nif_match:
+                nif = nif_match.group(1)
+                break
 
-        # Buscar "NIF:" seguido de un espacio opcional y el valor del NIF
-        nif_match = re.search(r'NIF:\s*(\S+)', cliente_data)
-        if nif_match:
-            # Capturar el NIF encontrado
-            nif = nif_match.group(1)
-            # El nombre es todo lo que está antes de "NIF:"
-            nombre = cliente_data.split('NIF:')[0].strip()
-
-
-        # Insertar datos en celdas. Por ejemplo:
         ws[f"A{index}"] = factura.numero_factura
         ws[f"B{index}"] = factura.fecha_salida.strftime('%Y-%m-%d')
         ws[f"C{index}"] = nif
         ws[f"D{index}"] = nombre
-        
+
         habitaciones = factura.habitaciones.all()
         habitaciones_str = ', '.join(str(habitacion) for habitacion in habitaciones)
 
-        
-        
         if factura.desayuno_precio > 0:
             ws[f"E{index}"] = habitaciones_str + ' - Desayunos'
         else:
             ws[f"E{index}"] = habitaciones_str
+
         ws[f"F{index}"] = factura.base_imponible
         ws[f"G{index}"] = factura.porcentaje_iva
 
-    # Crear un archivo en memoria
     output = BytesIO()
     wb.save(output)
     output.seek(0)
 
-    # Crear nombre de archivo con mes en español
-    if cliente:
-        nombre_archivo = f"facturas_{meses_en_espanol[mes_actual - 1]}_{año_actual}_{cliente}.xlsx"
+    # Crear nombre del archivo de salida
+    if cliente_param:
+        cliente_nombre = cliente_param.strip().splitlines()[0] if cliente_param.strip() else 'cliente'
+        nombre_archivo = f"facturas_{meses_en_espanol[mes_actual - 1]}_{año_actual}_{cliente_nombre}.xlsx"
     else:
         nombre_archivo = f"facturas_{meses_en_espanol[mes_actual - 1]}_{año_actual}.xlsx"
 
-    # Configurar la respuesta HTTP
     response = HttpResponse(output, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
     response['Content-Disposition'] = f'attachment; filename="{nombre_archivo}"'
 
